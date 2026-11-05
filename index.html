@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Galaxiekarte 40K</title>
-  <meta name="description" content="Interaktive Fan-Karte der Warhammer-40,000-Galaxie mit Planeten, Ereignissen und Büchern.">
+  <title>Galaxy Map 40K</title>
+  <meta name="description" content="Interactive fan map of the Warhammer 40,000 galaxy with planets, events and books.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -13,30 +13,30 @@
 <body>
   <div id="app">
     <main id="map-wrap">
-      <svg id="map" aria-label="Galaxiekarte"></svg>
+      <svg id="map" aria-label="Galaxy map"></svg>
 
       <header class="topbar">
-        <h1 class="brand">Galaxiekarte <span id="brand-era">40K</span></h1>
-        <div class="era-toggle" role="group" aria-label="Zeitalter">
-          <button type="button" data-era="30k" aria-pressed="false"><b>30K</b><span> · Horus-Häresie</span></button>
-          <button type="button" data-era="40k" aria-pressed="true"><b>40K</b><span> · Dunkles Imperium</span></button>
+        <h1 class="brand">Galaxy Map <span id="brand-era">40K</span></h1>
+        <div class="era-toggle" role="group" aria-label="Era">
+          <button type="button" data-era="30k" aria-pressed="false"><b>30K</b><span> · Horus Heresy</span></button>
+          <button type="button" data-era="40k" aria-pressed="true"><b>40K</b><span> · Dark Imperium</span></button>
         </div>
         <div class="search">
-          <input id="search" type="search" placeholder="Planet, Ereignis oder Buch suchen" autocomplete="off" aria-label="Suche">
+          <input id="search" type="search" placeholder="Search planets, events or books" autocomplete="off" aria-label="Search">
           <ul id="search-results" role="listbox" hidden></ul>
         </div>
       </header>
 
       <div class="zoom-controls" role="group" aria-label="Zoom">
-        <button id="zoom-in" title="Hineinzoomen" aria-label="Hineinzoomen">+</button>
-        <button id="zoom-out" title="Herauszoomen" aria-label="Herauszoomen">−</button>
-        <button id="zoom-reset" title="Ganze Galaxie" aria-label="Ganze Galaxie">⌂</button>
+        <button id="zoom-in" title="Zoom in" aria-label="Zoom in">+</button>
+        <button id="zoom-out" title="Zoom out" aria-label="Zoom out">−</button>
+        <button id="zoom-reset" title="Whole galaxy" aria-label="Whole galaxy">⌂</button>
       </div>
 
       <div class="legend">
         <span><i class="dot dot-sys"></i>System</span>
-        <span><i class="dot dot-major"></i>Bedeutendes System</span>
-        <span><i class="dot dot-warp"></i>Warp-Anomalie</span>
+        <span><i class="dot dot-major"></i>Major system</span>
+        <span><i class="dot dot-warp"></i>Warp anomaly</span>
       </div>
     </main>
 
@@ -45,7 +45,7 @@
       <nav class="crumbs" id="crumbs"></nav>
       <div id="panel-body"></div>
       <footer class="disclaimer">
-        Inoffizielles Fanprojekt, nicht mit Games Workshop verbunden. Warhammer 40,000 ist eine Marke von Games Workshop Ltd. Positionen sind schematisch.
+        Unofficial fan project, not affiliated with Games Workshop. Warhammer 40,000 is a trademark of Games Workshop Ltd. Positions are schematic.
       </footer>
     </aside>
   </div>

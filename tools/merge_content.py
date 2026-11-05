@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Fügt Recherche-Ergebnisse (JSON) in data.js ein.
+"""Merges research results (JSON) into data.js.
 
-Aufruf:  python3 tools/merge_content.py data.js neu1.json [neu2.json ...]
+Usage:  python3 tools/merge_content.py data.js new1.json [new2.json ...]
 
-- Bestehende Einträge bleiben erhalten; Listen (Planeten, Bücher) werden vereinigt.
-- Zeitalter-Angaben (era30k/era40k) aus den neuen Daten werden übernommen.
-- Mögliche Dubletten, zu nahe Systeme und Segmentum-Abweichungen werden gemeldet.
+- Existing entries are kept; lists (planets, books) are merged.
+- Era details (era30k/era40k) from the new data are applied.
+- Possible duplicates, systems too close together and segmentum mismatches are reported.
 """
 import json
 import math
@@ -16,7 +16,7 @@ import unicodedata
 
 
 def load_data_js(path):
-    """data.js mit JavaScriptCore (osascript) auswerten und als JSON holen."""
+    """Evaluate data.js with JavaScriptCore (osascript) and return it as JSON."""
     js = (
         "ObjC.import('Foundation');"
         f"var src = $.NSString.stringWithContentsOfFileEncodingError({json.dumps(path)}, 4, null).js;"
@@ -67,12 +67,12 @@ def main():
             if bid in D["books"]:
                 old = D["books"][bid]
                 if str(old.get("year")) != str(b.get("year")) or old.get("author") != b.get("author"):
-                    report.append(f"[{src}] Buch {bid}: alt {old.get('author')}/{old.get('year')} neu {b.get('author')}/{b.get('year')} -> neu übernommen")
+                    report.append(f"[{src}] Book {bid}: old {old.get('author')}/{old.get('year')} new {b.get('author')}/{b.get('year')} -> new applied")
                     D["books"][bid] = {**old, **b}
                 continue
             dup = [k for k, v in D["books"].items() if norm(v["title"]) == norm(b["title"])]
             if dup:
-                report.append(f"[{src}] Buch {bid} doppelt zu {dup[0]} (gleicher Titel)")
+                report.append(f"[{src}] Book {bid} duplicates {dup[0]} (same title)")
             D["books"][bid] = b
 
         for pid, p in N.get("planets", {}).items():
@@ -88,7 +88,7 @@ def main():
                 continue
             dup = [k for k, v in D["planets"].items() if norm(v["name"]) == norm(p["name"])]
             if dup:
-                report.append(f"[{src}] Planet {pid} doppelt zu {dup[0]} (gleicher Name)")
+                report.append(f"[{src}] Planet {pid} duplicates {dup[0]} (same name)")
             p.setdefault("books", [])
             D["planets"][pid] = p
 
@@ -98,14 +98,14 @@ def main():
                 old["planets"] = union(old["planets"], s.get("planets"))
                 moved = any(k in s and s[k] != old.get(k) for k in ("x", "y", "segmentum"))
                 if moved:
-                    report.append(f"[{src}] System {s['id']} korrigiert: {old.get('segmentum')} ({old['x']},{old['y']}) -> {s.get('segmentum')} ({s.get('x')},{s.get('y')})")
+                    report.append(f"[{src}] System {s['id']} corrected: {old.get('segmentum')} ({old['x']},{old['y']}) -> {s.get('segmentum')} ({s.get('x')},{s.get('y')})")
                     for k in ("x", "y", "segmentum"):
                         if k in s:
                             old[k] = s[k]
                 continue
             dup = [k for k, v in systems.items() if norm(v["name"]) == norm(s["name"])]
             if dup:
-                report.append(f"[{src}] System {s['id']} doppelt zu {dup[0]} -> Planeten zusammengeführt")
+                report.append(f"[{src}] System {s['id']} duplicates {dup[0]} -> planets merged")
                 systems[dup[0]]["planets"] = union(systems[dup[0]]["planets"], s.get("planets"))
                 continue
             entry = {k: s[k] for k in ("id", "name", "segmentum", "x", "y", "planets") if k in s}
@@ -122,59 +122,59 @@ def main():
                 for k in ("name", "desc", "date", "sort", "era"):
                     if e.get(k) is not None and e[k] != old.get(k):
                         if k in ("date", "sort", "era"):
-                            report.append(f"[{src}] Ereignis {e['id']}: {k} {old.get(k)} -> {e[k]}")
+                            report.append(f"[{src}] Event {e['id']}: {k} {old.get(k)} -> {e[k]}")
                         old[k] = e[k]
                 continue
             events[e["id"]] = e
         D["events"] = sorted(events.values(), key=lambda e: e["sort"])
 
-    # Planeten, die in mehreren Systemen stehen, nur im ersten behalten
+    # Planets listed in several systems: keep only in the first
     owner = {}
     for s in systems.values():
         keep = []
         for p in s["planets"]:
             if p in owner:
-                report.append(f"Planet {p} steht in {owner[p]} und {s['id']} -> nur in {owner[p]}")
+                report.append(f"Planet {p} is in {owner[p]} and {s['id']} -> kept only in {owner[p]}")
             else:
                 owner[p] = s["id"]
                 keep.append(p)
         s["planets"] = keep
     D["systems"] = [s for s in systems.values() if s["planets"]]
 
-    # Prüfungen
+    # Checks
     for s in D["systems"]:
         r = math.hypot(s["x"], s["y"])
         if r > 1020:
-            report.append(f"System {s['id']} liegt ausserhalb der Galaxie (r={r:.0f})")
+            report.append(f"System {s['id']} lies outside the galaxy (r={r:.0f})")
         seg = segmentum_for(s["x"], s["y"])
         if seg != s["segmentum"]:
-            report.append(f"System {s['id']}: Segmentum {s['segmentum']}, Position spricht für {seg}")
+            report.append(f"System {s['id']}: Segmentum {s['segmentum']}, position suggests {seg}")
     sl = D["systems"]
     for i in range(len(sl)):
         for j in range(i + 1, len(sl)):
             d = math.hypot(sl[i]["x"] - sl[j]["x"], sl[i]["y"] - sl[j]["y"])
             if d < 22:
-                report.append(f"Systeme {sl[i]['id']} und {sl[j]['id']} nur {d:.0f} auseinander")
+                report.append(f"Systems {sl[i]['id']} and {sl[j]['id']} only {d:.0f} apart")
     for e in D["events"]:
         for p in e["planets"]:
             if p not in D["planets"]:
-                report.append(f"Ereignis {e['id']}: Planet {p} fehlt")
+                report.append(f"Event {e['id']}: planet {p} missing")
         for b in e["books"]:
             if b not in D["books"]:
-                report.append(f"Ereignis {e['id']}: Buch {b} fehlt")
+                report.append(f"Event {e['id']}: book {b} missing")
     for pid, p in D["planets"].items():
         if pid not in owner:
-            report.append(f"Planet {pid} hat kein System")
+            report.append(f"Planet {pid} has no system")
         for b in p.get("books", []):
             if b not in D["books"]:
-                report.append(f"Planet {pid}: Buch {b} fehlt")
+                report.append(f"Planet {pid}: book {b} missing")
 
     header = open(data_path).read().split("window.WH40K_DATA")[0]
     with open(data_path, "w") as f:
         f.write(header + "window.WH40K_DATA = " + json.dumps(D, ensure_ascii=False, indent=1) + ";\n")
 
-    print(f"Systeme {len(D['systems'])}, Planeten {len(D['planets'])}, Ereignisse {len(D['events'])}, Bücher {len(D['books'])}")
-    print("\n".join(report) if report else "Keine Auffälligkeiten.")
+    print(f"Systems {len(D['systems'])}, planets {len(D['planets'])}, events {len(D['events'])}, books {len(D['books'])}")
+    print("\n".join(report) if report else "No issues found.")
 
 
 if __name__ == "__main__":

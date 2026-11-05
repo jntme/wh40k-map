@@ -1,19 +1,19 @@
 /*
- * Datenbasis der Karte.
+ * Map data.
  *
- * Koordinaten: Galaxie-Ebene mit Zentrum (0,0), Radius ca. 1050 Einheiten.
- * x wächst nach Osten (rechts), y nach Süden (unten). Positionen sind
- * schematisch und nicht massstabsgetreu.
+ * Coordinates: galactic plane centred on (0,0), radius approx. 1050 units.
+ * x grows east (right), y grows south (down). Positions are schematic
+ * and not to scale.
  *
- * Hinweis: Der Grundbestand wurde aus dem Gedächtnis zusammengestellt.
- * Daten bitte gegen Lexicanum (https://wh40k.lexicanum.com) prüfen.
+ * Note: the base data was compiled from memory.
+ * Please check details against Lexicanum (https://wh40k.lexicanum.com).
  *
- * Verknüpfungen:
- *   systems[].planets[]  -> Planeten im System
- *   planets[].books      -> Bücher, die auf dem Planeten spielen (ohne festes Ereignis)
- *   events[].planets     -> Planeten-IDs, auf denen das Ereignis stattfand
- *   events[].books       -> Bücher zum Ereignis
- *   events[].sort        -> Sortierschlüssel: Jahrtausend * 1000 + Jahr (z. B. 014.M31 -> 31014)
+ * Links:
+ *   systems[].planets[]  -> planets in the system
+ *   planets[].books      -> books set on the planet (without a specific event)
+ *   events[].planets     -> planet IDs where the event took place
+ *   events[].books       -> books about the event
+ *   events[].sort        -> sort key: millennium * 1000 + year (e.g. 014.M31 -> 31014)
  */
 window.WH40K_DATA = {
  "segmentums": [
@@ -61,12 +61,12 @@ window.WH40K_DATA = {
  "features": [
   {
    "id": "eye",
-   "name": "Auge des Schreckens",
+   "name": "Eye of Terror",
    "type": "warp",
    "x": -540,
    "y": -500,
    "r": 85,
-   "desc": "Gewaltiger Warpsturm, entstanden bei der Geburt Slaaneshs. Heimat der Verräterlegionen und Ausgangspunkt der Schwarzen Kreuzzüge."
+   "desc": "Vast Warp storm born at the birth of Slaanesh. Home of the Traitor Legions and launch point of the Black Crusades."
   },
   {
    "id": "maelstrom",
@@ -75,7 +75,7 @@ window.WH40K_DATA = {
    "x": -60,
    "y": -120,
    "r": 40,
-   "desc": "Warpsturm-Region nahe dem Segmentum Solar, Zuflucht von Piraten und Renegaten."
+   "desc": "Warp storm region near the Segmentum Solar, a haven for pirates and renegades."
   }
  ],
  "rift": {
@@ -83,7 +83,7 @@ window.WH40K_DATA = {
   "eras": [
    "40k"
   ],
-  "desc": "Der Große Riss. Er öffnete sich nach dem Fall von Cadia und teilt die Galaxie in Imperium Sanctum (südlich) und Imperium Nihilus (nördlich).",
+  "desc": "The Great Rift. It tore open after the Fall of Cadia and splits the galaxy into the Imperium Sanctum (south) and the Imperium Nihilus (north).",
   "points": [
    [
     -540,
@@ -456,7 +456,7 @@ window.WH40K_DATA = {
   },
   {
    "id": "damocles",
-   "name": "Damocles-Golf",
+   "name": "Damocles Gulf",
    "segmentum": "ultima",
    "x": 820,
    "y": -80,
@@ -1137,7 +1137,7 @@ window.WH40K_DATA = {
   },
   {
    "id": "signus",
-   "name": "Signus-Cluster",
+   "name": "Signus Cluster",
    "segmentum": "ultima",
    "x": 600,
    "y": -150,
@@ -1209,8 +1209,8 @@ window.WH40K_DATA = {
  "planets": {
   "terra": {
    "name": "Terra",
-   "type": "Thronwelt",
-   "desc": "Wiege der Menschheit und Sitz des Goldenen Throns. Vom Imperialen Palast aus wird das Imperium regiert.",
+   "type": "Throne World",
+   "desc": "Cradle of humanity and seat of the Golden Throne. The Imperium is ruled from the Imperial Palace.",
    "books": [
     "wolfblade",
     "valdor",
@@ -1221,32 +1221,32 @@ window.WH40K_DATA = {
     "ashes_of_the_imperium"
    ],
    "era30k": {
-    "type": "Thronwelt · Sitz der VII. Legion",
-    "desc": "Ausgangspunkt des Großen Kreuzzugs. Rogal Dorn und die Imperial Fists bauen den Imperialen Palast zur Festung aus; 014.M31 Schauplatz der Belagerung, an deren Ende der Imperator auf den Goldenen Thron gesetzt wird."
+    "type": "Throne World · Seat of the VII Legion",
+    "desc": "Starting point of the Great Crusade. Rogal Dorn and the Imperial Fists fortify the Imperial Palace; in 014.M31 the scene of the Siege, at whose end the Emperor is interred upon the Golden Throne."
    }
   },
   "mars": {
    "name": "Mars",
-   "type": "Schmiedewelt",
-   "desc": "Herz des Adeptus Mechanicus und grösste Schmiedewelt des Imperiums.",
+   "type": "Forge World",
+   "desc": "Heart of the Adeptus Mechanicus and greatest Forge World of the Imperium.",
    "books": [
     "mechanicum"
    ],
    "era30k": {
-    "type": "Sitz des Mechanicum",
-    "desc": "Durch den Vertrag von Olympus mit Terra verbündet. Während der Häresie stellt sich Fabricator-General Kelbor-Hal auf Horus' Seite und stürzt den Mars in einen Bürgerkrieg."
+    "type": "Seat of the Mechanicum",
+    "desc": "Allied to Terra through the Treaty of Olympus. During the Heresy, Fabricator-General Kelbor-Hal sides with Horus and plunges Mars into civil war."
    }
   },
   "armageddon": {
    "name": "Armageddon",
-   "type": "Makropolwelt",
-   "desc": "Industriell bedeutende Makropolwelt, Schauplatz mehrerer verheerender Kriege gegen die Orks.",
+   "type": "Hive World",
+   "desc": "Industrially vital Hive World, scene of several devastating wars against the Orks.",
    "books": []
   },
   "cadia": {
    "name": "Cadia",
-   "type": "Festungswelt (zerstört)",
-   "desc": "Festungswelt am Cadianischen Tor, dem einzigen stabilen Weg aus dem Auge des Schreckens. Über zehntausend Jahre ein Bollwerk gegen das Chaos.",
+   "type": "Fortress World (destroyed)",
+   "desc": "Fortress World at the Cadian Gate, the only stable route out of the Eye of Terror. For ten thousand years a bulwark against Chaos.",
    "books": [
     "cadia_stands",
     "fall_of_cadia_rath",
@@ -1255,8 +1255,8 @@ window.WH40K_DATA = {
   },
   "fenris": {
    "name": "Fenris",
-   "type": "Todeswelt · Ordensheimat",
-   "desc": "Eis- und Ozeanwelt, Heimat der Space Wolves.",
+   "type": "Death World · Chapter Planet",
+   "desc": "Ice and ocean world, home of the Space Wolves.",
    "books": [
     "space_wolf",
     "ragnars_claw",
@@ -1267,14 +1267,14 @@ window.WH40K_DATA = {
     "great_wolf"
    ],
    "era30k": {
-    "type": "Legionsheimat (VI. Legion)",
-    "desc": "Heimat der Vlka Fenryka. Leman Russ wuchs hier unter den Stämmen auf, bevor der Imperator ihn fand; Rekrutierungswelt der Legion."
+    "type": "Legion homeworld (VI Legion)",
+    "desc": "Home of the Vlka Fenryka. Leman Russ grew up among its tribes before the Emperor found him; recruiting world of the Legion."
    }
   },
   "caliban": {
    "name": "Caliban",
-   "type": "Ordensheimat (zerstört)",
-   "desc": "Waldwelt und Heimat der Dark Angels, am Ende der Horus-Häresie zerstört.",
+   "type": "Chapter Planet (destroyed)",
+   "desc": "Forest world and home of the Dark Angels, destroyed at the end of the Horus Heresy.",
    "books": [
     "descent_angels",
     "angels_of_darkness",
@@ -1287,14 +1287,14 @@ window.WH40K_DATA = {
     "luther_first_fallen"
    ],
    "era30k": {
-    "type": "Legionsheimat (I. Legion)",
-    "desc": "Von Bestien heimgesuchte Waldwelt der Ritterorden. Luther verwaltet sie, nachdem der Löwe ihn heimgeschickt hat; Unruhen und Verrat führen am Ende der Häresie zur Zerstörung des Planeten."
+    "type": "Legion homeworld (I Legion)",
+    "desc": "Beast-haunted forest world of the knightly orders. Luther governs it after the Lion sends him home; unrest and treachery lead to the planet's destruction at the end of the Heresy."
    }
   },
   "prospero": {
    "name": "Prospero",
-   "type": "Gelehrtenwelt (verwüstet)",
-   "desc": "Heimatwelt der Thousand Sons unter dem Primarchen Magnus.",
+   "type": "Scholar World (devastated)",
+   "desc": "Homeworld of the Thousand Sons under the Primarch Magnus.",
    "books": [
     "thousand_sons",
     "prospero_burns",
@@ -1302,48 +1302,48 @@ window.WH40K_DATA = {
     "crimson_king"
    ],
    "era30k": {
-    "type": "Legionsheimat (XV. Legion)",
-    "desc": "Welt der Gelehrten mit der Hauptstadt Tizca. Nach dem Konzil von Nikaea zieht sich Magnus hierher zurück; 004–005.M31 von Space Wolves und Custodes verwüstet."
+    "type": "Legion homeworld (XV Legion)",
+    "desc": "World of scholars with its capital Tizca. After the Council of Nikaea, Magnus withdraws here; devastated by the Space Wolves and Custodes in 004–005.M31."
    }
   },
   "vigilus": {
    "name": "Vigilus",
-   "type": "Makropolwelt",
-   "desc": "Strategisch wichtige Welt am Nachmund-Korridor, einer der wenigen sicheren Passagen durch den Großen Riss.",
+   "type": "Hive World",
+   "desc": "Strategically vital world at the Nachmund Gauntlet, one of the few safe passages through the Great Rift.",
    "books": []
   },
   "macragge": {
    "name": "Macragge",
-   "type": "Ordensheimat",
-   "desc": "Hauptwelt von Ultramar und Heimat der Ultramarines.",
+   "type": "Chapter Planet",
+   "desc": "Capital world of Ultramar and home of the Ultramarines.",
    "books": [
     "killing_ground",
     "unremembered_empire",
     "lord_of_ultramar"
    ],
    "era30k": {
-    "type": "Legionsheimat (XIII. Legion) · Hauptstadt des Imperium Secundus",
-    "desc": "Zentrum des Fünfhundert-Welten-Reichs Ultramar. 009.M31 ruft Guilliman hier das Imperium Secundus aus, als er Terra für verloren hält."
+    "type": "Legion homeworld (XIII Legion) · Capital of Imperium Secundus",
+    "desc": "Centre of Ultramar, the realm of Five Hundred Worlds. In 009.M31 Guilliman proclaims Imperium Secundus here, believing Terra lost."
    }
   },
   "calth": {
    "name": "Calth",
-   "type": "Kolonialwelt",
-   "desc": "Welt in Ultramar, Schauplatz eines der grössten Verrate der Horus-Häresie.",
+   "type": "Colony World",
+   "desc": "World in Ultramar, scene of one of the greatest betrayals of the Horus Heresy.",
    "books": [
     "know_no_fear",
     "mark_of_calth",
     "battle_for_the_abyss"
    ],
    "era30k": {
-    "type": "Werft- und Musterungswelt Ultramars",
-    "desc": "Hier sammelten sich 007.M31 Ultramarines und Word Bearers – vorgeblich für einen gemeinsamen Feldzug. Nach dem Verrat wurde die Sonne Veridia destabilisiert, die Oberfläche unbewohnbar; der Untergrundkrieg dauerte bis 014.M31."
+    "type": "Shipyard and muster world of Ultramar",
+    "desc": "In 007.M31 the Ultramarines and Word Bearers mustered here – ostensibly for a joint campaign. After the betrayal the star Veridia was destabilised and the surface rendered uninhabitable; the Underworld War lasted until 014.M31."
    }
   },
   "baal": {
    "name": "Baal",
-   "type": "Ordensheimat",
-   "desc": "Heimat der Blood Angels mit ihren Monden Baal Primus und Baal Secundus.",
+   "type": "Chapter Planet",
+   "desc": "Home of the Blood Angels, with its moons Baal Primus and Baal Secundus.",
    "books": [
     "deus_encarmine",
     "deus_sanguinius",
@@ -1351,66 +1351,66 @@ window.WH40K_DATA = {
     "black_tide"
    ],
    "era30k": {
-    "type": "Legionsheimat (IX. Legion)",
-    "desc": "Auf dem verstrahlten Mond Baal Secundus wuchs Sanguinius auf. Während der Häresie Zufluchtsort für loyale Astartes."
+    "type": "Legion homeworld (IX Legion)",
+    "desc": "Sanguinius grew up on the irradiated moon of Baal Secundus. During the Heresy a refuge for loyal Astartes."
    }
   },
   "nostramo": {
    "name": "Nostramo",
-   "type": "Ordensheimat (zerstört)",
-   "desc": "Ewig dunkle Welt, Heimat der Night Lords. Vom eigenen Primarchen Konrad Curze vernichtet.",
+   "type": "Chapter Planet (destroyed)",
+   "desc": "World of eternal darkness, home of the Night Lords. Destroyed by its own Primarch, Konrad Curze.",
    "books": [
     "soul_hunter",
     "night_haunter",
     "blood_reaver"
    ],
    "era30k": {
-    "type": "Legionsheimat (VIII. Legion, zerstört)",
-    "desc": "Ewig nächtliche Makropolwelt, die Konrad Curze als 'Night Haunter' durch Terror ordnete. Als sie nach seinem Weggang wieder in Verbrechen versank, ließ er sie noch vor der Häresie vernichten."
+    "type": "Legion homeworld (VIII Legion, destroyed)",
+    "desc": "A hive world of endless night that Konrad Curze ruled through terror as the 'Night Haunter'. When it sank back into crime after his departure, he had it destroyed even before the Heresy."
    }
   },
   "isstvan3": {
    "name": "Isstvan III",
-   "type": "Kolonialwelt",
-   "desc": "Hier begann Horus' offener Verrat an den loyalen Teilen seiner Legionen.",
+   "type": "Colony World",
+   "desc": "Where Horus' open betrayal of the loyal elements of his Legions began.",
    "books": [
     "galaxy_in_flames",
     "flight_eisenstein"
    ],
    "era30k": {
-    "type": "Rebellenwelt · Virusbombardement",
-    "desc": "Abgefallene Kolonie, gegen die Horus vier Legionen schickte. Die als unzuverlässig geltenden Marines wurden abgesetzt und dann per Virusbombe und Bombardement ausgelöscht."
+    "type": "Rebel World · Virus bombardment",
+    "desc": "Rebel colony against which Horus sent four Legions. The Marines deemed unreliable were deployed to the surface, then annihilated by virus bombs and orbital bombardment."
    }
   },
   "isstvan5": {
    "name": "Isstvan V",
-   "type": "Wüstenwelt",
-   "desc": "Schauplatz des Drop-Site-Massakers.",
+   "type": "Desert World",
+   "desc": "Scene of the Drop Site Massacre.",
    "books": [
     "fulgrim",
     "dropsite_massacre"
    ],
    "era30k": {
-    "type": "Schlachtfeld (Urgall-Senke)",
-    "desc": "006.M31 landeten drei loyale Legionen in der Urgall-Senke, um die Verräter zu stellen, und wurden von den vermeintlichen Verbündeten der zweiten Welle verraten."
+    "type": "Battlefield (Urgall Depression)",
+    "desc": "In 006.M31 three loyal Legions landed in the Urgall Depression to bring the traitors to battle, and were betrayed by their supposed allies in the second wave."
    }
   },
   "davin": {
    "name": "Davin",
-   "type": "Feudalwelt",
-   "desc": "Mondwelt, auf der Horus verwundet und durch die Mächte des Chaos verführt wurde.",
+   "type": "Feudal World",
+   "desc": "Moon-world where Horus was wounded and seduced by the powers of Chaos.",
    "books": [
     "false_gods"
    ],
    "era30k": {
-    "type": "Kompatible Welt der Luna Wolves",
-    "desc": "Der von Horus eingesetzte Gouverneur Eugen Temba fiel ab. Auf Davins Mond verwundete er Horus mit dem Anathame; in einer Logentempel-Heilung wurde Horus verführt."
+    "type": "Compliant World of the Luna Wolves",
+    "desc": "Eugen Temba, the governor installed by Horus, turned renegade. On Davin's moon he wounded Horus with the Anathame; during a healing in a Lodge temple, Horus was corrupted."
    }
   },
   "tanith": {
    "name": "Tanith",
-   "type": "Waldwelt (zerstört)",
-   "desc": "Heimat des Tanith First and Only, der Gaunt's Ghosts.",
+   "type": "Forest World (destroyed)",
+   "desc": "Home of the Tanith First and Only, Gaunt's Ghosts.",
    "books": [
     "first_and_only",
     "ghostmaker"
@@ -1418,17 +1418,17 @@ window.WH40K_DATA = {
   },
   "verghast": {
    "name": "Verghast",
-   "type": "Makropolwelt",
-   "desc": "Makropolwelt in den Sabbat-Welten, Schauplatz der Belagerung von Vervunhive.",
+   "type": "Hive World",
+   "desc": "Hive World in the Sabbat Worlds, scene of the siege of Vervunhive.",
    "books": []
   },
   "titan": {
    "name": "Titan",
-   "type": "Mond · Ordensheimat",
-   "desc": "Saturnmond im Sol-System und geheime Festung der Grey Knights, des Dämonenjäger-Ordens der Ordo Malleus.",
+   "type": "Moon · Chapter Planet",
+   "desc": "Moon of Saturn in the Sol System and secret fortress of the Grey Knights, the daemon-hunting Chapter of the Ordo Malleus.",
    "era40k": {
-    "type": "Ordensheimat",
-    "desc": "Sitz der Grey Knights; von hier brechen ihre Bruderschaften zu Dämoneninvasionen in der ganzen Galaxis auf."
+    "type": "Chapter Planet",
+    "desc": "Seat of the Grey Knights; from here their Brotherhoods set out against daemonic incursions across the galaxy."
    },
    "books": [
     "grey_knights",
@@ -1438,34 +1438,34 @@ window.WH40K_DATA = {
   },
   "badab_primaris": {
    "name": "Badab Primaris",
-   "type": "Makropolwelt · Ordensheimat",
-   "desc": "Giftige Makropolwelt am Rand des Maelstroms und Sitz der Astral Claws unter Lufgt Huron, dem 'Tyrannen von Badab'.",
+   "type": "Hive World · Chapter Planet",
+   "desc": "Toxic Hive World on the edge of the Maelstrom and seat of the Astral Claws under Lufgt Huron, the 'Tyrant of Badab'.",
    "era40k": {
-    "type": "Rebellenwelt (zurückerobert)",
-    "desc": "Nach dem Badab-Krieg zurückerobert; Huron floh als Huron Blackheart mit den Red Corsairs in den Maelstrom."
+    "type": "Rebel World (reconquered)",
+    "desc": "Reconquered after the Badab War; Huron fled into the Maelstrom as Huron Blackheart with the Red Corsairs."
    },
    "books": []
   },
   "hydra_cordatus": {
    "name": "Hydra Cordatus",
-   "type": "Schmiedewelt · Festungswelt",
-   "desc": "Dürre Welt mit der Zitadelle des Adeptus Mechanicus, in deren Tiefen die Gensaat-Lager der Space Marines verwahrt wurden.",
+   "type": "Forge World · Fortress World",
+   "desc": "Arid world bearing the citadel of the Adeptus Mechanicus, in whose depths the Space Marines' gene-seed stores were kept.",
    "era40k": {
-    "type": "Festungswelt (gefallen)",
-    "desc": "Im späten M41 von den Iron Warriors belagert und erobert."
+    "type": "Fortress World (fallen)",
+    "desc": "Besieged and taken by the Iron Warriors in late M41."
    },
    "books": []
   },
   "medrengard": {
    "name": "Medrengard",
-   "type": "Dämonenwelt · Legionsheimat",
-   "desc": "Festungswelt der Iron Warriors im Auge des Schreckens, beherrscht von Perturabo und seinen Kriegsschmieden. Über ihr brennt eine schwarze Sonne.",
+   "type": "Daemon World · Legion homeworld",
+   "desc": "Fortress world of the Iron Warriors in the Eye of Terror, ruled by Perturabo and his Warsmiths. A black sun burns above it.",
    "books": []
   },
   "sicarus": {
    "name": "Sicarus",
-   "type": "Dämonenwelt · Legionsheimat",
-   "desc": "Daemonenwelt der Word Bearers im Auge des Schreckens, regiert von Lorgar. Von hier ziehen die Dunklen Apostel der Legion aus.",
+   "type": "Daemon World · Legion homeworld",
+   "desc": "Daemon World of the Word Bearers in the Eye of Terror, ruled by Lorgar. From here the Legion's Dark Apostles go forth.",
    "books": [
     "dark_apostle",
     "dark_disciple",
@@ -1474,21 +1474,21 @@ window.WH40K_DATA = {
   },
   "piscina4": {
    "name": "Piscina IV",
-   "type": "Bergbauwelt",
-   "desc": "Imperiale Welt der Dark Angels-Rekrutierungssphäre mit der Hauptstadt Kadillus Harbour; Schauplatz eines verheerenden Ork-Angriffs.",
+   "type": "Mining World",
+   "desc": "Imperial world within the Dark Angels' recruiting sphere, with its capital Kadillus Harbour; scene of a devastating Ork assault.",
    "books": []
   },
   "medusa": {
    "name": "Medusa",
-   "type": "Todeswelt · Ordensheimat",
-   "desc": "Kalte, lebensfeindliche Welt und Heimat der Iron Hands, die das 'Fleisch' verachten und sich mit Bionik verbessern.",
+   "type": "Death World · Chapter Planet",
+   "desc": "Cold, hostile world and home of the Iron Hands, who despise the 'flesh' and improve themselves with bionics.",
    "era40k": {
-    "type": "Ordensheimat",
-    "desc": "Weiterhin Heimat der Iron Hands."
+    "type": "Chapter Planet",
+    "desc": "Still home of the Iron Hands."
    },
    "era30k": {
-    "type": "Legionsheimat (X. Legion)",
-    "desc": "Hier wuchs Ferrus Manus auf und erschlug der Legende nach den Silberwurm Asirnoth. Nach Isstvan V Sammelpunkt der zerschlagenen Iron Hands."
+    "type": "Legion homeworld (X Legion)",
+    "desc": "Ferrus Manus grew up here and, according to legend, slew the silver wyrm Asirnoth. After Isstvan V the rallying point of the shattered Iron Hands."
    },
    "books": [
     "gorgon_of_medusa"
@@ -1496,45 +1496,45 @@ window.WH40K_DATA = {
   },
   "gathalamor": {
    "name": "Gathalamor",
-   "type": "Kardinalswelt · Schreinwelt",
-   "desc": "Bedeutende Schreinwelt der Ekklesiarchie im Segmentum Solar, galaktisch südwestlich von Terra.",
+   "type": "Cardinal World · Shrine World",
+   "desc": "Major Shrine World of the Ecclesiarchy in the Segmentum Solar, galactic south-west of Terra.",
    "books": []
   },
   "ophelia7": {
    "name": "Ophelia VII",
-   "type": "Kardinalswelt · Schreinwelt",
-   "desc": "Heilige Welt der Ekklesiarchie und Sitz des Convent Sanctorum der Adepta Sororitas.",
+   "type": "Cardinal World · Shrine World",
+   "desc": "Holy world of the Ecclesiarchy and seat of the Convent Sanctorum of the Adepta Sororitas.",
    "books": []
   },
   "biel_tan": {
    "name": "Biel-Tan",
-   "type": "Weltenschiff der Aeldari",
-   "desc": "Kriegerisches Aeldari-Weltenschiff, das die Rückeroberung des alten Reiches anstrebt. Position hier schematisch, da Weltenschiffe wandern.",
+   "type": "Aeldari Craftworld",
+   "desc": "Warlike Aeldari Craftworld that seeks to reclaim the ancient empire. Position shown here is schematic, as craftworlds drift.",
    "books": []
   },
   "rynns_world": {
    "name": "Rynn's World",
-   "type": "Agrarwelt · Ordensheimat",
-   "desc": "Fruchtbare Welt im Loki-Sektor und Heimat der Crimson Fists mit ihrem Festungskloster Arx Tyrannus.",
+   "type": "Agri World · Chapter Planet",
+   "desc": "Fertile world in the Loki Sector and home of the Crimson Fists with their fortress-monastery Arx Tyrannus.",
    "era40k": {
-    "type": "Ordensheimat (verwüstet)",
-    "desc": "Ab 989.M41 von Snagrods Waaagh! verwüstet; die Arx Tyrannus wurde durch eine fehlgeleitete eigene Rakete zerstört."
+    "type": "Chapter Planet (devastated)",
+    "desc": "Ravaged by Snagrod's Waaagh! from 989.M41; the Arx Tyrannus was destroyed by one of the Chapter's own misguided missiles."
    },
    "books": []
   },
   "metalica": {
    "name": "Metalica",
-   "type": "Schmiedewelt",
-   "desc": "Schmiedewelt und industrielles Herz des Charadon-Sektors, berühmt für ihren lärmenden Kriegskult.",
+   "type": "Forge World",
+   "desc": "Forge World and industrial heart of the Charadon Sector, famous for its deafening war-cult.",
    "books": []
   },
   "nocturne": {
    "name": "Nocturne",
-   "type": "Todeswelt · Ordensheimat",
-   "desc": "Vulkanische Welt mit gewaltigen Gezeitenbeben, Heimat der Salamanders und ihres Primarchen Vulkan.",
+   "type": "Death World · Chapter Planet",
+   "desc": "Volcanic world wracked by tremendous tidal quakes, home of the Salamanders and their Primarch Vulkan.",
    "era30k": {
-    "type": "Legionsheimat (XVIII. Legion)",
-    "desc": "Vulkan wuchs bei einem Schmied auf und schützte die Sanctuary-Städte vor Sklavenjägern. Nach Isstvan V hüteten die Salamander hier die Hoffnung auf seine Rückkehr."
+    "type": "Legion homeworld (XVIII Legion)",
+    "desc": "Vulkan grew up with a blacksmith and protected the Sanctuary Cities from slavers. After Isstvan V the Salamanders here kept alive the hope of his return."
    },
    "books": [
     "salamander",
@@ -1543,82 +1543,82 @@ window.WH40K_DATA = {
     "lord_of_drakes"
    ],
    "era40k": {
-    "type": "Ordensheimat",
-    "desc": "Weiterhin Heimat der Salamanders."
+    "type": "Chapter Planet",
+    "desc": "Still home of the Salamanders."
    }
   },
   "ichar4": {
    "name": "Ichar IV",
-   "type": "Makropolwelt",
-   "desc": "Makropolwelt im Ultima Segmentum, galaktisch nördlich von Ultramar.",
+   "type": "Hive World",
+   "desc": "Hive World in the Ultima Segmentum, galactic north of Ultramar.",
    "books": []
   },
   "tarsis_ultra": {
    "name": "Tarsis Ultra",
-   "type": "Agrarwelt (tot)",
-   "desc": "Ehemalige Agrarwelt im Ultima Segmentum, die von einem Ausläufer der Schwarmflotte Leviathan angegriffen wurde.",
+   "type": "Agri World (dead)",
+   "desc": "Former Agri World in the Ultima Segmentum, attacked by a splinter of Hive Fleet Leviathan.",
    "books": []
   },
   "iax": {
    "name": "Iax",
-   "type": "Gartenwelt",
-   "desc": "Paradiesische Gartenwelt in Ultramar und eine der 'Fünfhundert Welten' Guillimans.",
+   "type": "Garden World",
+   "desc": "Paradisiacal Garden World in Ultramar and one of Guilliman's 'Five Hundred Worlds'.",
    "era40k": {
-    "type": "Gartenwelt (verseucht)",
-    "desc": "In den Seuchenkriegen Ziel Mortarions und Schauplatz seines Duells mit Guilliman."
+    "type": "Garden World (plague-ridden)",
+    "desc": "Mortarion's target in the Plague Wars and scene of his duel with Guilliman."
    },
    "books": []
   },
   "octarius": {
    "name": "Octarius",
-   "type": "Ork-Reich",
-   "desc": "Kerngebiet eines der grössten Ork-Reiche der Galaxis, am Ostrand nahe Ultramar.",
+   "type": "Ork empire",
+   "desc": "Heartland of one of the largest Ork empires in the galaxy, on the Eastern Fringe near Ultramar.",
    "era40k": {
-    "type": "Kriegsgebiet",
-    "desc": "Seit Kryptmans Plan Schauplatz eines endlosen Krieges zwischen Tyraniden und Orks."
+    "type": "War zone",
+    "desc": "Since Kryptman's gambit, scene of an endless war between Tyranids and Orks."
    },
    "books": []
   },
   "damnos": {
    "name": "Damnos",
-   "type": "Bergbauwelt (verloren)",
-   "desc": "Eisige imperiale Bergbauwelt, unter deren Oberfläche eine Necron-Gruft schlief.",
+   "type": "Mining World (lost)",
+   "desc": "Icy Imperial mining world beneath whose surface a Necron tomb lay sleeping.",
    "books": []
   },
   "pavonis": {
    "name": "Pavonis",
-   "type": "Industriewelt",
-   "desc": "Imperiale Welt, auf der Uriel Ventris seine ersten Einsätze als Hauptmann der 4. Kompanie der Ultramarines bestritt.",
+   "type": "Industrial World",
+   "desc": "Imperial world where Uriel Ventris fought his first actions as Captain of the Ultramarines' 4th Company.",
    "books": [
     "courage_and_honour"
    ]
   },
   "dalyth": {
    "name": "Dal'yth Prime",
-   "type": "Sept-Welt der T'au",
-   "desc": "T'au-Sept-Welt jenseits des Damocles-Golfs, Hauptziel des imperialen Damocles-Kreuzzugs.",
+   "type": "T'au sept world",
+   "desc": "T'au sept world beyond the Damocles Gulf, main target of the Imperial Damocles Crusade.",
    "books": []
   },
   "tsagualsa": {
    "name": "Tsagualsa",
-   "type": "Totenwelt",
-   "desc": "Düstere Welt im Thramas-Sektor am Ostrand, von den Night Lords die 'Aaswelt' genannt.",
+   "type": "Dead World",
+   "desc": "Grim world in the Thramas Sector on the Eastern Fringe, called the 'Carrion World' by the Night Lords.",
    "era30k": {
-    "type": "Festung der Night Lords",
-    "desc": "Hier wurde Konrad Curze von der Assassine M'Shen getötet."
+    "type": "Night Lords stronghold",
+    "desc": "Here Konrad Curze was slain by the assassin M'Shen."
    },
    "books": []
   },
   "paradyce6": {
    "name": "Paradyce VI",
-   "type": "Imperiale Welt (verloren)",
-   "desc": "Welt im Nephilim-Sektor, die innerhalb des Pariah-Nexus liegt und von den Necrons überrannt wurde.",
+   "type": "Imperial World (lost)",
+   "desc": "World in the Nephilim Sector, lying within the Pariah Nexus and overrun by the Necrons.",
    "books": []
   },
   "necromunda": {
    "name": "Necromunda",
-   "type": "Makropolwelt",
-   "desc": "Verschmutzte Makropolwelt im Segmentum Solar, berühmt für die Makropole Primus und ihre Unterwelt voller Gangs. Wichtiger Munitions- und Rüstungslieferant der Imperialen Armee.",
+   "type": "Hive World",
+   "desc": "Polluted Hive World in the Segmentum Solar, famous for Hive Primus and its gang-ridden underhive. A major supplier of munitions and armour to the Imperial Guard.",
    "books": [
     "survival_instinct",
     "salvation_necromunda",
@@ -1638,64 +1638,64 @@ window.WH40K_DATA = {
   },
   "golgotha": {
    "name": "Golgotha",
-   "type": "Ork-Welt",
-   "desc": "Von Ghazghkull Thraka eroberte Welt, die er zu einer riesigen Munitionsfabrik für seinen nächsten Waaagh! machen wollte. Hier verlor Commissar Yarrick seinen Baneblade 'Fortress of Arrogance'.",
+   "type": "Ork World",
+   "desc": "World conquered by Ghazghkull Thraka, which he meant to turn into a vast munitions factory for his next Waaagh! Here Commissar Yarrick lost his Baneblade 'Fortress of Arrogance'.",
    "books": [
     "gunheads"
    ]
   },
   "catachan": {
    "name": "Catachan",
-   "type": "Todeswelt · Dschungelwelt",
-   "desc": "Berüchtigtste Todeswelt des Imperiums im Ultima Segmentum. Ihr tödlicher Dschungel bringt die Catachan-Dschungelkämpfer hervor.",
+   "type": "Death World · Jungle World",
+   "desc": "The Imperium's most notorious Death World, in the Ultima Segmentum. Its lethal jungle breeds the Catachan Jungle Fighters.",
    "books": []
   },
   "valhalla": {
    "name": "Valhalla",
-   "type": "Eiswelt",
-   "desc": "Einst eine grüne Welt, die durch einen Kometeneinschlag aus ihrer Bahn geworfen wurde und vereiste. Heimat der Valhallanischen Eiskrieger.",
+   "type": "Ice World",
+   "desc": "Once a green world, knocked from its orbit by a comet strike and frozen over. Home of the Valhallan Ice Warriors.",
    "books": []
   },
   "krieg": {
    "name": "Krieg",
-   "type": "Todeswelt (verstrahlt)",
-   "desc": "Ehemalige Makropolwelt im Segmentum Tempestus, nach einem jahrhundertelangen Bürgerkrieg atomar verwüstet. Heimat des Todeskorps von Krieg.",
+   "type": "Death World (irradiated)",
+   "desc": "Former Hive World in the Segmentum Tempestus, ravaged by atomic fire in a centuries-long civil war. Home of the Death Korps of Krieg.",
    "books": [
     "krieg_novel"
    ]
   },
   "tallarn": {
    "name": "Tallarn",
-   "type": "Wüstenwelt",
-   "desc": "Wüstenwelt im Segmentum Tempestus und Heimat der Tallarn-Wüstenkrieger.",
+   "type": "Desert World",
+   "desc": "Desert world in the Segmentum Tempestus and home of the Tallarn Desert Raiders.",
    "era30k": {
-    "type": "Musterungswelt",
-    "desc": "Bis zur Häresie eine fruchtbare Welt. Die Iron Warriors vergifteten sie per Virusbombardement; danach folgte die grösste Panzerschlacht der Geschichte."
+    "type": "Recruiting World",
+    "desc": "A fertile world until the Heresy. The Iron Warriors poisoned it with virus bombardment; there followed the greatest tank battle in history."
    },
    "books": [
     "tallarn"
    ],
    "era40k": {
-    "type": "Wüstenwelt",
-    "desc": "Heute Wüstenwelt und Rekrutierungsquelle der Tallarn-Regimenter."
+    "type": "Desert World",
+    "desc": "Now a desert world and recruiting ground of the Tallarn regiments."
    }
   },
   "vostroya": {
    "name": "Vostroya",
-   "type": "Industriewelt",
-   "desc": "Industriewelt in der Halo-Zone des Segmentum Obscurus jenseits des Auges des Schreckens. Liefert als Busse ihre Erstgeborenen an die Imperiale Armee (Vostroyanische Erstgeborene).",
+   "type": "Industrial World",
+   "desc": "Industrial world in the Halo Zone of the Segmentum Obscurus beyond the Eye of Terror. As penance it gives its firstborn to the Imperial Guard (the Vostroyan Firstborn).",
    "books": []
   },
   "balhaut": {
    "name": "Balhaut",
-   "type": "Imperiale Welt",
-   "desc": "Sabbat-Welt, auf der Kriegsmeister Slaydo den entscheidenden Sieg seines Kreuzzugs errang und dabei tödlich verwundet wurde. Später Ruhe- und Wiederaufbauwelt der Kreuzzugsarmeen.",
+   "type": "Imperial World",
+   "desc": "Sabbat World where Warmaster Slaydo won the decisive victory of his crusade and was mortally wounded. Later a world of rest and reconstruction for the crusade armies.",
    "books": []
   },
   "fortis_binary": {
    "name": "Fortis Binary",
-   "type": "Schmiedewelt",
-   "desc": "Vom Chaos gehaltene Schmiedewelt in den Sabbat-Welten, erster grosser Einsatz der Tanith-Geister unter Gaunt.",
+   "type": "Forge World",
+   "desc": "Chaos-held Forge World in the Sabbat Worlds, the first major action of the Tanith Ghosts under Gaunt.",
    "books": [
     "first_and_only",
     "ghostmaker"
@@ -1703,8 +1703,8 @@ window.WH40K_DATA = {
   },
   "menazoid_epsilon": {
    "name": "Menazoid Epsilon",
-   "type": "Todeswelt",
-   "desc": "Todeswelt im Menazoid-Clasp-System. Hier fiel Lord-General Dravere; auf dem Planeten lag eine STC-Anlage zur Herstellung von 'Männern aus Eisen'.",
+   "type": "Death World",
+   "desc": "Death World in the Menazoid Clasp system. Here Lord General Dravere fell; the planet held an STC facility for making 'Men of Iron'.",
    "books": [
     "first_and_only",
     "ghostmaker"
@@ -1712,16 +1712,16 @@ window.WH40K_DATA = {
   },
   "hagia": {
    "name": "Hagia",
-   "type": "Schreinwelt",
-   "desc": "Geburtswelt der Heiligen Sabbat und Ruhestätte ihrer Reliquien. Hauptstadt ist die Heilige Doctrinopolis.",
+   "type": "Shrine World",
+   "desc": "Birthworld of Saint Sabbat and resting place of her relics. Its capital is the Holy Doctrinopolis.",
    "books": [
     "honour_guard"
    ]
   },
   "phantine": {
    "name": "Phantine",
-   "type": "Imperiale Welt",
-   "desc": "Welt mit giftiger unterer Atmosphäre, deren Städte hoch über den Wolken liegen. Zurückeroberung durch Luftlandeoperationen der Tanith-Geister und Luftkämpfe der Phantine-Luftstreitkräfte.",
+   "type": "Imperial World",
+   "desc": "World with a toxic lower atmosphere whose cities lie high above the clouds. Retaken through air-drop operations by the Tanith Ghosts and dogfights of the Phantine air forces.",
    "books": [
     "guns_of_tanith",
     "double_eagle"
@@ -1729,24 +1729,24 @@ window.WH40K_DATA = {
   },
   "aexe_cardinal": {
    "name": "Aexe Cardinal",
-   "type": "Imperiale Welt",
-   "desc": "Von Grabenkrieg zerrissene Welt, auf der die Aexe-Allianz gegen die vom Chaos unterstützte Shadik-Republik kämpft.",
+   "type": "Imperial World",
+   "desc": "World torn by trench warfare, where the Aexe Alliance fights the Chaos-backed Shadik Republic.",
    "books": [
     "straight_silver"
    ]
   },
   "herodor": {
    "name": "Herodor",
-   "type": "Schreinwelt",
-   "desc": "Schreinwelt der Sabbat-Welten, auf der ein Mädchen als Wiedergeburt der Heiligen Sabbat verehrt wird. Hier fiel Oberst Colm Corbec.",
+   "type": "Shrine World",
+   "desc": "Shrine World of the Sabbat Worlds where a girl is venerated as the rebirth of Saint Sabbat. Here Colonel Colm Corbec fell.",
    "books": [
     "sabbat_martyr"
    ]
   },
   "gereon": {
    "name": "Gereon",
-   "type": "Imperiale Welt (besetzt)",
-   "desc": "Vom Archfeind besetzte Welt, auf der der Verräter-General Noches Sturm gefangen gehalten wird. 777.M41 befreit.",
+   "type": "Imperial World (occupied)",
+   "desc": "World occupied by the Archenemy, where the traitor general Noches Sturm is held captive. Liberated in 777.M41.",
    "books": [
     "traitor_general",
     "armour_of_contempt"
@@ -1754,8 +1754,8 @@ window.WH40K_DATA = {
   },
   "jago": {
    "name": "Jago",
-   "type": "Imperiale Welt",
-   "desc": "Ödwelt, auf der die Geister die uralte Festung Hinzerhaus gegen den Blutpakt halten müssen.",
+   "type": "Imperial World",
+   "desc": "Barren world where the Ghosts must hold the ancient fortress of Hinzerhaus against the Blood Pact.",
    "books": [
     "only_in_death",
     "iron_star"
@@ -1763,8 +1763,8 @@ window.WH40K_DATA = {
   },
   "urdesh": {
    "name": "Urdesh",
-   "type": "Schmiedewelt",
-   "desc": "Schmiedewelt im Eisengürtel und einer der wichtigsten Versorger des Sabbat-Welten-Kreuzzugs, zur Mitte des Kreuzzugs vom Chaos erobert. Schauplatz von Macaroths Entscheidungsfeldzug gegen Anarch Sek.",
+   "type": "Forge World",
+   "desc": "Forge World in the Iron Belt and one of the most important suppliers of the Sabbat Worlds Crusade, taken by Chaos midway through the crusade. Scene of Macaroth's decisive campaign against Anarch Sek.",
    "books": [
     "the_warmaster",
     "the_anarch"
@@ -1772,56 +1772,56 @@ window.WH40K_DATA = {
   },
   "ancreon_sextus": {
    "name": "Ancreon Sextus",
-   "type": "Imperiale Welt",
-   "desc": "Welt mit uralten Stufenstädten wie Sparshad Mons, die der Blutpakt als Warptore nutzt.",
+   "type": "Imperial World",
+   "desc": "World with ancient ziggurat cities such as Sparshad Mons, used by the Blood Pact as warp gates.",
    "books": [
     "his_last_command"
    ]
   },
   "salvations_reach": {
    "name": "Salvation's Reach",
-   "type": "Archfeind-Stützpunkt",
-   "desc": "Hochgeheime Bastion des Archfeinds in den Sabbat-Welten, Ziel eines riskanten Kommandounternehmens der Tanith-Geister.",
+   "type": "Archenemy stronghold",
+   "desc": "Top-secret Archenemy bastion in the Sabbat Worlds, target of a daring commando raid by the Tanith Ghosts.",
    "books": [
     "salvations_reach"
    ]
   },
   "orestes": {
    "name": "Orestes",
-   "type": "Schmiedewelt",
-   "desc": "Schmiedewelt des Adeptus Mechanicus, auf der die Titanenlegion Legio Invicta auf dem Weg in die Sabbat-Welten Station macht und von Chaostitanen angegriffen wird.",
+   "type": "Forge World",
+   "desc": "Forge World of the Adeptus Mechanicus where the Titan Legion Legio Invicta stops on its way to the Sabbat Worlds and is attacked by Chaos Titans.",
    "books": [
     "titanicus"
    ]
   },
   "karsk": {
    "name": "Karsk",
-   "type": "Imperiale Welt",
-   "desc": "Welt im westlichen Halo, auf der Lord Solar Macharius gegen einen Kult kämpft, der den 'Engel des Feuers' – in Wahrheit einen Dämon – beschwören will.",
+   "type": "Imperial World",
+   "desc": "World in the western Halo where Lord Solar Macharius fights a cult seeking to summon the 'Angel of Fire' – in truth a daemon.",
    "books": [
     "angel_of_fire"
    ]
   },
   "demetrius": {
    "name": "Demetrius",
-   "type": "Imperiale Welt",
-   "desc": "Welt, auf der Macharius nach der 'Faust von Demetrius' sucht, einer Energiefaust, die angeblich einem Primarchen gehörte.",
+   "type": "Imperial World",
+   "desc": "World where Macharius searches for the 'Fist of Demetrius', a power fist said to have belonged to a Primarch.",
    "books": [
     "fist_of_demetrius"
    ]
   },
   "loki": {
    "name": "Loki",
-   "type": "Imperiale Welt",
-   "desc": "Schauplatz der letzten Jahre des Macharius-Kreuzzugs.",
+   "type": "Imperial World",
+   "desc": "Scene of the final years of the Macharian Crusade.",
    "books": [
     "fall_of_macharius"
    ]
   },
   "port_maw": {
    "name": "Port Maw",
-   "type": "Makropolwelt",
-   "desc": "Hohler, uralter künstlicher Planetoid, Hauptwelt des Gothic-Sektors und Hauptquartier der Battlefleet Gothic.",
+   "type": "Hive World",
+   "desc": "Hollow, ancient artificial planetoid, capital world of the Gothic Sector and headquarters of Battlefleet Gothic.",
    "books": [
     "execution_hour",
     "shadow_point"
@@ -1829,48 +1829,48 @@ window.WH40K_DATA = {
   },
   "savaven": {
    "name": "Savaven",
-   "type": "Kardinalswelt",
-   "desc": "Kardinalswelt der Ekklesiarchie, im Gothic-Krieg als erster Planet vom Planetenkiller vernichtet.",
+   "type": "Cardinal World",
+   "desc": "Cardinal World of the Ecclesiarchy, the first planet destroyed by the Planet Killer in the Gothic War.",
    "era40k": {
-    "type": "Zerstörte Welt",
-    "desc": "Im Gothic-Krieg vom Planetenkiller vernichtet."
+    "type": "Destroyed World",
+    "desc": "Destroyed by the Planet Killer in the Gothic War."
    },
    "books": []
   },
   "schindlegeist": {
    "name": "Schindlegeist",
-   "type": "Zivilisierte Welt",
-   "desc": "Standort der fünften Schwarzsteinfestung vor dem Gothic-Krieg und Schauplatz der Entscheidungsschlacht gegen Abaddons Flotte.",
+   "type": "Civilised World",
+   "desc": "Location of the fifth Blackstone Fortress before the Gothic War and scene of the decisive battle against Abaddon's fleet.",
    "books": []
   },
   "gudrun": {
    "name": "Gudrun",
-   "type": "Imperiale Welt",
-   "desc": "Ehemalige Hauptwelt des Helican-Subsektors im Scarus-Sektor, Sitz der Adelshäuser wie des verräterischen Hauses Glaw.",
+   "type": "Imperial World",
+   "desc": "Former capital world of the Helican Subsector in the Scarus Sector, seat of noble houses such as the treacherous House Glaw.",
    "books": [
     "xenos"
    ]
   },
   "hubris": {
    "name": "Hubris",
-   "type": "Imperiale Welt",
-   "desc": "Kalte Welt im Helican-Subsektor. In ihren Kryo-Gewölben stellt Inquisitor Eisenhorn den Ketzer Murdin Eyclone.",
+   "type": "Imperial World",
+   "desc": "Cold world in the Helican Subsector. In its cryo-vaults Inquisitor Eisenhorn corners the heretic Murdin Eyclone.",
    "books": [
     "xenos"
    ]
   },
   "thracian_primaris": {
    "name": "Thracian Primaris",
-   "type": "Imperiale Welt",
-   "desc": "Welt im Helican-Subsektor, Schauplatz des katastrophalen Triumphzugs von Lord Helican 241.M41.",
+   "type": "Imperial World",
+   "desc": "World in the Helican Subsector, scene of Lord Helican's disastrous triumphal procession in 241.M41.",
    "books": [
     "malleus"
    ]
   },
   "eustis_majoris": {
    "name": "Eustis Majoris",
-   "type": "Makropolwelt",
-   "desc": "Hauptwelt des Angelus-Subsektors im Scarus-Sektor, eine riesige Makropole. Hier ermittelt Inquisitor Ravenor gegen den Handel mit der Droge Flects.",
+   "type": "Hive World",
+   "desc": "Capital world of the Angelus Subsector in the Scarus Sector, one vast hive. Here Inquisitor Ravenor investigates the trade in the drug flects.",
    "books": [
     "ravenor",
     "ravenor_returned",
@@ -1879,8 +1879,8 @@ window.WH40K_DATA = {
   },
   "sancour": {
    "name": "Sancour",
-   "type": "Imperiale Welt",
-   "desc": "Welt mit der verfallenden Stadt Queen Mab, einst Zentrum des Schiffbaus. Schauplatz der Bequin-Romane.",
+   "type": "Imperial World",
+   "desc": "World with the decaying city of Queen Mab, once a centre of shipbuilding. Setting of the Bequin novels.",
    "books": [
     "pariah",
     "penitent"
@@ -1888,32 +1888,32 @@ window.WH40K_DATA = {
   },
   "vraks_prime": {
    "name": "Vraks Prime",
-   "type": "Arsenalwelt",
-   "desc": "Einzige bewohnte Welt des Vraks-Systems im Scarus-Sektor, ein gewaltiges Waffenlager des Imperiums. Fiel unter Kardinal Xaphan vom Imperium ab.",
+   "type": "Armoury World",
+   "desc": "The only inhabited world of the Vraks system in the Scarus Sector, a vast Imperial arsenal. Broke from the Imperium under Cardinal Xaphan.",
    "books": [
     "siege_of_vraks"
    ]
   },
   "kathur": {
    "name": "Kathur",
-   "type": "Schreinwelt",
-   "desc": "Schreinwelt im Scarus-Sektor nahe dem Auge des Schreckens, von Chaosseuchen heimgesucht.",
+   "type": "Shrine World",
+   "desc": "Shrine World in the Scarus Sector near the Eye of Terror, afflicted by Chaos plagues.",
    "books": [
     "cadian_blood"
    ]
   },
   "gravalax": {
    "name": "Gravalax",
-   "type": "Agrarwelt",
-   "desc": "Kleine Agrarwelt in der Region des Damokles-Golfs, fast vollständig von T'au-Raum umgeben.",
+   "type": "Agri World",
+   "desc": "Small Agri World in the region of the Damocles Gulf, almost entirely surrounded by T'au space.",
    "books": [
     "for_the_emperor"
    ]
   },
   "perlia": {
    "name": "Perlia",
-   "type": "Zivilisierte Welt",
-   "desc": "Zivilisierte Welt nahe dem Damokles-Golf mit dem Grossteil der Industrie ihres Subsektors. Zweimal Schauplatz einer Belagerung, beide Male mit Ciaphas Cain.",
+   "type": "Civilised World",
+   "desc": "Civilised world near the Damocles Gulf holding most of its subsector's industry. Twice the scene of a siege, both times with Ciaphas Cain present.",
    "books": [
     "death_or_glory",
     "cains_last_stand"
@@ -1921,107 +1921,107 @@ window.WH40K_DATA = {
   },
   "simia_orichalcae": {
    "name": "Simia Orichalcae",
-   "type": "Eiswelt",
-   "desc": "Eiswelt mit einer wichtigen Promethium-Raffinerie, die Cains Regiment gegen Orks verteidigt.",
+   "type": "Ice World",
+   "desc": "Ice world with an important promethium refinery, defended against Orks by Cain's regiment.",
    "books": [
     "caves_of_ice"
    ]
   },
   "adumbria": {
    "name": "Adumbria",
-   "type": "Imperiale Welt",
-   "desc": "Welt, die Cains Regiment gegen eine Chaos-Invasion verteidigt.",
+   "type": "Imperial World",
+   "desc": "World defended by Cain's regiment against a Chaos invasion.",
    "books": [
     "traitors_hand"
    ]
   },
   "periremunda": {
    "name": "Periremunda",
-   "type": "Imperiale Welt",
-   "desc": "Welt, die sich einer anrückenden Tyraniden-Schwarmflotte gegenübersieht.",
+   "type": "Imperial World",
+   "desc": "World facing an approaching Tyranid hive fleet.",
    "books": [
     "duty_calls"
    ]
   },
   "nusquam_fundumentibus": {
    "name": "Nusquam Fundumentibus",
-   "type": "Imperiale Welt",
-   "desc": "Welt, auf der Cain und das Valhallanische 597. gegen einen Orkausbruch eingesetzt werden.",
+   "type": "Imperial World",
+   "desc": "World where Cain and the Valhallan 597th are deployed against an Ork outbreak.",
    "books": [
     "last_ditch"
    ]
   },
   "daniks_world": {
    "name": "Danik's World",
-   "type": "Kriegswelt · Eiswelt",
-   "desc": "Ehemalige Agrarwelt im Ultima Segmentum, umkämpft von rebellischen PVS-Truppen, der 12. Vostroyanischen Armee und Orks.",
+   "type": "War World · Ice World",
+   "desc": "Former Agri World in the Ultima Segmentum, contested by rebel PDF troops, the Vostroyan 12th Army and Orks.",
    "books": [
     "rebel_winter"
    ]
   },
   "cressida": {
    "name": "Cressida",
-   "type": "Tote Welt (ehem. Eiswelt)",
-   "desc": "Eiswelt, die nach dem Abzug der imperialen Truppen durch Exterminatus vernichtet wurde.",
+   "type": "Dead World (formerly ice world)",
+   "desc": "Ice world destroyed by Exterminatus after the withdrawal of Imperial forces.",
    "books": [
     "ice_guard"
    ]
   },
   "rogar_iii": {
    "name": "Rogar III",
-   "type": "Todeswelt · Dschungelwelt",
-   "desc": "Zwischen Imperium und Orks umkämpfte Dschungel-Todeswelt, Einsatzort von Catachan-Dschungelkämpfern.",
+   "type": "Death World · Jungle World",
+   "desc": "Jungle Death World contested between the Imperium and the Orks, area of operations for Catachan Jungle Fighters.",
    "books": [
     "death_world"
    ]
   },
   "gondwa_vi": {
    "name": "Gondwa VI",
-   "type": "Sumpfwelt",
-   "desc": "Von Orks überrannte Sumpfwelt, auf der die Catachan 57. Dschungelkämpfer kämpfen.",
+   "type": "Swamp World",
+   "desc": "Ork-overrun swamp world where the Catachan 57th Jungle Fighters do battle.",
    "books": [
     "catachan_devil"
    ]
   },
   "dulmalin": {
    "name": "Dulma'lin",
-   "type": "Höhlenwelt",
-   "desc": "Höhlenwelt, die Oberst 'Iron Hand' Straken und seine Catachaner von Orks säubern sollen.",
+   "type": "Cavern World",
+   "desc": "Cavern world that Colonel 'Iron Hand' Straken and his Catachans are tasked with clearing of Orks.",
    "books": [
     "straken"
    ]
   },
   "khadar": {
    "name": "Khadar",
-   "type": "Wüstenwelt",
-   "desc": "Wüstenwelt, von der ein rätselhafter Notruf ausgeht; Tallarn-Wüstenkrieger werden zur Untersuchung entsandt.",
+   "type": "Desert World",
+   "desc": "Desert world emitting a mysterious distress call; Tallarn Desert Raiders are dispatched to investigate.",
    "books": [
     "desert_raiders"
    ]
   },
   "belmos_vii": {
    "name": "Belmos VII",
-   "type": "Minenwelt",
-   "desc": "Minenwelt, deren Bevölkerung von einer unerklärlichen Seuche befallen ist; Einsatzort des 114. Mordianischen Eisengarde-Regiments.",
+   "type": "Mining World",
+   "desc": "Mining world whose population is struck by an inexplicable plague; area of operations for the Mordian 114th Iron Guard regiment.",
    "books": [
     "iron_guard"
    ]
   },
   "broucheroc": {
    "name": "Broucheroc",
-   "type": "Kriegswelt",
-   "desc": "Frontstadt im Krieg gegen die Orks, in der die Lebenserwartung eines neuen Gardisten auf fünfzehn Stunden berechnet wird.",
+   "type": "War World",
+   "desc": "Frontline city in the war against the Orks, where a new Guardsman's life expectancy is calculated at fifteen hours.",
    "books": [
     "fifteen_hours"
    ]
   },
   "luna": {
    "name": "Luna",
-   "type": "Mond",
-   "desc": "Terras Mond im Sol-System.",
+   "type": "Moon",
+   "desc": "Terra's moon in the Sol System.",
    "era30k": {
-    "type": "Heimat der Selenar-Gencults",
-    "desc": "Ursprünglicher Stützpunkt der Luna Wolves. Während der Belagerung von Terra Schauplatz von Kämpfen um die Gentechnik-Anlagen der Selenar."
+    "type": "Home of the Selenar gene-cults",
+    "desc": "Original base of the Luna Wolves. During the Siege of Terra the scene of fighting over the gene-forges of the Selenar."
    },
    "books": [
     "sons_of_the_selenar"
@@ -2029,11 +2029,11 @@ window.WH40K_DATA = {
   },
   "pluto": {
    "name": "Pluto",
-   "type": "Festungsplanet",
-   "desc": "Äusserster Planet des Sol-Systems.",
+   "type": "Fortress planet",
+   "desc": "Outermost planet of the Sol System.",
    "era30k": {
-    "type": "Äussere Verteidigung des Sol-Systems",
-    "desc": "010.M31 griff die Alpha Legion die Verteidigung der Imperial Fists an Pluto an – das erste grosse Gefecht des Solarkriegs."
+    "type": "Outer defence of the Sol System",
+    "desc": "In 010.M31 the Alpha Legion attacked the Imperial Fists' defences at Pluto – the first major engagement of the Solar War."
    },
    "books": [
     "praetorian_of_dorn"
@@ -2041,21 +2041,21 @@ window.WH40K_DATA = {
   },
   "cthonia": {
    "name": "Cthonia",
-   "type": "Bergbauwelt (zerstört)",
-   "desc": "Ausgebeutete, von Bandenkriegen zerfressene Bergbauwelt im Segmentum Solar.",
+   "type": "Mining World (destroyed)",
+   "desc": "Exhausted mining world in the Segmentum Solar, eaten away by gang wars.",
    "era30k": {
-    "type": "Legionsheimat (XVI. Legion)",
-    "desc": "Rekrutierungswelt der Luna Wolves bzw. Sons of Horus; ihre Krieger trugen den rauen Bandenkodex Cthonias in die Legion."
+    "type": "Legion homeworld (XVI Legion)",
+    "desc": "Recruiting world of the Luna Wolves, later the Sons of Horus; its warriors carried Cthonia's harsh gang code into the Legion."
    },
    "books": []
   },
   "nikaea": {
    "name": "Nikaea",
-   "type": "Grenzwelt",
-   "desc": "Welt im Segmentum Solar.",
+   "type": "Frontier World",
+   "desc": "World in the Segmentum Solar.",
    "era30k": {
-    "type": "Ort des Konzils von Nikaea",
-    "desc": "001.M31 entschied der Imperator hier über die Zukunft der Librarians und der psionischen Künste in den Legionen."
+    "type": "Site of the Council of Nikaea",
+    "desc": "In 001.M31 the Emperor ruled here on the future of the Librarians and the psychic arts within the Legions."
    },
    "books": [
     "thousand_sons"
@@ -2063,11 +2063,11 @@ window.WH40K_DATA = {
   },
   "beta_garmon2": {
    "name": "Beta-Garmon II",
-   "type": "Makropolwelt",
-   "desc": "Welt im Beta-Garmon-Sternhaufen, einem strategischen Knotenpunkt vor dem Segmentum Solar.",
+   "type": "Hive World",
+   "desc": "World in the Beta-Garmon cluster, a strategic nexus before the Segmentum Solar.",
    "era30k": {
-    "type": "Schlachtfeld der Titanen",
-    "desc": "Schauplatz des 'Titandeath' um die Stadt Nyrcon: Über tausend Titanen fielen in der grössten Titanenschlacht der Geschichte."
+    "type": "Battlefield of the Titans",
+    "desc": "Scene of the 'Titandeath' around the city of Nyrcon: more than a thousand Titans fell in the greatest Titan battle in history."
    },
    "books": [
     "titandeath"
@@ -2075,21 +2075,21 @@ window.WH40K_DATA = {
   },
   "paramar5": {
    "name": "Paramar V",
-   "type": "Schmiedewelt",
-   "desc": "Schmiedewelt im Norden des Segmentum Solar, an einer warpstabilen Route zwischen Isstvan und Sol.",
+   "type": "Forge World",
+   "desc": "Forge World in the north of the Segmentum Solar, on a warp-stable route between Isstvan and Sol.",
    "era30k": {
-    "type": "Schmiedewelt · Nachschubknoten",
-    "desc": "006.M31 von Alpha Legion und Dunklem Mechanicum erobert, danach mehrfach umkämpft (Zweite Schlacht 008–011.M31); erst 019.M31 zurückerobert."
+    "type": "Forge World · Supply nexus",
+    "desc": "Taken by the Alpha Legion and the Dark Mechanicum in 006.M31, then contested repeatedly (Second Battle 008–011.M31); only reconquered in 019.M31."
    },
    "books": []
   },
   "molech": {
    "name": "Molech",
-   "type": "Festungswelt · Ritterwelt",
-   "desc": "Ritterwelt, auf der der Imperator einst – so die Legende der Verräter – einen Pakt mit dem Chaos schloss.",
+   "type": "Fortress World · Knight World",
+   "desc": "Knight World where, according to traitor legend, the Emperor once made a pact with Chaos.",
    "era30k": {
-    "type": "Festungs- und Ritterwelt",
-    "desc": "009.M31 von Horus mit Sons of Horus und Death Guard erobert; Horus betritt dort ein Warptor und gewinnt neue Macht."
+    "type": "Fortress and Knight World",
+    "desc": "Conquered in 009.M31 by Horus with the Sons of Horus and Death Guard; Horus enters a warp gate there and gains new power."
    },
    "books": [
     "vengeful_spirit"
@@ -2098,10 +2098,10 @@ window.WH40K_DATA = {
   "trisolian": {
    "name": "Trisolian",
    "type": "System",
-   "desc": "Sternsystem auf Horus' Weg nach Terra.",
+   "desc": "Star system on Horus' path to Terra.",
    "era30k": {
-    "type": "Schlachtfeld",
-    "desc": "012.M31 griff Leman Russ hier das Flaggschiff Vengeful Spirit an und verwundete Horus mit dem Speer des Russ."
+    "type": "Battlefield",
+    "desc": "In 012.M31 Leman Russ attacked the flagship Vengeful Spirit here and wounded Horus with the Spear of Russ."
    },
    "books": [
     "wolfsbane"
@@ -2109,11 +2109,11 @@ window.WH40K_DATA = {
   },
   "phall": {
    "name": "Phall",
-   "type": "Agrarwelten-System",
-   "desc": "System im Segmentum Obscurus mit zwei Agrarwelten.",
+   "type": "Agri World system",
+   "desc": "System in the Segmentum Obscurus with two Agri Worlds.",
    "era30k": {
-    "type": "Schlachtfeld",
-    "desc": "007.M31 trafen hier eine Imperial-Fists-Flotte unter Alexis Polux und die Iron Warriors aufeinander."
+    "type": "Battlefield",
+    "desc": "In 007.M31 an Imperial Fists fleet under Alexis Polux clashed with the Iron Warriors here."
    },
    "books": [
     "shadows_of_treachery"
@@ -2121,11 +2121,11 @@ window.WH40K_DATA = {
   },
   "iydris": {
    "name": "Iydris",
-   "type": "Dämonenwelt",
-   "desc": "Welt im Auge des Schreckens.",
+   "type": "Daemon World",
+   "desc": "World in the Eye of Terror.",
    "era30k": {
-    "type": "Schauplatz von Fulgrims Aufstieg",
-    "desc": "Ziel von Perturabos und Fulgrims Suche nach dem 'Angel Exterminatus'; Fulgrim steigt hier zum Dämonenprinzen auf."
+    "type": "Site of Fulgrim's ascension",
+    "desc": "Goal of Perturabo and Fulgrim's quest for the 'Angel Exterminatus'; here Fulgrim ascends to daemonhood."
    },
    "books": [
     "angel_exterminatus"
@@ -2133,11 +2133,11 @@ window.WH40K_DATA = {
   },
   "colchis": {
    "name": "Colchis",
-   "type": "Ordensheimat (zerstört)",
-   "desc": "Wüstenwelt im Segmentum Pacificus, einst von einer mächtigen Priesterschaft beherrscht.",
+   "type": "Chapter Planet (destroyed)",
+   "desc": "Desert world in the Segmentum Pacificus, once ruled by a powerful priesthood.",
    "era30k": {
-    "type": "Legionsheimat (XVII. Legion)",
-    "desc": "Lorgar wuchs hier im Covenant auf und führte einen Glaubenskrieg. Nach der Häresie im Bitteren Krieg (bis ca. 032.M31) zerstört."
+    "type": "Legion homeworld (XVII Legion)",
+    "desc": "Lorgar grew up here within the Covenant and led a holy war. Destroyed after the Heresy during the Bitter War (until c. 032.M31)."
    },
    "books": [
     "bearer_of_the_word"
@@ -2145,11 +2145,11 @@ window.WH40K_DATA = {
   },
   "khur": {
    "name": "Khur",
-   "type": "Zivilisierte Welt (tot)",
-   "desc": "Welt im Segmentum Pacificus mit der Stadt Monarchia.",
+   "type": "Civilised World (dead)",
+   "desc": "World in the Segmentum Pacificus with the city of Monarchia.",
    "era30k": {
-    "type": "Von den Word Bearers bekehrte Welt",
-    "desc": "Monarchia war als Tempelstadt zu Ehren des Imperators erbaut. Auf Befehl des Imperators zerstörten die Ultramarines sie – die Zensur der Word Bearers."
+    "type": "World converted by the Word Bearers",
+    "desc": "Monarchia was built as a temple-city in honour of the Emperor. On the Emperor's order the Ultramarines destroyed it – the Censure of the Word Bearers."
    },
    "books": [
     "first_heretic"
@@ -2157,21 +2157,21 @@ window.WH40K_DATA = {
   },
   "inwit": {
    "name": "Inwit",
-   "type": "Eiswelt",
-   "desc": "Eiswelt im Inwit-Cluster (Segmentum Tempestus).",
+   "type": "Ice World",
+   "desc": "Ice world in the Inwit Cluster (Segmentum Tempestus).",
    "era30k": {
-    "type": "Heimatwelt Rogal Dorns",
-    "desc": "Hier wuchs Rogal Dorn auf. 009–013.M31 griffen Verräterflotten den Inwit-Cluster an."
+    "type": "Homeworld of Rogal Dorn",
+    "desc": "Rogal Dorn grew up here. In 009–013.M31 traitor fleets attacked the Inwit Cluster."
    },
    "books": []
   },
   "kiavahr": {
    "name": "Kiavahr",
-   "type": "Schmiedewelt",
-   "desc": "Technokratische Industriewelt im Kiavahr-System (Segmentum Tempestus).",
+   "type": "Forge World",
+   "desc": "Technocratic industrial world in the Kiavahr system (Segmentum Tempestus).",
    "era30k": {
-    "type": "Unterworfene Technokratie",
-    "desc": "Die Tech-Gilden Kiavahrs beuteten den Gefängnismond Lycaeus aus, bis Corax' Aufstand sie stürzte."
+    "type": "Subjugated technocracy",
+    "desc": "Kiavahr's Tech-Guilds exploited the prison moon Lycaeus until Corax's uprising overthrew them."
    },
    "books": [
     "deliverance_lost"
@@ -2179,15 +2179,15 @@ window.WH40K_DATA = {
   },
   "deliverance": {
    "name": "Deliverance",
-   "type": "Mond · Ordensheimat",
-   "desc": "Mond Kiavahrs, früher die Gefängniswelt Lycaeus.",
+   "type": "Moon · Chapter Planet",
+   "desc": "Moon of Kiavahr, formerly the prison world Lycaeus.",
    "era30k": {
-    "type": "Legionsheimat (XIX. Legion)",
-    "desc": "Corax führte hier den Häftlingsaufstand an und benannte Lycaeus in Deliverance um. Nach Isstvan V baute die Raven Guard dort ihre Legion wieder auf."
+    "type": "Legion homeworld (XIX Legion)",
+    "desc": "Corax led the prisoners' uprising here and renamed Lycaeus Deliverance. After Isstvan V the Raven Guard rebuilt their Legion there."
    },
    "era40k": {
-    "type": "Ordensheimat",
-    "desc": "Weiterhin Heimat der Raven Guard."
+    "type": "Chapter Planet",
+    "desc": "Still home of the Raven Guard."
    },
    "books": [
     "deliverance_lost",
@@ -2197,11 +2197,11 @@ window.WH40K_DATA = {
   },
   "barbarus": {
    "name": "Barbarus",
-   "type": "Todeswelt",
-   "desc": "Von giftigen Nebeln umhüllte Welt im Segmentum Tempestus.",
+   "type": "Death World",
+   "desc": "World shrouded in poisonous mists in the Segmentum Tempestus.",
    "era30k": {
-    "type": "Legionsheimat (XIV. Legion)",
-    "desc": "Mortarion wuchs unter einem Nekromanten-Kriegsherrn auf und führte die Menschen der Täler gegen die Herren der Berge. Während der Häresie zerstört."
+    "type": "Legion homeworld (XIV Legion)",
+    "desc": "Mortarion grew up under a necromancer warlord and led the people of the valleys against the Overlords of the mountains. Destroyed during the Heresy."
    },
    "books": [
     "buried_dagger",
@@ -2210,11 +2210,11 @@ window.WH40K_DATA = {
   },
   "ullanor": {
    "name": "Ullanor Prime",
-   "type": "Orkwelt",
-   "desc": "Zentrum des grössten Ork-Reichs zur Zeit des Großen Kreuzzugs. Lage vor dem Krieg des Biests unbekannt.",
+   "type": "Ork World",
+   "desc": "Centre of the greatest Ork empire at the time of the Great Crusade. Location before the War of the Beast unknown.",
    "era30k": {
-    "type": "Schauplatz des Ullanor-Kreuzzugs",
-    "desc": "000.M31 besiegt; beim anschließenden Triumph ernennt der Imperator Horus zum Kriegsmeister. Vor der Belagerung Terras Sammelpunkt der Verräterheere."
+    "type": "Site of the Ullanor Crusade",
+    "desc": "Conquered in 000.M31; at the subsequent Triumph the Emperor names Horus Warmaster. Before the Siege of Terra the mustering point of the traitor hosts."
    },
    "books": [
     "slaves_to_darkness"
@@ -2222,11 +2222,11 @@ window.WH40K_DATA = {
   },
   "olympia": {
    "name": "Olympia",
-   "type": "Tote Welt",
-   "desc": "Gebirgige Welt der Stadtstaaten im Ultima Segmentum.",
+   "type": "Dead World",
+   "desc": "Mountainous world of city-states in the Ultima Segmentum.",
    "era30k": {
-    "type": "Legionsheimat (IV. Legion)",
-    "desc": "Perturabo wuchs hier am Hof des Tyrannen von Lochos auf. Nach einem Aufstand ließ er ca. 004.M31 die Bevölkerung dezimieren. Bei der Belagerung ab 019.M31 sprengten die Iron Warriors ihre eigenen Arsenale."
+    "type": "Legion homeworld (IV Legion)",
+    "desc": "Perturabo grew up here at the court of the Tyrant of Lochos. After an uprising he had the population decimated around 004.M31. During the siege from 019.M31 the Iron Warriors blew up their own arsenals."
    },
    "books": [
     "hammer_of_olympia"
@@ -2234,11 +2234,11 @@ window.WH40K_DATA = {
   },
   "chemos": {
    "name": "Chemos",
-   "type": "Tote Welt",
-   "desc": "Ausgebeutete Industriewelt im Ultima Segmentum (Aquitaine-Sektor).",
+   "type": "Dead World",
+   "desc": "Exhausted industrial world in the Ultima Segmentum (Aquitaine Sector).",
    "era30k": {
-    "type": "Legionsheimat (III. Legion)",
-    "desc": "Fulgrim führte die verarmte Kolonie zu neuem Wohlstand. 012.M31 von den Dark Angels zerstört."
+    "type": "Legion homeworld (III Legion)",
+    "desc": "Fulgrim led the impoverished colony to new prosperity. Destroyed by the Dark Angels in 012.M31."
    },
    "books": [
     "palatine_phoenix"
@@ -2246,11 +2246,11 @@ window.WH40K_DATA = {
   },
   "diamat": {
    "name": "Diamat",
-   "type": "Schmiedewelt",
-   "desc": "Schmiedewelt im Tanagra-System (Ultima Segmentum).",
+   "type": "Forge World",
+   "desc": "Forge World in the Tanagra system (Ultima Segmentum).",
    "era30k": {
-    "type": "Umkämpfte Schmiedewelt",
-    "desc": "Der Löwe und die Dark Angels verteidigten Diamat gegen Kräfte des Horus, während sie von der Rebellion erfuhren."
+    "type": "Contested Forge World",
+    "desc": "The Lion and the Dark Angels defended Diamat against Horus' forces as they learned of the rebellion."
    },
    "books": [
     "fallen_angels"
@@ -2258,11 +2258,11 @@ window.WH40K_DATA = {
   },
   "nuceria": {
    "name": "Nuceria",
-   "type": "Tote Welt",
-   "desc": "Welt im Ultima Segmentum, auf der Angron als Gladiatorensklave aufwuchs.",
+   "type": "Dead World",
+   "desc": "World in the Ultima Segmentum where Angron grew up as a gladiator slave.",
    "era30k": {
-    "type": "Heimatwelt Angrons",
-    "desc": "Angron floh mit Mitsklaven gegen die Hochreiter. Der Imperator holte ihn gegen seinen Willen – seine Gefährten starben. 008.M31 Ort der Schlacht, in der Angron zum Dämonenprinzen aufsteigt. (Ausbildungswelt der World Eaters war Bodt.)"
+    "type": "Homeworld of Angron",
+    "desc": "Angron escaped with fellow slaves to fight the High Riders. The Emperor took him against his will – his companions died. In 008.M31 site of the battle in which Angron ascends to daemonhood. (The World Eaters' training world was Bodt.)"
    },
    "books": [
     "betrayer",
@@ -2271,11 +2271,11 @@ window.WH40K_DATA = {
   },
   "signus_prime": {
    "name": "Signus Prime",
-   "type": "Verbotene Welt",
-   "desc": "Hauptwelt des Signus-Clusters im Ultima Segmentum.",
+   "type": "Forbidden World",
+   "desc": "Principal world of the Signus Cluster in the Ultima Segmentum.",
    "era30k": {
-    "type": "Schauplatz des Signus-Feldzugs",
-    "desc": "Horus lockte die Blood Angels hierher, wo sie gegen Dämonen Khornes kämpften und Sanguinius vom Fluch der Legion erfuhr. Danach zur Mortae Perpetua erklärt."
+    "type": "Site of the Signus Campaign",
+    "desc": "Horus lured the Blood Angels here, where they fought the daemons of Khorne and Sanguinius learned of the Legion's curse. Afterwards declared Mortae Perpetua."
    },
    "books": [
     "fear_to_tread"
@@ -2283,15 +2283,15 @@ window.WH40K_DATA = {
   },
   "chogoris": {
    "name": "Chogoris",
-   "type": "Feudalwelt · Ordensheimat",
-   "desc": "Steppenwelt im Ultima Segmentum (Yasan-Sektor), Heimat der White Scars.",
+   "type": "Feudal World · Chapter Planet",
+   "desc": "Steppe world in the Ultima Segmentum (Yasan Sector), home of the White Scars.",
    "era30k": {
-    "type": "Legionsheimat (V. Legion)",
-    "desc": "Jaghatai Khan einte als Kriegsherr die Steppenvölker und vertrieb das Palatinat, bevor der Imperator ihn fand."
+    "type": "Legion homeworld (V Legion)",
+    "desc": "As a warlord, Jaghatai Khan united the steppe peoples and drove out the Palatine before the Emperor found him."
    },
    "era40k": {
-    "type": "Ordensheimat",
-    "desc": "Weiterhin Heimat der White Scars."
+    "type": "Chapter Planet",
+    "desc": "Still home of the White Scars."
    },
    "books": [
     "warhawk_of_chogoris"
@@ -2299,11 +2299,11 @@ window.WH40K_DATA = {
   },
   "sixty_three_nineteen": {
    "name": "Sixty-Three Nineteen",
-   "type": "Kompatible Welt",
-   "desc": "Die 19. Welt, die von der 63. Expeditionsflotte unterworfen wurde. Lage unbekannt.",
+   "type": "Compliant World",
+   "desc": "The 19th world brought to compliance by the 63rd Expedition Fleet. Location unknown.",
    "era30k": {
-    "type": "Kreuzzugswelt",
-    "desc": "001.M31 gab sich ihr Herrscher als Imperator aus; Horus und die Luna Wolves stürzten ihn."
+    "type": "Crusade World",
+    "desc": "In 001.M31 its ruler claimed to be the Emperor; Horus and the Luna Wolves overthrew him."
    },
    "books": [
     "horus_rising"
@@ -2311,11 +2311,11 @@ window.WH40K_DATA = {
   },
   "chondax": {
    "name": "Chondax",
-   "type": "Ork- und tote Welt",
-   "desc": "Trinäres Sternsystem am galaktischen Rand. Genaue Lage unbekannt.",
+   "type": "Ork and dead world",
+   "desc": "Trinary star system at the galactic rim. Exact location unknown.",
    "era30k": {
-    "type": "Feldzug der White Scars",
-    "desc": "Jahrelang kämpften die White Scars hier gegen Orks und standen dabei einer Blockade der Alpha Legion gegenüber, die sie von Nachrichten abschnitt."
+    "type": "White Scars campaign",
+    "desc": "For years the White Scars fought Orks here while facing an Alpha Legion blockade that cut them off from all news."
    },
    "books": [
     "scars"
@@ -2323,11 +2323,11 @@ window.WH40K_DATA = {
   },
   "armatura": {
    "name": "Armatura",
-   "type": "Garnisons- und Schmiedewelt",
-   "desc": "Welt in Ultramar.",
+   "type": "Garrison and Forge World",
+   "desc": "World in Ultramar.",
    "era30k": {
-    "type": "Militärischer Knotenpunkt Ultramars",
-    "desc": "Während des Schattenkreuzzugs von Angron und den World Eaters verwüstet."
+    "type": "Military hub of Ultramar",
+    "desc": "Ravaged by Angron and the World Eaters during the Shadow Crusade."
    },
    "books": [
     "betrayer"
@@ -2335,21 +2335,21 @@ window.WH40K_DATA = {
   },
   "thramas": {
    "name": "Thramas",
-   "type": "Makropolwelt",
-   "desc": "Makropolwelt im Thramas-Sektor am Rand des Ultima Segmentum.",
+   "type": "Hive World",
+   "desc": "Hive World in the Thramas Sector on the edge of the Ultima Segmentum.",
    "era30k": {
-    "type": "Umkämpfte Sektorwelt",
-    "desc": "Ziel des Thramas-Kreuzzugs, in dem Night Lords und Dark Angels jahrelang um den Sektor kämpften."
+    "type": "Contested sector world",
+    "desc": "Target of the Thramas Crusade, in which the Night Lords and Dark Angels fought for years over the sector."
    },
    "books": []
   },
   "sotha": {
    "name": "Sotha",
-   "type": "Tote Welt",
-   "desc": "Welt am Rand der Eastern Fringe, nahe Ultramar.",
+   "type": "Dead World",
+   "desc": "World on the Eastern Fringe, near Ultramar.",
    "era30k": {
-    "type": "Standort des Pharos",
-    "desc": "Hier stand der Pharos, ein Xenos-Leuchtfeuer, das zeitweise das Astronomican ersetzte. Die Night Lords griffen Sotha an."
+    "type": "Location of the Pharos",
+    "desc": "Here stood the Pharos, a xenos beacon that for a time replaced the Astronomican. The Night Lords attacked Sotha."
    },
    "books": [
     "pharos"
@@ -2359,11 +2359,11 @@ window.WH40K_DATA = {
  "events": [
   {
    "id": "unification_wars",
-   "name": "Vereinigungskriege",
+   "name": "Unification Wars",
    "date": "M30",
    "sort": 30790,
-   "era": "Großer Kreuzzug",
-   "desc": "Der Imperator eint das zersplitterte Terra mit seinen Donnerkriegern; Constantin Valdor führt die Custodes an.",
+   "era": "Great Crusade",
+   "desc": "The Emperor unites a fractured Terra with His Thunder Warriors; Constantin Valdor leads the Custodes.",
    "planets": [
     "terra"
    ],
@@ -2373,11 +2373,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "crusade_start",
-   "name": "Beginn des Großen Kreuzzugs",
-   "date": "ca. 798.M30",
+   "name": "Start of the Great Crusade",
+   "date": "c. 798.M30",
    "sort": 30798,
-   "era": "Großer Kreuzzug",
-   "desc": "Nach dem Vertrag mit dem Mars bricht der Imperator von Terra auf, um die verstreuten Welten der Menschheit zurückzugewinnen.",
+   "era": "Great Crusade",
+   "desc": "After the Treaty of Olympus with Mars, the Emperor sets out from Terra to reclaim humanity's scattered worlds.",
    "planets": [
     "terra",
     "mars"
@@ -2386,11 +2386,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "lycaeus_uprising",
-   "name": "Aufstand auf Lycaeus",
+   "name": "Lycaeus Uprising",
    "date": "M30",
    "sort": 30850,
-   "era": "Großer Kreuzzug",
-   "desc": "Corax führt die Gefangenen des Mondes Lycaeus gegen die Tech-Gilden Kiavahrs; der Mond wird in Deliverance umbenannt.",
+   "era": "Great Crusade",
+   "desc": "Corax leads the prisoners of the moon Lycaeus against the Tech-Guilds of Kiavahr; the moon is renamed Deliverance.",
    "planets": [
     "deliverance",
     "kiavahr"
@@ -2401,11 +2401,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "barbarus_liberation",
-   "name": "Befreiung von Barbarus",
+   "name": "Liberation of Barbarus",
    "date": "M30",
    "sort": 30860,
-   "era": "Großer Kreuzzug",
-   "desc": "Mortarion erhebt sich gegen die Herren des Nebels; der Imperator erschlägt den letzten Kriegsherrn, und Mortarion übernimmt die Death Guard.",
+   "era": "Great Crusade",
+   "desc": "Mortarion rises against the Overlords of the mists; the Emperor slays the last Overlord, and Mortarion takes command of the Death Guard.",
    "planets": [
     "barbarus"
    ],
@@ -2416,11 +2416,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "monarchia",
-   "name": "Zerstörung von Monarchia",
-   "date": "spätes M30",
+   "name": "Destruction of Monarchia",
+   "date": "late M30",
    "sort": 30963,
-   "era": "Großer Kreuzzug",
-   "desc": "Der Imperator lässt die Ultramarines die Tempelstadt Monarchia zerstören und tadelt die Word Bearers für ihre Verehrung – ca. 43 Jahre vor Isstvan V.",
+   "era": "Great Crusade",
+   "desc": "The Emperor has the Ultramarines raze the temple-city of Monarchia and rebukes the Word Bearers for their worship – some 43 years before Isstvan V.",
    "planets": [
     "khur"
    ],
@@ -2430,11 +2430,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "nostramo_destruction",
-   "name": "Vernichtung von Nostramo",
-   "date": "spätes M30",
+   "name": "Destruction of Nostramo",
+   "date": "late M30",
    "sort": 30984,
-   "era": "Großer Kreuzzug",
-   "desc": "Konrad Curze lässt seine Heimatwelt aus dem Orbit zerstören, nachdem sie wieder in Gesetzlosigkeit versunken ist.",
+   "era": "Great Crusade",
+   "desc": "Konrad Curze destroys his homeworld from orbit after it slides back into lawlessness.",
    "planets": [
     "nostramo"
    ],
@@ -2442,11 +2442,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "ullanor",
-   "name": "Ullanor-Kreuzzug und Triumph",
+   "name": "Ullanor Crusade and Triumph",
    "date": "000.M31",
    "sort": 31000,
-   "era": "Großer Kreuzzug",
-   "desc": "Das größte Ork-Reich der Galaxis wird vernichtet. Beim Triumph ernennt der Imperator Horus zum Kriegsmeister und zieht sich nach Terra zurück.",
+   "era": "Great Crusade",
+   "desc": "The greatest Ork empire in the galaxy is destroyed. At the Triumph, the Emperor names Horus Warmaster and withdraws to Terra.",
    "planets": [
     "ullanor"
    ],
@@ -2454,11 +2454,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "sixty_three_nineteen",
-   "name": "Schlacht um Sixty-Three Nineteen",
+   "name": "Battle of Sixty-Three Nineteen",
    "date": "001.M31",
    "sort": 31001,
-   "era": "Großer Kreuzzug",
-   "desc": "Horus und die Luna Wolves stürzen den falschen 'Imperator' der Welt; Captain Garviel Loken tötet den Usurpator.",
+   "era": "Great Crusade",
+   "desc": "Horus and the Luna Wolves topple the world's false 'Emperor'; Captain Garviel Loken slays the usurper.",
    "planets": [
     "sixty_three_nineteen"
    ],
@@ -2468,11 +2468,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "nikaea",
-   "name": "Konzil von Nikaea",
+   "name": "Council of Nikaea",
    "date": "001.M31",
    "sort": 31001.5,
-   "era": "Großer Kreuzzug",
-   "desc": "Der Imperator verbietet den Legionen den Gebrauch psionischer Kräfte; die Librarius-Abteilungen werden aufgelöst und Magnus wird verwarnt.",
+   "era": "Great Crusade",
+   "desc": "The Emperor forbids the Legions the use of psychic powers; the Librarius divisions are disbanded and Magnus is censured.",
    "planets": [
     "nikaea"
    ],
@@ -2482,11 +2482,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "chondax",
-   "name": "Chondax-Feldzug",
+   "name": "Chondax Campaign",
    "date": "001–007.M31",
    "sort": 31001.8,
-   "era": "Großer Kreuzzug",
-   "desc": "Die White Scars kämpfen jahrelang gegen Orks am Rand der Galaxis; eine Blockade der Alpha Legion hält sie über den Ausbruch der Häresie im Unklaren.",
+   "era": "Great Crusade",
+   "desc": "The White Scars fight Orks for years on the galactic fringe; an Alpha Legion blockade keeps them ignorant of the Heresy's outbreak.",
    "planets": [
     "chondax"
    ],
@@ -2496,11 +2496,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "davin",
-   "name": "Horus' Verführung auf Davin",
+   "name": "Corruption of Horus on Davin",
    "date": "004.M31",
    "sort": 31004,
-   "era": "Großer Kreuzzug",
-   "desc": "Horus wird auf Davins Mond von Eugen Temba mit dem Anathame verwundet und während der Heilung im Logentempel von den Chaosgöttern verführt.",
+   "era": "Great Crusade",
+   "desc": "On Davin's moon, Eugan Temba wounds Horus with the Anathame; while healing in the Delphos of the lodge temple, Horus is seduced by the Chaos Gods.",
    "planets": [
     "davin"
    ],
@@ -2510,11 +2510,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "olympia_decimation",
-   "name": "Dezimierung von Olympia",
-   "date": "ca. 004.M31",
+   "name": "Decimation of Olympia",
+   "date": "c. 004.M31",
    "sort": 31004.2,
-   "era": "Großer Kreuzzug",
-   "desc": "Nach einem Aufstand auf Olympia zwingt Perturabo die Bevölkerung zur Dezimierung; Millionen sterben, die Welt wird versklavt.",
+   "era": "Great Crusade",
+   "desc": "After an uprising on Olympia, Perturabo forces the population into decimation; millions die and the world is enslaved.",
    "planets": [
     "olympia"
    ],
@@ -2524,11 +2524,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "prospero",
-   "name": "Brand von Prospero",
+   "name": "Burning of Prospero",
    "date": "004–005.M31",
    "sort": 31004.8,
-   "era": "Horus-Häresie",
-   "desc": "Nach Magnus' verbotener Warnung an Terra zerstören Space Wolves und Custodes Prospero. Die Thousand Sons werden ins Auge des Schreckens gerissen.",
+   "era": "Horus Heresy",
+   "desc": "After Magnus' forbidden warning to Terra, the Space Wolves and Custodes destroy Prospero. The Thousand Sons are torn into the Eye of Terror.",
    "planets": [
     "prospero"
    ],
@@ -2540,11 +2540,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "isstvan3",
-   "name": "Massaker auf Isstvan III",
+   "name": "Isstvan III Atrocity",
    "date": "005.M31",
    "sort": 31005,
-   "era": "Horus-Häresie",
-   "desc": "Horus lässt die loyalen Marines seiner Verräterlegionen per Virusbombardement auslöschen. Beginn der offenen Rebellion.",
+   "era": "Horus Heresy",
+   "desc": "Horus has the loyal Marines of his Traitor Legions wiped out by virus bombardment. The open rebellion begins.",
    "planets": [
     "isstvan3"
    ],
@@ -2555,11 +2555,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "webway_war",
-   "name": "Krieg im Netz der Tausend Tore",
+   "name": "Webway War",
    "date": "M31",
    "sort": 31005.2,
-   "era": "Horus-Häresie",
-   "desc": "Magnus' Durchbruch beschädigt das Netz unter dem Palast; Custodes, Schwestern der Stille und der Imperator kämpfen gegen eindringende Dämonen.",
+   "era": "Horus Heresy",
+   "desc": "Magnus' breach damages the Webway beneath the Palace; the Custodes, the Sisters of Silence and the Emperor fight invading Daemons.",
    "planets": [
     "terra"
    ],
@@ -2569,11 +2569,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "signus",
-   "name": "Signus-Feldzug",
+   "name": "Signus Campaign",
    "date": "005–006.M31",
    "sort": 31005.4,
-   "era": "Horus-Häresie",
-   "desc": "Horus lenkt die Blood Angels in den Signus-Cluster, wo sie gegen Dämonen Khornes kämpfen und Sanguinius vom Makel seiner Legion erfährt.",
+   "era": "Horus Heresy",
+   "desc": "Horus lures the Blood Angels into the Signus Cluster, where they fight Daemons of Khorne and Sanguinius learns of his Legion's Flaw.",
    "planets": [
     "signus_prime"
    ],
@@ -2583,11 +2583,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "mars_schism",
-   "name": "Schisma des Mars",
-   "date": "ab 005.M31",
+   "name": "Schism of Mars",
+   "date": "from 005.M31",
    "sort": 31005.5,
-   "era": "Horus-Häresie",
-   "desc": "Bürgerkrieg innerhalb des Mechanicum zwischen Loyalisten und Anhängern des Horus.",
+   "era": "Horus Heresy",
+   "desc": "Civil war within the Mechanicum between loyalists and followers of Horus.",
    "planets": [
     "mars"
    ],
@@ -2597,11 +2597,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "diamat",
-   "name": "Schlacht um Diamat",
+   "name": "Battle of Diamat",
    "date": "M31",
    "sort": 31005.7,
-   "era": "Horus-Häresie",
-   "desc": "Die Dark Angels unter dem Löwen verteidigen die Schmiedewelt Diamat gegen Kräfte, die sich Horus angeschlossen haben.",
+   "era": "Horus Heresy",
+   "desc": "The Dark Angels under the Lion defend the Forge World of Diamat against forces that have sided with Horus.",
    "planets": [
     "diamat"
    ],
@@ -2611,11 +2611,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "isstvan5",
-   "name": "Drop-Site-Massaker",
+   "name": "Drop Site Massacre",
    "date": "006.M31",
    "sort": 31006,
-   "era": "Horus-Häresie",
-   "desc": "Drei Legionen fallen ihren vermeintlichen Verbündeten in den Rücken. Ferrus Manus fällt, Iron Hands, Salamanders und Raven Guard werden zerschlagen.",
+   "era": "Horus Heresy",
+   "desc": "Three Legions betray their supposed allies. Ferrus Manus falls; the Iron Hands, Salamanders and Raven Guard are shattered.",
    "planets": [
     "isstvan5"
    ],
@@ -2627,11 +2627,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "paramar1",
-   "name": "Erste Schlacht um Paramar",
+   "name": "First Battle of Paramar",
    "date": "006.M31",
    "sort": 31006.3,
-   "era": "Horus-Häresie",
-   "desc": "Alpha Legion, Dunkles Mechanicum und die Titanen der Legio Fureans erobern die Schmiedewelt Paramar V und sichern Horus den Weg nach Terra.",
+   "era": "Horus Heresy",
+   "desc": "The Alpha Legion, the Dark Mechanicum and the Titans of Legio Fureans seize the Forge World Paramar V, securing Horus' road to Terra.",
    "planets": [
     "paramar5"
    ],
@@ -2639,11 +2639,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "calth",
-   "name": "Verrat von Calth",
+   "name": "Battle of Calth",
    "date": "007.M31",
    "sort": 31007,
-   "era": "Horus-Häresie",
-   "desc": "Die Word Bearers greifen die Ultramarines auf Calth heimtückisch an. Die Sonne wird destabilisiert, der Ruinsturm entsteht.",
+   "era": "Horus Heresy",
+   "desc": "The Word Bearers treacherously attack the Ultramarines at Calth. The star is destabilised and the Ruinstorm is born.",
    "planets": [
     "calth"
    ],
@@ -2655,11 +2655,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "phall",
-   "name": "Schlacht von Phall",
+   "name": "Battle of Phall",
    "date": "007.M31",
    "sort": 31007.1,
-   "era": "Horus-Häresie",
-   "desc": "Eine Strafexpedition der Imperial Fists unter Alexis Polux trifft im Phall-System auf die Iron Warriors – eine verlustreiche Raumschlacht ohne Sieger.",
+   "era": "Horus Heresy",
+   "desc": "An Imperial Fists punitive expedition under Alexis Polux meets the Iron Warriors in the Phall System – a costly void battle with no victor.",
    "planets": [
     "phall"
    ],
@@ -2669,11 +2669,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "shadow_crusade",
-   "name": "Schattenkreuzzug",
+   "name": "Shadow Crusade",
    "date": "007–008.M31",
    "sort": 31007.3,
-   "era": "Horus-Häresie",
-   "desc": "Word Bearers und World Eaters unter Lorgar und Angron verwüsten die Welten Ultramars.",
+   "era": "Horus Heresy",
+   "desc": "The Word Bearers and World Eaters under Lorgar and Angron ravage the worlds of Ultramar.",
    "planets": [
     "armatura",
     "macragge"
@@ -2684,11 +2684,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "thramas",
-   "name": "Thramas-Kreuzzug",
+   "name": "Thramas Crusade",
    "date": "007–009.M31",
    "sort": 31007.5,
-   "era": "Horus-Häresie",
-   "desc": "Jahrelanger Krieg zwischen Night Lords und Dark Angels um die Schmiedewelten des Thramas-Sektors.",
+   "era": "Horus Heresy",
+   "desc": "Years of war between the Night Lords and Dark Angels over the Forge Worlds of the Thramas Sector.",
    "planets": [
     "thramas"
    ],
@@ -2696,11 +2696,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "iydris",
-   "name": "Aufstieg Fulgrims auf Iydris",
+   "name": "Fulgrim's Ascension on Iydris",
    "date": "007.M31",
    "sort": 31007.7,
-   "era": "Horus-Häresie",
-   "desc": "Perturabo folgt Fulgrim ins Auge des Schreckens auf der Suche nach dem 'Angel Exterminatus' – und Fulgrim wird selbst zum Dämonenprinzen.",
+   "era": "Horus Heresy",
+   "desc": "Perturabo follows Fulgrim into the Eye of Terror in search of the 'Angel Exterminatus' – and Fulgrim himself becomes a Daemon Prince.",
    "planets": [
     "iydris"
    ],
@@ -2710,11 +2710,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "nuceria",
-   "name": "Schlacht um Nuceria",
+   "name": "Battle of Nuceria",
    "date": "008.M31",
    "sort": 31008,
-   "era": "Horus-Häresie",
-   "desc": "Am Ende des Schattenkreuzzugs stellt Guilliman Angron auf Nuceria; Lorgar lässt Angron zum Dämonenprinzen aufsteigen.",
+   "era": "Horus Heresy",
+   "desc": "At the end of the Shadow Crusade, Guilliman corners Angron on Nuceria; Lorgar elevates Angron to Daemon Prince.",
    "planets": [
     "nuceria"
    ],
@@ -2727,8 +2727,8 @@ window.WH40K_DATA = {
    "name": "Imperium Secundus",
    "date": "009–011.M31",
    "sort": 31009,
-   "era": "Horus-Häresie",
-   "desc": "Vom Ruinsturm abgeschnitten, hält Guilliman Terra für gefallen und ruft auf Macragge ein zweites Imperium mit Sanguinius als Regenten aus.",
+   "era": "Horus Heresy",
+   "desc": "Cut off by the Ruinstorm, Guilliman believes Terra has fallen and proclaims a second Imperium on Macragge, with Sanguinius as Emperor.",
    "planets": [
     "macragge"
    ],
@@ -2741,11 +2741,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "sotha",
-   "name": "Schlacht um Sotha",
-   "date": "ca. 009.M31",
+   "name": "Battle of Sotha",
+   "date": "c. 009.M31",
    "sort": 31009.2,
-   "era": "Horus-Häresie",
-   "desc": "Die Night Lords greifen Sotha an, um den Pharos zu zerstören, der dem Imperium Secundus als Ersatz-Astronomican dient.",
+   "era": "Horus Heresy",
+   "desc": "The Night Lords attack Sotha to destroy the Pharos, which serves Imperium Secundus as a substitute Astronomican.",
    "planets": [
     "sotha"
    ],
@@ -2755,11 +2755,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "molech",
-   "name": "Schlacht um Molech",
+   "name": "Battle of Molech",
    "date": "009.M31",
    "sort": 31009.4,
-   "era": "Horus-Häresie",
-   "desc": "Horus erobert die Ritterwelt Molech und betritt dort ein Warptor, durch das er gewaltige neue Macht gewinnt.",
+   "era": "Horus Heresy",
+   "desc": "Horus conquers the Knight World of Molech and enters a warp gate there, through which he gains vast new power.",
    "planets": [
     "molech"
    ],
@@ -2769,11 +2769,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "inwit_siege",
-   "name": "Belagerung von Inwit",
+   "name": "Siege of Inwit",
    "date": "009–013.M31",
    "sort": 31009.6,
-   "era": "Horus-Häresie",
-   "desc": "Verräterflotten aus mehreren Legionen greifen den Inwit-Cluster, die Heimat Rogal Dorns, an; die Verteidiger halten stand.",
+   "era": "Horus Heresy",
+   "desc": "Traitor fleets from several Legions assault the Inwit Cluster, home of Rogal Dorn; the defenders hold firm.",
    "planets": [
     "inwit"
    ],
@@ -2781,11 +2781,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "tallarn",
-   "name": "Schlacht um Tallarn",
+   "name": "Battle of Tallarn",
    "date": "010–012.M31",
    "sort": 31010,
-   "era": "Horus-Häresie",
-   "desc": "Die Iron Warriors vergiften Tallarn; auf der Oberfläche folgt die grösste Panzerschlacht der Menschheitsgeschichte.",
+   "era": "Horus Heresy",
+   "desc": "The Iron Warriors poison Tallarn; on its surface follows the largest tank battle in human history.",
    "planets": [
     "tallarn"
    ],
@@ -2795,11 +2795,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "pluto",
-   "name": "Schlacht um Pluto",
+   "name": "Battle of Pluto",
    "date": "010.M31",
    "sort": 31010.5,
-   "era": "Belagerung von Terra",
-   "desc": "Die Alpha Legion greift die äussere Verteidigung des Sol-Systems an; Rogal Dorn stellt Alpharius selbst.",
+   "era": "Siege of Terra",
+   "desc": "The Alpha Legion strikes the outer defences of the Sol System; Rogal Dorn confronts Alpharius himself.",
    "planets": [
     "pluto"
    ],
@@ -2809,11 +2809,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "trisolian",
-   "name": "Schlacht von Trisolian",
+   "name": "Battle of Trisolian",
    "date": "012.M31",
    "sort": 31012.2,
-   "era": "Horus-Häresie",
-   "desc": "Leman Russ entert die Vengeful Spirit und verwundet Horus mit dem Speer des Russ, muss aber schwer verletzt fliehen.",
+   "era": "Horus Heresy",
+   "desc": "Leman Russ boards the Vengeful Spirit and wounds Horus with the Spear of Russ, but is forced to flee gravely injured.",
    "planets": [
     "trisolian"
    ],
@@ -2823,11 +2823,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "chemos_destruction",
-   "name": "Zerstörung von Chemos",
+   "name": "Destruction of Chemos",
    "date": "012.M31",
    "sort": 31012.3,
-   "era": "Horus-Häresie",
-   "desc": "Die Dark Angels vernichten Chemos, die Heimatwelt der Emperor's Children.",
+   "era": "Horus Heresy",
+   "desc": "The Dark Angels destroy Chemos, homeworld of the Emperor's Children.",
    "planets": [
     "chemos"
    ],
@@ -2835,11 +2835,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "beta_garmon",
-   "name": "Schlacht um Beta-Garmon",
+   "name": "Beta-Garmon Campaign",
    "date": "006–013.M31",
    "sort": 31012.5,
-   "era": "Horus-Häresie",
-   "desc": "Der lange Kampf um das Tor zum Segmentum Solar gipfelt im 'Titandeath' bei Nyrcon – Horus siegt und hat den Weg nach Terra frei.",
+   "era": "Horus Heresy",
+   "desc": "The long struggle for the gateway to the Segmentum Solar culminates in the 'Titandeath' at Nyrcon – Horus triumphs and the road to Terra lies open.",
    "planets": [
     "beta_garmon2"
    ],
@@ -2849,11 +2849,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "solar_war",
-   "name": "Solarkrieg",
+   "name": "Solar War",
    "date": "010–014.M31",
    "sort": 31013.5,
-   "era": "Belagerung von Terra",
-   "desc": "Horus' Flotten kämpfen sich durch das Sol-System; die Verteidigungslinien Dorns an den äusseren Planeten fallen.",
+   "era": "Siege of Terra",
+   "desc": "Horus' fleets fight their way through the Sol System; Dorn's defensive lines on the outer planets fall.",
    "planets": [
     "pluto",
     "mars",
@@ -2865,11 +2865,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "siege_terra",
-   "name": "Belagerung von Terra",
+   "name": "Siege of Terra",
    "date": "014.M31",
    "sort": 31014,
-   "era": "Belagerung von Terra",
-   "desc": "Der Höhepunkt der Häresie: Horus' Armeen belagern den Imperialen Palast. Endet mit Horus' Tod und dem Imperator auf dem Goldenen Thron.",
+   "era": "Siege of Terra",
+   "desc": "The climax of the Heresy: Horus' armies besiege the Imperial Palace. It ends with Horus' death and the Emperor on the Golden Throne.",
    "planets": [
     "terra",
     "mars"
@@ -2888,11 +2888,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "lions_gate",
-   "name": "Kampf um den Raumhafen Lion's Gate",
+   "name": "Battle for the Lion's Gate Spaceport",
    "date": "014.M31",
    "sort": 31014.2,
-   "era": "Belagerung von Terra",
-   "desc": "Die Verräter erobern den Raumhafen Lion's Gate vor dem Palast; später holt Jaghatai Khan ihn in einem verzweifelten Angriff zurück.",
+   "era": "Siege of Terra",
+   "desc": "The traitors seize the Lion's Gate spaceport before the Palace; later Jaghatai Khan retakes it in a desperate assault.",
    "planets": [
     "terra"
    ],
@@ -2903,11 +2903,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "fall_caliban",
-   "name": "Fall von Caliban",
-   "date": "ca. 014–015.M31",
+   "name": "Fall of Caliban",
+   "date": "c. 014–015.M31",
    "sort": 31015,
-   "era": "Horus-Häresie",
-   "desc": "Bei der Rückkehr des Löwen stellt sich Luther gegen ihn; Caliban zerbricht, die Gefallenen werden durch den Warp verstreut.",
+   "era": "Horus Heresy",
+   "desc": "On the Lion's return, Luther turns against him; Caliban shatters and the Fallen are scattered through the Warp.",
    "planets": [
     "caliban"
    ],
@@ -2918,11 +2918,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "battle_of_the_fang",
-   "name": "Schlacht um den Fang",
+   "name": "First Battle of the Fang",
    "date": "M32",
    "sort": 32100,
    "era": "M32",
-   "desc": "Die Thousand Sons und ihre Verbündeten greifen Fenris an und belagern den Fang, die Festung der Space Wolves.",
+   "desc": "The Thousand Sons and their allies attack Fenris and besiege the Fang, fortress of the Space Wolves.",
    "planets": [
     "fenris"
    ],
@@ -2932,11 +2932,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "war_of_the_beast",
-   "name": "Krieg der Bestie",
+   "name": "War of the Beast",
    "date": "M32",
    "sort": 32544,
    "era": "M32",
-   "desc": "Ein gewaltiges Ork-Reich unter 'der Bestie' überrennt das Imperium und bedroht sogar Terra. Die Imperial Fists werden fast ausgelöscht.",
+   "desc": "A vast Ork empire under 'the Beast' overruns the Imperium and threatens even Terra. The Imperial Fists are nearly wiped out.",
    "planets": [
     "terra"
    ],
@@ -2951,11 +2951,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "krieg_civil_war",
-   "name": "Bürgerkrieg und Atombrand auf Krieg",
+   "name": "Krieg Civil War and Atomic Fire",
    "date": "M40",
    "sort": 40450,
    "era": "M40",
-   "desc": "Krieg sagt sich vom Imperium los; nur Makropole Ferrograd unter Oberst Jurten bleibt loyal. Der folgende, jahrhundertelange Atomkrieg macht Krieg zur verstrahlten Todeswelt.",
+   "desc": "Krieg secedes from the Imperium; only Hive Ferrograd under Colonel Jurten stays loyal. The centuries-long atomic war that follows turns Krieg into an irradiated death world.",
    "planets": [
     "krieg"
    ],
@@ -2965,11 +2965,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "gothic_war",
-   "name": "Gothic-Krieg",
+   "name": "Gothic War",
    "date": "139–160.M41",
    "sort": 41139,
-   "era": "Gothic-Krieg",
-   "desc": "Abaddons 12. Schwarzer Kreuzzug mit dem Planetenkiller im Gothic-Sektor. Ziel sind die Schwarzsteinfestungen; Abaddon erbeutet drei, wird aber von Imperium und Eldar besiegt.",
+   "era": "Gothic War",
+   "desc": "Abaddon's 12th Black Crusade, wielding the Planet Killer in the Gothic Sector. His target is the Blackstone Fortresses; Abaddon seizes three but is defeated by the Imperium and the Eldar.",
    "planets": [
     "port_maw"
    ],
@@ -2980,11 +2980,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "savaven_destroyed",
-   "name": "Vernichtung von Savaven",
+   "name": "Destruction of Savaven",
    "date": "M41",
    "sort": 41142,
-   "era": "Gothic-Krieg",
-   "desc": "Die Kardinalswelt Savaven wird als erster Planet vom Planetenkiller zerstört.",
+   "era": "Gothic War",
+   "desc": "The Cardinal World of Savaven is the first planet destroyed by the Planet Killer.",
    "planets": [
     "savaven"
    ],
@@ -2992,11 +2992,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "schindlegeist",
-   "name": "Schlacht von Schindlegeist",
-   "date": "um 160.M41",
+   "name": "Battle of Schindlegeist",
+   "date": "c. 160.M41",
    "sort": 41160,
-   "era": "Gothic-Krieg",
-   "desc": "Entscheidungsschlacht des Gothic-Krieges, in der Abaddons Flotte geschlagen wird.",
+   "era": "Gothic War",
+   "desc": "The decisive battle of the Gothic War, in which Abaddon's fleet is beaten.",
    "planets": [
     "schindlegeist"
    ],
@@ -3004,11 +3004,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "eyclone_hunt",
-   "name": "Eisenhorns Jagd auf Murdin Eyclone",
+   "name": "Eisenhorn's Hunt for Murdin Eyclone",
    "date": "240.M41",
    "sort": 41240,
    "era": "M41",
-   "desc": "Inquisitor Gregor Eisenhorn stellt den Ketzer Eyclone auf Hubris und deckt eine Verschwörung um das Necroteuch auf, die bis zum Haus Glaw auf Gudrun reicht.",
+   "desc": "Inquisitor Gregor Eisenhorn corners the heretic Eyclone on Hubris and uncovers a conspiracy around the Necroteuch reaching as far as House Glaw on Gudrun.",
    "planets": [
     "hubris",
     "gudrun"
@@ -3019,11 +3019,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "helican_triumph",
-   "name": "Triumph von Lord Helican",
+   "name": "Lord Helican's Triumph",
    "date": "241.M41",
    "sort": 41241,
    "era": "M41",
-   "desc": "Der Triumphzug für Lord Helican auf Thracian Primaris endet in einem verheerenden Massaker. Ausgangspunkt der Handlung von 'Malleus'.",
+   "desc": "The triumphal parade for Lord Helican on Thracian Primaris ends in a devastating massacre. The starting point of 'Malleus'.",
    "planets": [
     "thracian_primaris"
    ],
@@ -3033,11 +3033,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "macharian_crusade",
-   "name": "Macharius-Kreuzzug",
+   "name": "Macharian Crusade",
    "date": "392–399.M41",
    "sort": 41392,
-   "era": "Macharius-Kreuzzug",
-   "desc": "Lord Solar Macharius erobert in sieben Jahren über tausend Welten am westlichen Rand der Galaxis im Segmentum Pacificus.",
+   "era": "Macharian Crusade",
+   "desc": "In seven years, Lord Solar Macharius conquers over a thousand worlds on the western rim of the galaxy in the Segmentum Pacificus.",
    "planets": [
     "karsk",
     "demetrius",
@@ -3051,11 +3051,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "ravenor_flects",
-   "name": "Ravenors Ermittlungen auf Eustis Majoris",
+   "name": "Ravenor's Investigation on Eustis Majoris",
    "date": "401–404.M41",
    "sort": 41401,
    "era": "M41",
-   "desc": "Inquisitor Gideon Ravenor verfolgt den Handel mit der Droge Flects auf Eustis Majoris und stösst auf eine weit grössere Verschwörung.",
+   "desc": "Inquisitor Gideon Ravenor pursues the trade in the drug flects on Eustis Majoris and stumbles upon a far greater conspiracy.",
    "planets": [
     "eustis_majoris"
    ],
@@ -3067,11 +3067,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "armageddon1",
-   "name": "Erster Krieg um Armageddon",
+   "name": "First War for Armageddon",
    "date": "444.M41",
    "sort": 41444,
    "era": "M41",
-   "desc": "Angron führt eine Dämoneninvasion gegen Armageddon. Grey Knights und Space Wolves werfen ihn zurück; die anschliessende Säuberung durch die Inquisition führt zu den 'Monaten der Schande'.",
+   "desc": "Angron leads a Daemon invasion against Armageddon. The Grey Knights and Space Wolves hurl him back; the Inquisition's subsequent purge leads to the 'Months of Shame'.",
    "planets": [
     "armageddon"
    ],
@@ -3081,11 +3081,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "damocles_crusade",
-   "name": "Damocles-Golf-Kreuzzug",
+   "name": "Damocles Gulf Crusade",
    "date": "742.M41",
    "sort": 41742,
    "era": "M41",
-   "desc": "Erster grosser Krieg des Imperiums gegen das T'au-Imperium. Imperiale Armee und Space Marines, darunter die Ultramarines, kämpfen um Dal'yth Prime, bis ein Waffenstillstand geschlossen wird.",
+   "desc": "The Imperium's first major war against the T'au Empire. The Imperial Guard and Space Marines, the Ultramarines among them, fight for Dal'yth Prime until a truce is struck.",
    "planets": [
     "dalyth"
    ],
@@ -3095,11 +3095,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "macragge_745",
-   "name": "Schlacht um Macragge",
+   "name": "Battle of Macragge",
    "date": "745.M41",
    "sort": 41745,
    "era": "M41",
-   "desc": "Die Schwarmflotte Behemoth greift Ultramar an. Im Ersten Tyranidenkrieg fällt die Erste Kompanie der Ultramarines bei der Verteidigung der Polfestungen, doch Behemoth wird vernichtet.",
+   "desc": "Hive Fleet Behemoth attacks Ultramar. In the First Tyrannic War, the Ultramarines' First Company falls defending the polar fortresses, but Behemoth is destroyed.",
    "planets": [
     "macragge"
    ],
@@ -3107,11 +3107,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "sabbat_crusade_start",
-   "name": "Beginn des Sabbat-Welten-Kreuzzugs",
+   "name": "Start of the Sabbat Worlds Crusade",
    "date": "755.M41",
    "sort": 41755,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Kriegsmeister Slaydo beginnt den Kreuzzug zur Rückeroberung der Sabbat-Welten, die das Chaos um 740.M41 überrannt hatte.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "Warmaster Slaydo launches the crusade to reclaim the Sabbat Worlds, overrun by Chaos around 740.M41.",
    "planets": [],
    "books": [
     "sabbat_worlds_crusade"
@@ -3119,11 +3119,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "balhaut_765",
-   "name": "Schlacht um Balhaut",
+   "name": "Battle of Balhaut",
    "date": "765.M41",
    "sort": 41765,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Slaydos Sieg über die Chaosheere auf Balhaut; der Kriegsmeister erliegt danach seinen Wunden, Macaroth wird sein Nachfolger.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "Slaydo's victory over the hosts of Chaos on Balhaut; the Warmaster then succumbs to his wounds and Macaroth succeeds him.",
    "planets": [
     "balhaut"
    ],
@@ -3133,11 +3133,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "tanith_fall",
-   "name": "Fall von Tanith",
+   "name": "Fall of Tanith",
    "date": "765.M41",
    "sort": 41765.2,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Tanith wird während der Gründung seiner Regimenter vom Chaos vernichtet. Nur das Tanith First and Only unter Kommissar Ibram Gaunt entkommt.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "Tanith is destroyed by Chaos during the Founding of its regiments. Only the Tanith First-and-Only under Commissar Ibram Gaunt escapes.",
    "planets": [
     "tanith"
    ],
@@ -3148,11 +3148,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "fortis_binary",
-   "name": "Kampf um Fortis Binary",
+   "name": "Battle for Fortis Binary",
    "date": "M41",
    "sort": 41765.5,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Die frisch gegründeten Tanith-Geister kämpfen im Grabenkrieg um die vom Chaos gehaltene Schmiedewelt.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "The newly founded Tanith Ghosts fight a trench war for the Chaos-held Forge World.",
    "planets": [
     "fortis_binary"
    ],
@@ -3163,11 +3163,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "menazoid_epsilon",
-   "name": "Feldzug auf Menazoid Epsilon",
+   "name": "Menazoid Epsilon Campaign",
    "date": "M41",
    "sort": 41766,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Die Geister kämpfen auf der Todeswelt Menazoid Epsilon um eine STC-Anlage; Lord-General Dravere kommt ums Leben.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "The Ghosts fight for an STC facility on the death world Menazoid Epsilon; Lord General Dravere is killed.",
    "planets": [
     "menazoid_epsilon"
    ],
@@ -3178,11 +3178,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "vervunhive",
-   "name": "Belagerung von Vervunhive",
+   "name": "Siege of Vervunhive",
    "date": "M41",
    "sort": 41767,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Der Chaos-Kriegsherr Heritor Asphodel greift von der Makropole Ferrozoica aus Vervunhive an. Die Geister verteidigen die Stadt; Überlebende aus Verghast schliessen sich dem Regiment an.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "The Chaos warlord Heritor Asphodel attacks Vervunhive from Ferrozoica Hive. The Ghosts defend the city; Verghastite survivors join the regiment.",
    "planets": [
     "verghast"
    ],
@@ -3192,11 +3192,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "hagia",
-   "name": "Ehrengarde auf Hagia",
+   "name": "Honour Guard on Hagia",
    "date": "769.M41",
    "sort": 41769,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Gaunt führt eine Ehrengarde, um die Reliquien der Heiligen Sabbat aus dem Schrein auf Hagia vor den Infardi zu retten.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "Gaunt leads an honour guard to save the relics of Saint Sabbat from the shrine on Hagia before the Infardi can seize them.",
    "planets": [
     "hagia"
    ],
@@ -3206,11 +3206,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "orestes",
-   "name": "Titanenkrieg um Orestes",
+   "name": "Titan War on Orestes",
    "date": "M41",
    "sort": 41770,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Die Legio Invicta wird auf der Schmiedewelt Orestes in einen Krieg gegen Chaostitanen verwickelt, während das Mechanicus der Welt zerstritten ist.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "Legio Invicta is drawn into a war against Chaos Titans on the Forge World Orestes, while the world's Mechanicus is divided against itself.",
    "planets": [
     "orestes"
    ],
@@ -3220,11 +3220,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "phantine",
-   "name": "Rückeroberung von Phantine",
+   "name": "Liberation of Phantine",
    "date": "771.M41",
    "sort": 41771,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Feldzug zur Rückeroberung der Wolkenwelt Phantine, um die Nachschublinien des Kriegsmeisters zu sichern; erste Luftlandeoperation der Geister.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "A campaign to retake the cloud world of Phantine and secure the Warmaster's supply lines; the Ghosts' first airborne drop.",
    "planets": [
     "phantine"
    ],
@@ -3235,11 +3235,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "aexe_cardinal",
-   "name": "Grabenkrieg auf Aexe Cardinal",
+   "name": "Trench War on Aexe Cardinal",
    "date": "772.M41",
    "sort": 41772,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Die Geister verstärken die Aexe-Allianz im zermürbenden Grabenkrieg gegen die Shadik-Republik.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "The Ghosts reinforce the Aexe Alliance in a grinding trench war against the Shadik Republic.",
    "planets": [
     "aexe_cardinal"
    ],
@@ -3249,11 +3249,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "herodor",
-   "name": "Verteidigung von Herodor",
+   "name": "Defence of Herodor",
    "date": "773.M41",
    "sort": 41773,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Die Geister schützen ein Mädchen, das als Wiedergeburt der Heiligen Sabbat gilt, vor einem Angriff des Archfeinds. Oberst Corbec fällt.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "The Ghosts protect a girl believed to be the reincarnation of Saint Sabbat from an attack by the Archenemy. Colonel Corbec falls.",
    "planets": [
     "herodor"
    ],
@@ -3263,11 +3263,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "gereon_infiltration",
-   "name": "Mission auf Gereon",
+   "name": "Mission to Gereon",
    "date": "774.M41",
    "sort": 41774,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Gaunt infiltriert mit einem kleinen Trupp das besetzte Gereon, um den Verräter-General Noches Sturm zu töten.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "Gaunt infiltrates occupied Gereon with a small team to assassinate the traitor general Noches Sturm.",
    "planets": [
     "gereon"
    ],
@@ -3277,11 +3277,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "ancreon_sextus",
-   "name": "Sturm auf Sparshad Mons",
+   "name": "Assault on Sparshad Mons",
    "date": "776.M41",
    "sort": 41776,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Kampf um die Stufenstädte von Ancreon Sextus, die sich als Warptore des Blutpakts erweisen.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "The battle for the step-cities of Ancreon Sextus, which prove to be Blood Pact warp gates.",
    "planets": [
     "ancreon_sextus"
    ],
@@ -3291,11 +3291,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "gereon_liberation",
-   "name": "Befreiung von Gereon",
+   "name": "Liberation of Gereon",
    "date": "777.M41",
    "sort": 41777,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Die Geister unterstützen den Widerstand bei der Befreiung Gereons vom Archfeind.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "The Ghosts aid the resistance in freeing Gereon from the Archenemy.",
    "planets": [
     "gereon"
    ],
@@ -3305,11 +3305,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "jago",
-   "name": "Belagerung von Hinzerhaus",
+   "name": "Siege of Hinzerhaus",
    "date": "778.M41",
    "sort": 41778,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Die Geister halten auf Jago die uralte Festung Hinzerhaus gegen eine Übermacht des Blutpakts.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "On Jago, the Ghosts hold the ancient fortress of Hinzerhaus against overwhelming Blood Pact forces.",
    "planets": [
     "jago"
    ],
@@ -3320,11 +3320,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "balhaut_780",
-   "name": "Blutpakt-Attentat auf Balhaut",
+   "name": "Blood Pact Strike on Balhaut",
    "date": "780.M41",
    "sort": 41780,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Ein Infiltrationstrupp des Blutpakts versucht auf Balhaut einen hochrangigen Überläufer zu beseitigen.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "A Blood Pact infiltration team on Balhaut attempts to eliminate a high-ranking defector.",
    "planets": [
     "balhaut"
    ],
@@ -3334,11 +3334,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "salvations_reach",
-   "name": "Angriff auf Salvation's Reach",
+   "name": "Raid on Salvation's Reach",
    "date": "781.M41",
    "sort": 41781,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Kommandounternehmen der Tanith-Geister gegen die Archfeind-Festung Salvation's Reach.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "A Tanith Ghosts commando operation against the Archenemy fortress of Salvation's Reach.",
    "planets": [
     "salvations_reach"
    ],
@@ -3348,11 +3348,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "urdesh",
-   "name": "Schlacht um Urdesh",
+   "name": "Battle of Urdesh",
    "date": "M41",
    "sort": 41782,
-   "era": "Sabbat-Welten-Kreuzzug",
-   "desc": "Entscheidungsfeldzug unter Kriegsmeister Macaroth persönlich um die Schmiedewelt Urdesh gegen die Heere von Anarch Sek.",
+   "era": "Sabbat Worlds Crusade",
+   "desc": "A decisive campaign led by Warmaster Macaroth in person for the Forge World Urdesh against the hosts of Anarch Sek.",
    "planets": [
     "urdesh"
    ],
@@ -3363,11 +3363,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "vraks_siege",
-   "name": "Belagerung von Vraks",
+   "name": "Siege of Vraks",
    "date": "813–830.M41",
    "sort": 41813,
    "era": "M41",
-   "desc": "Nach dem Abfall von Kardinal Xaphan belagert die 88. Belagerungsarmee des Todeskorps von Krieg die Arsenalwelt Vraks Prime – ein 17 bis 18 Jahre dauernder Feldzug mit Millionen Toten.",
+   "desc": "After Cardinal Xaphan's apostasy, the 88th Siege Army of the Death Korps of Krieg besieges the armoury world Vraks Prime – a campaign of 17 to 18 years with millions dead.",
    "planets": [
     "vraks_prime"
    ],
@@ -3377,11 +3377,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "cressida",
-   "name": "Evakuierung von Cressida",
+   "name": "Evacuation of Cressida",
    "date": "M41",
    "sort": 41900,
    "era": "M41",
-   "desc": "Nach dem Rückzugsbefehl der imperialen Truppen soll ein Trupp Valhallaner einen gestrandeten Würdenträger retten, bevor die Eiswelt durch Exterminatus vernichtet wird.",
+   "desc": "After Imperial forces are ordered to withdraw, a squad of Valhallans must rescue a stranded dignitary before the ice world is destroyed by Exterminatus.",
    "planets": [
     "cressida"
    ],
@@ -3391,11 +3391,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "badab_war",
-   "name": "Badab-Krieg",
+   "name": "Badab War",
    "date": "901–912.M41",
    "sort": 41901,
    "era": "M41",
-   "desc": "Lufgt Huron, Ordensmeister der Astral Claws, sagt sich mit verbündeten Orden vom Imperium los. Ein mehrjähriger Bruderkrieg zwischen Space Marines endet mit dem Fall von Badab und Hurons Flucht in den Maelstrom.",
+   "desc": "Lufgt Huron, Chapter Master of the Astral Claws, secedes from the Imperium with allied Chapters. Years of fratricidal war between Space Marines end with the fall of Badab and Huron's flight into the Maelstrom.",
    "planets": [
     "badab_primaris"
    ],
@@ -3406,11 +3406,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "daniks_world",
-   "name": "Rebellion auf Danik's World",
+   "name": "Rebellion on Danik's World",
    "date": "M41",
    "sort": 41901,
    "era": "M41",
-   "desc": "Die 12. Vostroyanische Armee kämpft auf der vereisten Welt gegen rebellische PVS-Truppen und den Ork-Clan Venomhead.",
+   "desc": "The Vostroyan 12th Army fights rebel PDF troops and the Venomhead Ork clan on the frozen world.",
    "planets": [
     "daniks_world"
    ],
@@ -3420,11 +3420,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "kathur",
-   "name": "Rückeroberung von Kathur",
+   "name": "Reclamation of Kathur",
    "date": "M41",
    "sort": 41902,
    "era": "M41",
-   "desc": "Cadianische Gardisten sollen die vom Chaos verseuchte Schreinwelt Kathur zurückerobern.",
+   "desc": "Cadian Guardsmen are sent to retake the Chaos-tainted shrine world of Kathur.",
    "planets": [
     "kathur"
    ],
@@ -3434,11 +3434,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "broucheroc",
-   "name": "Ork-Krieg um Broucheroc",
+   "name": "Ork War for Broucheroc",
    "date": "M41",
    "sort": 41903,
    "era": "M41",
-   "desc": "In der seit Jahren umkämpften Frontstadt Broucheroc versucht der junge Rekrut Arvin Larn, länger als fünfzehn Stunden zu überleben.",
+   "desc": "In the frontline city of Broucheroc, contested for years, young recruit Arvin Larn tries to survive longer than fifteen hours.",
    "planets": [
     "broucheroc"
    ],
@@ -3448,11 +3448,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "perlia_1",
-   "name": "Erste Belagerung von Perlia",
+   "name": "First Siege of Perlia",
    "date": "921.M41",
    "sort": 41921,
    "era": "M41",
-   "desc": "Waaagh! Korbul greift den Subsektor an. Kommissar Ciaphas Cain verteidigt mit der Valhallanischen 12. Feldartillerie das Industriezentrum Perlia.",
+   "desc": "Waaagh! Korbul strikes the subsector. Commissar Ciaphas Cain defends the industrial centre of Perlia with the Valhallan 12th Field Artillery.",
    "planets": [
     "perlia"
    ],
@@ -3462,11 +3462,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "gravalax",
-   "name": "Gravalax-Zwischenfall",
+   "name": "Gravalax Incident",
    "date": "M41",
    "sort": 41925,
    "era": "M41",
-   "desc": "Ciaphas Cain und das Valhallanische 597. werden nach Gravalax entsandt, das zum T'au-Imperium überzulaufen droht; ein Attentat auf den T'au-Botschafter bringt die Welt an den Rand des Krieges.",
+   "desc": "Ciaphas Cain and the Valhallan 597th are sent to Gravalax, which threatens to defect to the T'au Empire; an assassination attempt on the T'au envoy brings the world to the brink of war.",
    "planets": [
     "gravalax"
    ],
@@ -3476,11 +3476,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "simia_orichalcae",
-   "name": "Verteidigung von Simia Orichalcae",
+   "name": "Defence of Simia Orichalcae",
    "date": "M41",
    "sort": 41926,
    "era": "M41",
-   "desc": "Cains Regiment verteidigt eine Promethium-Raffinerie auf der Eiswelt gegen Ork-Plünderer – und stösst in den Eishöhlen auf Schlimmeres.",
+   "desc": "Cain's regiment defends a promethium refinery on the ice world against Ork raiders – and finds something worse in the ice caves.",
    "planets": [
     "simia_orichalcae"
    ],
@@ -3490,11 +3490,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "periremunda",
-   "name": "Tyranidenbedrohung auf Periremunda",
+   "name": "Tyranid Threat on Periremunda",
    "date": "M41",
    "sort": 41927,
    "era": "M41",
-   "desc": "Etwa ein Jahr nach Simia Orichalcae soll Cains Regiment Periremunda gegen eine anrückende Tyraniden-Schwarmflotte sichern.",
+   "desc": "About a year after Simia Orichalcae, Cain's regiment is sent to secure Periremunda against an approaching Tyranid hive fleet.",
    "planets": [
     "periremunda"
    ],
@@ -3504,11 +3504,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "adumbria",
-   "name": "Chaos-Invasion von Adumbria",
+   "name": "Chaos Invasion of Adumbria",
    "date": "M41",
    "sort": 41928,
    "era": "M41",
-   "desc": "Cain und das Valhallanische 597. verteidigen Adumbria gegen eine Invasion des Chaos.",
+   "desc": "Cain and the Valhallan 597th defend Adumbria against a Chaos invasion.",
    "planets": [
     "adumbria"
    ],
@@ -3518,11 +3518,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "nusquam",
-   "name": "Orkausbruch auf Nusquam Fundumentibus",
+   "name": "Ork Uprising on Nusquam Fundumentibus",
    "date": "M41",
    "sort": 41935,
    "era": "M41",
-   "desc": "Cain und das Valhallanische 597. bekämpfen einen Orkausbruch auf Nusquam Fundumentibus.",
+   "desc": "Cain and the Valhallan 597th battle an Ork uprising on Nusquam Fundumentibus.",
    "planets": [
     "nusquam_fundumentibus"
    ],
@@ -3532,11 +3532,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "armageddon2",
-   "name": "Zweiter Krieg um Armageddon",
+   "name": "Second War for Armageddon",
    "date": "941.M41",
    "sort": 41941,
    "era": "M41",
-   "desc": "Ghazghkull Thraka greift Armageddon an. Commissar Yarrick führt die Verteidigung.",
+   "desc": "Ghazghkull Thraka attacks Armageddon. Commissar Yarrick leads the defence.",
    "planets": [
     "armageddon"
    ],
@@ -3546,11 +3546,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "kadillus",
-   "name": "Säuberung von Kadillus",
+   "name": "Battle for Kadillus Harbour",
    "date": "M41",
    "sort": 41960,
    "era": "M41",
-   "desc": "Die 3. Kompanie der Dark Angels verteidigt Piscina IV und die Stadt Kadillus Harbour gegen eine Ork-Invasion.",
+   "desc": "The Dark Angels' 3rd Company defends Piscina IV and the city of Kadillus Harbour against an Ork invasion.",
    "planets": [
     "piscina4"
    ],
@@ -3560,11 +3560,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "fall_of_damnos",
-   "name": "Fall von Damnos",
+   "name": "Fall of Damnos",
    "date": "M41",
    "sort": 41970,
    "era": "M41",
-   "desc": "Auf Damnos erwacht eine Necron-Gruft. Trotz des Eingreifens der Ultramarines geht die Welt verloren.",
+   "desc": "A Necron tomb awakens on Damnos. Despite the intervention of the Ultramarines, the world is lost.",
    "planets": [
     "damnos"
    ],
@@ -3574,11 +3574,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "rynns_world_war",
-   "name": "Krieg um Rynn's World",
+   "name": "Rynn's World War",
    "date": "989.M41",
    "sort": 41989,
    "era": "M41",
-   "desc": "Waaagh! Snagrod fällt über Rynn's World her. Eine fehlgeleitete Abwehrrakete zerstört die Arx Tyrannus und fast den ganzen Orden der Crimson Fists; die Überlebenden kämpfen um ihre Heimat.",
+   "desc": "Waaagh! Snagrod falls upon Rynn's World. A misfired defence missile destroys Arx Tyrannus and almost the entire Crimson Fists Chapter; the survivors fight for their home.",
    "planets": [
     "rynns_world"
    ],
@@ -3588,11 +3588,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "hydra_cordatus_siege",
-   "name": "Belagerung von Hydra Cordatus",
-   "date": "spätes M41",
+   "name": "Siege of Hydra Cordatus",
+   "date": "late M41",
    "sort": 41990,
    "era": "M41",
-   "desc": "Die Iron Warriors belagern die Zitadelle auf Hydra Cordatus, um die dort gelagerte Gensaat der Space Marines zu erbeuten. Die Festung fällt.",
+   "desc": "The Iron Warriors besiege the citadel on Hydra Cordatus to seize the Space Marine gene-seed stored there. The fortress falls.",
    "planets": [
     "hydra_cordatus"
    ],
@@ -3602,11 +3602,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "ichar4",
-   "name": "Schlacht um Ichar IV",
+   "name": "Battle of Ichar IV",
    "date": "992–993.M41",
    "sort": 41992,
    "era": "M41",
-   "desc": "Im Zweiten Tyranidenkrieg greift die Schwarmflotte Kraken Ichar IV an. Unter Marneus Calgar schlagen Ultramarines und Imperiale Armee die Tyraniden zurück.",
+   "desc": "In the Second Tyrannic War, Hive Fleet Kraken attacks Ichar IV. Under Marneus Calgar, the Ultramarines and the Imperial Guard drive the Tyranids back.",
    "planets": [
     "ichar4"
    ],
@@ -3614,11 +3614,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "soul_drinkers_war",
-   "name": "Kreuzzug der Soul Drinkers",
-   "date": "spätes M41",
+   "name": "Crusade of the Soul Drinkers",
+   "date": "late M41",
    "sort": 41993,
    "era": "M41",
-   "desc": "Nach dem Streit um die Seelenlanze Rogal Dorns wird der Orden der Soul Drinkers exkommuniziert und führt unter Sarpedon einen eigenen Krieg, bis hin zu den Kämpfen an Bord der Phalanx, der Festung der Imperial Fists.",
+   "desc": "After the dispute over Rogal Dorn's Soulspear, the Soul Drinkers Chapter is excommunicated and wages its own war under Sarpedon, culminating in battles aboard the Phalanx, fortress of the Imperial Fists.",
    "planets": [],
    "books": [
     "soul_drinker",
@@ -3631,11 +3631,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "void_stalker",
-   "name": "Rückkehr der Night Lords nach Tsagualsa",
-   "date": "spätes M41",
+   "name": "Night Lords' Return to Tsagualsa",
+   "date": "late M41",
    "sort": 41995,
    "era": "M41",
-   "desc": "Von den Eldar Ulthwés gejagt, fliehen Talos und seine Night Lords nach Tsagualsa, wo einst ihr Primarch starb.",
+   "desc": "Hunted by the Eldar of Ulthwé, Talos and his Night Lords flee to Tsagualsa, where their Primarch once died.",
    "planets": [
     "tsagualsa"
    ],
@@ -3645,11 +3645,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "pavonis_nightbringer",
-   "name": "Krise auf Pavonis",
-   "date": "spätes M41",
+   "name": "Crisis on Pavonis",
+   "date": "late M41",
    "sort": 41996,
    "era": "M41",
-   "desc": "Uriel Ventris führt die 4. Kompanie der Ultramarines nach Pavonis und stellt sich einem Splitter des Nachtbringers, eines C'tan.",
+   "desc": "Uriel Ventris leads the Ultramarines' 4th Company to Pavonis and confronts a shard of the Nightbringer, one of the C'tan.",
    "planets": [
     "pavonis"
    ],
@@ -3659,11 +3659,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "golgotha",
-   "name": "Kämpfe um Golgotha",
-   "date": "spätes M41",
+   "name": "Battles for Golgotha",
+   "date": "late M41",
    "sort": 41996,
    "era": "M41",
-   "desc": "Yarrick spürt Ghazghkull auf Golgotha auf und unterliegt; später soll eine cadianische Panzergruppe das Wrack der 'Fortress of Arrogance' bergen – kurz vor dem Dritten Krieg um Armageddon.",
+   "desc": "Yarrick tracks Ghazghkull to Golgotha and is defeated; later a Cadian armoured company is sent to recover the wreck of the 'Fortress of Arrogance' – shortly before the Third War for Armageddon.",
    "planets": [
     "golgotha"
    ],
@@ -3673,11 +3673,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "octarius_war",
-   "name": "Krieg um Octarius",
-   "date": "ab 997.M41",
+   "name": "Octarius War",
+   "date": "from 997.M41",
    "sort": 41997,
    "era": "M41",
-   "desc": "Inquisitor Kryptman lenkt die Schwarmflotte Leviathan in das Ork-Reich von Octarius. Der Krieg zwischen Tyraniden und Orks lässt beide Seiten gefährlich anwachsen.",
+   "desc": "Inquisitor Kryptman diverts Hive Fleet Leviathan into the Ork empire of Octarius. The war between Tyranids and Orks makes both sides grow dangerously.",
    "planets": [
     "octarius"
    ],
@@ -3687,11 +3687,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "tarsis_ultra",
-   "name": "Schlacht um Tarsis Ultra",
+   "name": "Battle of Tarsis Ultra",
    "date": "997.M41",
    "sort": 41997.3,
    "era": "M41",
-   "desc": "Ein Ausläufer der Schwarmflotte Leviathan greift Tarsis Ultra an. Uriel Ventris verteidigt die Welt um einen hohen Preis und wird danach verbannt.",
+   "desc": "A tendril of Hive Fleet Leviathan attacks Tarsis Ultra. Uriel Ventris defends the world at great cost and is exiled afterwards.",
    "planets": [
     "tarsis_ultra"
    ],
@@ -3701,11 +3701,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "armageddon3",
-   "name": "Dritter Krieg um Armageddon",
+   "name": "Third War for Armageddon",
    "date": "998.M41",
    "sort": 41998,
    "era": "M41",
-   "desc": "Ghazghkulls Rückkehr mit einer noch grösseren Waaagh!",
+   "desc": "Ghazghkull returns with an even greater Waaagh!",
    "planets": [
     "armageddon"
    ],
@@ -3716,11 +3716,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "medrengard_death_oath",
-   "name": "Todesschwur auf Medrengard",
-   "date": "spätes M41",
+   "name": "Death Oath on Medrengard",
+   "date": "late M41",
    "sort": 41998,
    "era": "M41",
-   "desc": "Uriel Ventris und Pasanius erfüllen ihren Todesschwur in den Festungen der Iron Warriors auf Medrengard und treffen auf Honsou.",
+   "desc": "Uriel Ventris and Pasanius fulfil their Death Oath in the Iron Warriors' fortresses on Medrengard and face Honsou.",
    "planets": [
     "medrengard"
    ],
@@ -3730,11 +3730,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "nocturne_defence",
-   "name": "Verteidigung von Nocturne",
-   "date": "spätes M41",
+   "name": "Defence of Nocturne",
+   "date": "late M41",
    "sort": 41998.2,
    "era": "M41",
-   "desc": "Die Salamanders verteidigen ihre Heimatwelt Nocturne während des Grossen Bebens gegen die abtrünnigen Dragon Warriors und andere Angreifer.",
+   "desc": "The Salamanders defend their homeworld Nocturne during the Time of Trial against the renegade Dragon Warriors and other attackers.",
    "planets": [
     "nocturne"
    ],
@@ -3744,11 +3744,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "honsou_ultramar",
-   "name": "Honsous Rache an Ultramar",
-   "date": "spätes M41",
+   "name": "Honsou's Vengeance on Ultramar",
+   "date": "late M41",
    "sort": 41998.5,
    "era": "M41",
-   "desc": "Der Kriegsschmied Honsou greift mit den Iron Warriors Ultramar an; auf Calth und Tarentus kommt es zu schweren Kämpfen mit den Ultramarines.",
+   "desc": "The Warsmith Honsou attacks Ultramar with the Iron Warriors; heavy fighting with the Ultramarines erupts on Calth and Tarentus.",
    "planets": [
     "calth"
    ],
@@ -3758,11 +3758,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "fall_cadia",
-   "name": "Fall von Cadia",
+   "name": "Fall of Cadia",
    "date": "999.M41",
    "sort": 41999,
    "era": "Gathering Storm",
-   "desc": "Abaddons 13. Schwarzer Kreuzzug zerstört Cadia. Kurz darauf reisst die Cicatrix Maledictum auf.",
+   "desc": "Abaddon's 13th Black Crusade destroys Cadia. Soon after, the Cicatrix Maledictum tears open.",
    "planets": [
     "cadia"
    ],
@@ -3773,11 +3773,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "fracture_biel_tan",
-   "name": "Zersplitterung von Biel-Tan",
+   "name": "Fracture of Biel-Tan",
    "date": "999.M41",
    "sort": 41999.1,
    "era": "Gathering Storm",
-   "desc": "Slaanesh-Dämonen verwüsten das Weltenschiff Biel-Tan. Die Ynnari um Yvraine treten hervor und verkünden den Totengott Ynnead.",
+   "desc": "Daemons of Slaanesh ravage the Craftworld Biel-Tan. The Ynnari under Yvraine emerge and proclaim Ynnead, the god of the dead.",
    "planets": [
     "biel_tan"
    ],
@@ -3787,11 +3787,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "perlia_2",
-   "name": "Zweite Belagerung von Perlia",
+   "name": "Second Siege of Perlia",
    "date": "999.M41",
    "sort": 41999.1,
    "era": "M41",
-   "desc": "Während des 13. Schwarzen Kreuzzugs gerät Perlia ins Visier des Chaos. Der greise Ciaphas Cain, Lehrer an einer Schola Progenium, verteidigt die Welt erneut.",
+   "desc": "During the 13th Black Crusade, Perlia falls under the gaze of Chaos. The aged Ciaphas Cain, now a tutor at a Schola Progenium, defends the world once more.",
    "planets": [
     "perlia"
    ],
@@ -3801,11 +3801,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "guilliman_rebirth",
-   "name": "Wiederauferstehung Guillimans",
+   "name": "Resurrection of Guilliman",
    "date": "999.M41",
    "sort": 41999.2,
    "era": "Gathering Storm",
-   "desc": "Mit Hilfe von Yvraine und Belisarius Cawl erwacht Roboute Guilliman auf Macragge aus seiner zehntausendjährigen Stasis.",
+   "desc": "With the help of Yvraine and Belisarius Cawl, Roboute Guilliman awakens on Macragge from his ten-thousand-year stasis.",
    "planets": [
     "macragge"
    ],
@@ -3815,11 +3815,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "great_rift_opens",
-   "name": "Öffnung der Cicatrix Maledictum",
+   "name": "Opening of the Cicatrix Maledictum",
    "date": "999.M41",
    "sort": 41999.3,
    "era": "Gathering Storm",
-   "desc": "Ein galaxisweiter Warpsturm reisst vom Auge des Schreckens bis zum Ostrand auf und teilt das Imperium in Sanctus und Nihilus.",
+   "desc": "A galaxy-spanning warp storm tears open from the Eye of Terror to the eastern rim, splitting the Imperium into Sanctus and Nihilus.",
    "planets": [
     "cadia",
     "terra"
@@ -3830,11 +3830,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "terran_crusade",
-   "name": "Terranischer Kreuzzug",
+   "name": "Terran Crusade",
    "date": "999.M41",
    "sort": 41999.35,
    "era": "Gathering Storm",
-   "desc": "Guilliman kämpft sich durch Warpstürme nach Terra durch, trifft den Imperator auf dem Goldenen Thron und wird zum Reichsregenten.",
+   "desc": "Guilliman fights his way through warp storms to Terra, meets the Emperor on the Golden Throne and becomes Lord Commander of the Imperium.",
    "planets": [
     "terra"
    ],
@@ -3844,11 +3844,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "baal_devastation",
-   "name": "Verwüstung von Baal",
+   "name": "Devastation of Baal",
    "date": "999.M41",
    "sort": 41999.5,
    "era": "Gathering Storm",
-   "desc": "Die Schwarmflotte Leviathan greift das Baal-System an. Unter Kommandant Dante stehen die Blood Angels und ihre Nachfolger vor der Vernichtung, bis Guillimans Verstärkung eintrifft.",
+   "desc": "Hive Fleet Leviathan attacks the Baal System. Under Commander Dante, the Blood Angels and their Successors face annihilation until Guilliman's reinforcements arrive.",
    "planets": [
     "baal"
    ],
@@ -3859,11 +3859,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "indomitus_crusade",
-   "name": "Indomitus-Kreuzzug",
-   "date": "frühes M42",
+   "name": "Indomitus Crusade",
+   "date": "early M42",
    "sort": 42000.2,
-   "era": "Indomitus-Kreuzzug",
-   "desc": "Guilliman bricht mit gewaltigen Flotten und den neuen Primaris-Marines von Terra auf, um das Imperium zurückzuerobern.",
+   "era": "Indomitus Crusade",
+   "desc": "Guilliman sets out from Terra with vast fleets and the new Primaris Marines to reconquer the Imperium.",
    "planets": [
     "terra"
    ],
@@ -3877,11 +3877,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "plague_wars",
-   "name": "Seuchenkriege in Ultramar",
-   "date": "frühes M42",
+   "name": "Plague Wars in Ultramar",
+   "date": "early M42",
    "sort": 42001,
    "era": "Dark Imperium",
-   "desc": "Die Death Guard überzieht Ultramar mit Seuchen. Der zurückgekehrte Roboute Guilliman führt den Widerstand und stellt Mortarion schliesslich auf Iax.",
+   "desc": "The Death Guard smother Ultramar in plague. The returned Roboute Guilliman leads the resistance and finally confronts Mortarion on Iax.",
    "planets": [
     "macragge",
     "iax"
@@ -3894,11 +3894,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "vigilus_war",
-   "name": "Krieg um Vigilus",
-   "date": "frühes M42",
+   "name": "War of Vigilus",
+   "date": "early M42",
    "sort": 42002,
    "era": "Dark Imperium",
-   "desc": "Orks, Genestealer-Kulte und Abaddons Truppen kämpfen um die Kontrolle des Nachmund-Korridors.",
+   "desc": "Orks, Genestealer Cults and Abaddon's forces fight for control of the Nachmund Gauntlet.",
    "planets": [
     "vigilus"
    ],
@@ -3909,11 +3909,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "gathalamor",
-   "name": "Schlacht um Gathalamor",
-   "date": "frühes M42",
+   "name": "Battle of Gathalamor",
+   "date": "early M42",
    "sort": 42003,
-   "era": "Indomitus-Kreuzzug",
-   "desc": "Der Indomitus-Kreuzzug erreicht die Schreinwelt Gathalamor, auf der eine uralte Bedrohung erwacht. Mordianer und Sororitas führen einen verzweifelten Bodenkrieg.",
+   "era": "Indomitus Crusade",
+   "desc": "The Indomitus Crusade reaches the shrine world of Gathalamor, where an ancient threat awakens. Mordians and the Adepta Sororitas wage a desperate ground war.",
    "planets": [
     "gathalamor"
    ],
@@ -3923,11 +3923,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "wolftime",
-   "name": "Die Wolfszeit",
-   "date": "frühes M42",
+   "name": "The Wolftime",
+   "date": "early M42",
    "sort": 42004,
-   "era": "Indomitus-Kreuzzug",
-   "desc": "Der Indomitus-Kreuzzug erreicht Fenris. Die Space Wolves ringen mit der Aufnahme der Primaris-Marines, während die prophezeite Wolfszeit naht.",
+   "era": "Indomitus Crusade",
+   "desc": "The Indomitus Crusade reaches Fenris. The Space Wolves struggle with accepting the Primaris Marines while the prophesied Wolftime draws near.",
    "planets": [
     "fenris"
    ],
@@ -3937,11 +3937,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "iron_kingdom",
-   "name": "Rückkehr nach Medusa",
-   "date": "frühes M42",
+   "name": "Return to Medusa",
+   "date": "early M42",
    "sort": 42005,
-   "era": "Indomitus-Kreuzzug",
-   "desc": "Ein Vorstoss des Indomitus-Kreuzzugs führt in das Imperium Nihilus nach Medusa, der Heimat der Iron Hands.",
+   "era": "Indomitus Crusade",
+   "desc": "A thrust of the Indomitus Crusade leads into the Imperium Nihilus to Medusa, home of the Iron Hands.",
    "planets": [
     "medusa"
    ],
@@ -3951,11 +3951,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "psychic_awakening",
-   "name": "Psionisches Erwachen",
-   "date": "frühes M42",
+   "name": "Psychic Awakening",
+   "date": "early M42",
    "sort": 42005.5,
    "era": "Dark Imperium",
-   "desc": "Im Schatten des Grossen Risses erwachen überall psionische Kräfte. Zahlreiche Konflikte flammen auf, etwa um die Blood Angels und den Schwarzen Zorn.",
+   "desc": "In the shadow of the Great Rift, psychic powers awaken everywhere. Countless conflicts flare up, such as those around the Blood Angels and the Black Rage.",
    "planets": [
     "baal"
    ],
@@ -3967,11 +3967,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "pariah_nexus",
-   "name": "Krieg im Pariah-Nexus",
-   "date": "frühes M42",
+   "name": "War in the Pariah Nexus",
+   "date": "early M42",
    "sort": 42006,
    "era": "Dark Imperium",
-   "desc": "Im Nephilim-Sektor errichten die Necrons ein Netz aus Pylonen, das Psioniker auslöscht und Menschen die Seele raubt ('die Stille'). Die Kampfgruppe Kallides stösst hinein, später auch Guilliman.",
+   "desc": "In the Nephilim Sector, the Necrons raise a web of pylons that snuffs out psykers and strips humans of their souls ('the Stilling'). Battle Group Kallides pushes in, later followed by Guilliman.",
    "planets": [
     "paradyce6"
    ],
@@ -3982,11 +3982,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "charadon",
-   "name": "Krieg um Charadon",
-   "date": "frühes M42",
+   "name": "War in Charadon",
+   "date": "early M42",
    "sort": 42007,
    "era": "Dark Imperium",
-   "desc": "Typhus und die Death Guard fallen in den Charadon-Sektor ein und reissen einen Warp-Riss auf. Die Schmiedewelt Metalica wird zum Brennpunkt.",
+   "desc": "Typhus and the Death Guard invade the Charadon Sector and tear open a warp rift. The Forge World Metalica becomes the flashpoint.",
    "planets": [
     "metalica"
    ],
@@ -3997,11 +3997,11 @@ window.WH40K_DATA = {
   },
   {
    "id": "ophelia7",
-   "name": "Angriff auf Ophelia VII",
-   "date": "frühes M42",
+   "name": "Assault on Ophelia VII",
+   "date": "early M42",
    "sort": 42008,
-   "era": "Indomitus-Kreuzzug",
-   "desc": "Ein Ungeheuer aus Mythen bedroht die Kardinalswelt Ophelia VII. Äbtissin Sanctorum Morvenn Vahl verteidigt sie, während die Pläne der 'Hand Abaddons' reifen.",
+   "era": "Indomitus Crusade",
+   "desc": "A monster of legend threatens the Cardinal World Ophelia VII. Abbess Sanctorum Morvenn Vahl defends it while the schemes of the 'Hand of Abaddon' ripen.",
    "planets": [
     "ophelia7"
    ],
@@ -4012,10 +4012,10 @@ window.WH40K_DATA = {
   {
    "id": "arks_of_omen",
    "name": "Arks of Omen",
-   "date": "frühes M42",
+   "date": "early M42",
    "sort": 42009,
    "era": "Dark Imperium",
-   "desc": "Abaddon und der Dämonenschmied Vashtorr greifen mit gewaltigen Schiffen nach den Fragmenten eines mächtigen Schlüssels. Am Ende kehrt Lion El'Jonson zurück und besiegt Angron.",
+   "desc": "Abaddon and the Daemon smith Vashtorr reach with colossal ships for the fragments of a mighty key. In the end, Lion El'Jonson returns and defeats Angron.",
    "planets": [],
    "books": [
     "aoo_abaddon",

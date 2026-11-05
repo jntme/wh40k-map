@@ -8,24 +8,24 @@
   const panelBody = document.getElementById('panel-body');
   const crumbs = document.getElementById('crumbs');
 
-  // ---------- Zoomstufen (Pixel pro Welteinheit) ----------
-  const K_ORBIT_START = 2.2;  // ab hier werden Planetenbahnen eingeblendet
-  const K_ORBIT_FULL = 3.2;   // ab hier voll sichtbar
-  const K_SYSTEM = 6;         // Zoom beim Anwählen eines Systems
+  // ---------- Zoom levels (pixels per world unit) ----------
+  const K_ORBIT_START = 2.2;  // planet orbits start fading in here
+  const K_ORBIT_FULL = 3.2;   // fully visible from here
+  const K_SYSTEM = 6;         // zoom when a system is selected
   const K_MAX = 22;
   const GALAXY_R = 1050;
   const ORBIT0 = 6, ORBIT_STEP = 4.5;
 
-  // ---------- Zeitalter ----------
+  // ---------- Eras ----------
   const ERAS = {
-    '30k': { short: '30K', label: 'Horus-Häresie', title: 'Das 31. Jahrtausend', sub: 'Großer Kreuzzug und Horus-Häresie' },
-    '40k': { short: '40K', label: 'Dunkles Imperium', title: 'Das 41. Jahrtausend', sub: 'Vom Ende des M41 bis ins Dark Imperium' }
+    '30k': { short: '30K', label: 'Horus Heresy', title: 'The 31st Millennium', sub: 'The Great Crusade and the Horus Heresy' },
+    '40k': { short: '40K', label: 'Dark Imperium', title: 'The 41st Millennium', sub: 'From the end of M41 to the Dark Imperium' }
   };
   let era = '40k';
   const eventEra = e => (e.sort < 32000 ? '30k' : '40k');
   const inEra = obj => !obj || !obj.eras || obj.eras.includes(era);
 
-  // ---------- Indizes ----------
+  // ---------- Indexes ----------
   const segById = Object.fromEntries(D.segmentums.map(s => [s.id, s]));
   const systemById = Object.fromEntries(D.systems.map(s => [s.id, s]));
   const featureById = Object.fromEntries(D.features.map(f => [f.id, f]));
@@ -43,7 +43,7 @@
   Object.entries(D.planets).forEach(([pid, p]) =>
     (p.books || []).forEach(b => (planetsByBook[b] = planetsByBook[b] || []).push(pid)));
 
-  // Zeitalter eines Buchs: aus seinen Ereignissen, sonst aus der Reihe
+  // Era of a book: from its events, otherwise from its series
   const HERESY_SERIES = /horus heresy|siege of terra|primarchs/i;
   const bookEras = {};
   Object.entries(D.books).forEach(([bid, b]) => {
@@ -61,7 +61,7 @@
 
   validateData();
 
-  // ---------- Hilfsfunktionen ----------
+  // ---------- Helpers ----------
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -91,7 +91,7 @@
     return h / 10 * Math.PI / 180;
   }
 
-  function smoothPath(pts) { // Catmull-Rom -> kubische Bézier
+  function smoothPath(pts) { // Catmull-Rom -> cubic Bézier
     let d = `M${pts[0][0]},${pts[0][1]}`;
     for (let i = 0; i < pts.length - 1; i++) {
       const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
@@ -104,20 +104,20 @@
 
   function planetColor(type) {
     const t = (type || '').toLowerCase();
-    if (t.includes('zerstört') || t.includes('verwüstet') || t.includes('vernichtet')) return '#6b2a24';
-    if (t.includes('thron')) return '#e8c25a';
-    if (t.includes('schmiede')) return '#c4502e';
-    if (t.includes('festung')) return '#8a8f99';
-    if (t.includes('todes') || t.includes('eis')) return '#bfe0f0';
-    if (t.includes('dämonen') || t.includes('chaos')) return '#9b3fbf';
-    if (t.includes('wald') || t.includes('dschungel') || t.includes('agrar')) return '#3f8a4a';
-    if (t.includes('wüste')) return '#d2b071';
-    if (t.includes('ozean')) return '#3a74b8';
-    if (t.includes('makropol')) return '#9a8570';
+    if (t.includes('destroyed') || t.includes('devastated') || t.includes('ravaged')) return '#6b2a24';
+    if (t.includes('throne')) return '#e8c25a';
+    if (t.includes('forge')) return '#c4502e';
+    if (t.includes('fortress')) return '#8a8f99';
+    if (t.includes('death') || t.includes('ice world')) return '#bfe0f0';
+    if (t.includes('daemon') || t.includes('chaos')) return '#9b3fbf';
+    if (t.includes('forest') || t.includes('jungle') || t.includes('agri')) return '#3f8a4a';
+    if (t.includes('desert')) return '#d2b071';
+    if (t.includes('ocean')) return '#3a74b8';
+    if (t.includes('hive')) return '#9a8570';
     return '#7fa7d9';
   }
 
-  // ---------- SVG-Aufbau ----------
+  // ---------- SVG construction ----------
   const defs = el('defs', {}, svg);
   defs.innerHTML = `
     <radialGradient id="g-disc">
@@ -143,7 +143,7 @@
     <clipPath id="clip-disc"><circle r="${GALAXY_R}"/></clipPath>`;
 
   const world = el('g', { id: 'world' }, svg);
-  const scalers = []; // Funktionen, die bei Zoomänderung Pixelgrössen nachführen
+  const scalers = []; // functions that update pixel sizes when the zoom changes
 
   drawGalaxy();
   drawSegmentums();
@@ -252,7 +252,7 @@
       }, layer);
       systemEls[s.id] = g;
 
-      // Planetenbahnen (nur bei starkem Zoom sichtbar)
+      // planet orbits (only visible when zoomed in closely)
       const orbits = el('g', { class: 'orbits' }, g);
       el('circle', { r: 2, class: 'star', fill: 'url(#g-star)' }, orbits);
       const valid = s.planets.filter(pid => D.planets[pid]);
@@ -299,7 +299,7 @@
     });
   }
 
-  // Beschriftungen entflechten: Ab welchem Zoom ein Label frei steht
+  // declutter labels: zoom level from which a label no longer overlaps
   function computeLabelZoom() {
     const visible = D.systems.filter(s => inEra(s));
     const score = s => (s.major ? 1e6 : 0) +
@@ -323,7 +323,7 @@
     });
   }
 
-  // ---------- Zeitalter anwenden ----------
+  // ---------- Apply era ----------
   const eraButtons = [...document.querySelectorAll('[data-era]')];
   eraButtons.forEach(b => b.addEventListener('click', () => switchEra(b.dataset.era)));
 
@@ -358,7 +358,7 @@
     navigate(next, { fly: false });
   }
 
-  // ---------- Ansicht / Zoom ----------
+  // ---------- View / zoom ----------
   const view = { x: 0, y: 0, k: 1 };
   let W = 1, H = 1, kFit = 0.4, lastK = null, anim = null;
   const kMin = () => kFit * 0.7;
@@ -439,7 +439,7 @@
     flyTo((x0 + x1) / 2, (y0 + y1) / 2, clamp(k, kFit, K_SYSTEM));
   }
 
-  // ---------- Eingabe: Maus, Touch, Rad ----------
+  // ---------- Input: mouse, touch, wheel ----------
   const pointers = new Map();
   let down = null, pinch = null;
 
@@ -535,14 +535,14 @@
     setView(c.x, c.y, clamp(view.k, kMin(), K_MAX));
   });
 
-  // Mobil: Panel ein-/ausklappen
+  // Mobile: expand/collapse panel
   document.getElementById('panel-handle').addEventListener('click', () => {
     panel.classList.toggle('collapsed');
     document.body.classList.toggle('panel-collapsed', panel.classList.contains('collapsed'));
   });
 
   // ---------- Routing ----------
-  // Format: #/<30k|40k>/<art>/<id>, z. B. #/30k/planet/prospero
+  // Format: #/<30k|40k>/<kind>/<id>, e.g. #/30k/planet/prospero
   let pendingOpts = null;
 
   function navigate(hash, opts) {
@@ -577,7 +577,7 @@
 
   function show(hash, opts = {}) {
     let { era: er, kind, id } = parse(hash);
-    // Ereignisse und Bücher gehören zu einem Zeitalter
+    // events and books belong to an era
     if (kind === 'event' && eventById[id]) er = eventEra(eventById[id]);
     if (kind === 'book' && D.books[id] && !bookInEra(id, er || era)) er = [...bookEras[id]][0];
     if (er && er !== era) { era = er; applyEra(); }
@@ -629,9 +629,9 @@
     return [...set];
   }
 
-  // ---------- Panel-Inhalte ----------
+  // ---------- Panel content ----------
   function setCrumbs(parts) {
-    crumbs.innerHTML = [[`#/${era}/`, `Galaxie ${ERAS[era].short}`], ...parts]
+    crumbs.innerHTML = [[`#/${era}/`, `Galaxy ${ERAS[era].short}`], ...parts]
       .map(([href, label], i, arr) => i === arr.length - 1 && arr.length > 1
         ? `<span>${esc(label)}</span>`
         : `<a href="${href}">${esc(label)}</a>`)
@@ -648,14 +648,14 @@
       <div class="meta">${esc(b.author)} · ${esc(b.series)} · ${esc(b.year)}</div></li>`;
   }
 
-  function bookList(ids, emptyText = 'Noch keine Bücher erfasst.') {
+  function bookList(ids, emptyText = 'No books recorded yet.') {
     return ids.length
       ? `<ul class="books">${ids.map(bookItem).join('')}</ul>`
       : `<div class="empty">${emptyText}</div>`;
   }
 
   function planetChips(ids) {
-    if (!ids.some(p => D.planets[p])) return '<div class="empty">Kein fester Schauplatz erfasst.</div>';
+    if (!ids.some(p => D.planets[p])) return '<div class="empty">No specific location recorded.</div>';
     return `<div class="chips">${ids.filter(p => D.planets[p]).map(p =>
       `<a class="chip" href="${link('planet', p)}">${esc(D.planets[p].name)}</a>`).join('')}</div>`;
   }
@@ -671,8 +671,8 @@
   function otherEraHint(count, kind, id, what) {
     if (!count) return '';
     const o = other();
-    return `<p class="era-hint">${what} im Zeitalter ${ERAS[o].short}: ${count} ${count === 1 ? 'Ereignis' : 'Ereignisse'}.
-      <a href="${link(kind, id, o)}">Zu ${ERAS[o].short} wechseln →</a></p>`;
+    return `<p class="era-hint">${what} in ${ERAS[o].short}: ${count} ${count === 1 ? 'event' : 'events'}.
+      <a href="${link(kind, id, o)}">Switch to ${ERAS[o].short} →</a></p>`;
   }
 
   function renderOverview() {
@@ -681,9 +681,9 @@
     const worlds = Object.keys(D.planets).filter(p => planetHasContent(p)).length;
     const books = Object.keys(D.books).filter(b => bookInEra(b)).length;
     let html = `<h2>${ERAS[era].title}</h2>
-      <div class="subtitle">${ERAS[era].sub}<br>${worlds} Welten · ${evs.length} Ereignisse · ${books} Bücher</div>
-      <p>Zoome hinein, um Systeme und ihre Planeten zu sehen. Wähle eine Welt, um ihre Handlungsstränge und die passenden Bücher zu entdecken. Oben wechselst du zwischen 30K und 40K.</p>
-      <h3>Zeitleiste</h3><div class="timeline">`;
+      <div class="subtitle">${ERAS[era].sub}<br>${worlds} worlds · ${evs.length} events · ${books} books</div>
+      <p>Zoom in to see systems and their planets. Select a world to explore its storylines and the books set there. Switch between 30K and 40K at the top.</p>
+      <h3>Timeline</h3><div class="timeline">`;
     let group = null;
     evs.forEach(e => {
       if (e.era !== group) { group = e.era; html += `<div class="era">${esc(group)}</div>`; }
@@ -692,7 +692,7 @@
         <div class="card-head"><span class="card-title">${esc(e.name)}</span><span class="date">${esc(e.date)}</span></div>
         <div class="subtitle" style="margin:4px 0 0">${esc(where)}</div></a>`;
     });
-    if (!evs.length) html += '<div class="empty">Noch keine Ereignisse erfasst.</div>';
+    if (!evs.length) html += '<div class="empty">No events recorded yet.</div>';
     html += `</div>`;
     panelBody.innerHTML = html;
   }
@@ -709,8 +709,8 @@
     const evs = eraEvents(D.events.filter(e => e.planets.some(p => valid.includes(p))));
     const otherCount = eraEvents(D.events.filter(e => e.planets.some(p => valid.includes(p))), other()).length;
     panelBody.innerHTML = `<h2>${esc(s.name)}</h2>
-      <div class="subtitle">${esc(segName(s.segmentum))} · ${valid.length} ${valid.length === 1 ? 'Welt' : 'Welten'} erfasst</div>
-      <h3>Welten</h3>
+      <div class="subtitle">${esc(segName(s.segmentum))} · ${valid.length} ${valid.length === 1 ? 'world' : 'worlds'} recorded</div>
+      <h3>Worlds</h3>
       ${valid.map(pid => {
         const p = D.planets[pid];
         const info = planetInfo(pid);
@@ -718,9 +718,9 @@
           <div class="card-head"><span class="card-title">${esc(p.name)}</span><span class="date">${esc(info.type)}</span></div>
           <p>${esc(info.eraDesc || p.desc)}</p></a>`;
       }).join('')}
-      <h3>Handlungsstränge ${ERAS[era].short}</h3>
-      ${evs.length ? evs.map(e => eventCard(e)).join('') : '<div class="empty">In diesem Zeitalter noch keine Ereignisse erfasst.</div>'}
-      ${otherEraHint(otherCount, 'system', s.id, 'Dieses System')}`;
+      <h3>Storylines ${ERAS[era].short}</h3>
+      ${evs.length ? evs.map(e => eventCard(e)).join('') : '<div class="empty">No events recorded for this era yet.</div>'}
+      ${otherEraHint(otherCount, 'system', s.id, 'This system')}`;
   }
 
   function renderPlanet(pid) {
@@ -740,11 +740,11 @@
       <div class="subtitle">${esc(info.type)} · ${s ? `<a href="${link('system', s.id)}">System ${esc(s.name)}</a>` : ''} · ${esc(segName(s && s.segmentum))}</div>
       <p>${esc(p.desc)}</p>
       ${info.eraDesc ? `<div class="era-box"><span class="era-tag">${ERAS[era].short}</span> ${esc(info.eraDesc)}</div>` : ''}
-      <h3>Handlungsstränge ${ERAS[era].short}</h3>
-      ${evs.length ? evs.map(e => eventCard(e)).join('') : '<div class="empty">In diesem Zeitalter noch keine Ereignisse erfasst.</div>'}
-      ${otherEraHint(otherCount, 'planet', pid, 'Diese Welt')}
-      ${extraBooks.length ? `<h3>Weitere Bücher</h3>${bookList(extraBooks)}` : ''}
-      <p style="margin-top:18px"><a href="${lex}" target="_blank" rel="noopener">Auf Lexicanum nachlesen ↗</a></p>`;
+      <h3>Storylines ${ERAS[era].short}</h3>
+      ${evs.length ? evs.map(e => eventCard(e)).join('') : '<div class="empty">No events recorded for this era yet.</div>'}
+      ${otherEraHint(otherCount, 'planet', pid, 'This world')}
+      ${extraBooks.length ? `<h3>More books</h3>${bookList(extraBooks)}` : ''}
+      <p style="margin-top:18px"><a href="${lex}" target="_blank" rel="noopener">Read more on Lexicanum ↗</a></p>`;
   }
 
   function renderEvent(e) {
@@ -752,8 +752,8 @@
     panelBody.innerHTML = `<h2>${esc(e.name)}</h2>
       <div class="subtitle">${esc(e.date)} · ${esc(e.era)}</div>
       <p>${esc(e.desc)}</p>
-      <h3>Schauplätze</h3>${planetChips(e.planets)}
-      <h3>Bücher</h3>${bookList(e.books)}`;
+      <h3>Locations</h3>${planetChips(e.planets)}
+      <h3>Books</h3>${bookList(e.books)}`;
   }
 
   function renderBook(bid) {
@@ -762,22 +762,22 @@
     const evs = eraEvents(eventsByBook[bid]);
     panelBody.innerHTML = `<h2>${esc(b.title)}</h2>
       <div class="subtitle">${esc(b.author)} · ${esc(b.series)} · ${esc(b.year)}</div>
-      <h3>Handlungsstränge</h3>
-      ${evs.length ? evs.map(e => eventCard(e, false)).join('') : '<div class="empty">Keinem Ereignis zugeordnet.</div>'}
-      <h3>Schauplätze</h3>${planetChips(bookPlanets(bid))}`;
+      <h3>Storylines</h3>
+      ${evs.length ? evs.map(e => eventCard(e, false)).join('') : '<div class="empty">Not linked to any event.</div>'}
+      <h3>Locations</h3>${planetChips(bookPlanets(bid))}`;
   }
 
   function renderFeature(id) {
     const f = featureById[id] || D.rift;
     setCrumbs([[link('feature', id), f.name]]);
     const note = id === 'rift' && era === '30k'
-      ? '<p class="era-hint">Im 31. Jahrtausend existiert der Große Riss noch nicht. Er öffnet sich erst nach dem Fall von Cadia (999.M41).</p>' : '';
+      ? '<p class="era-hint">The Great Rift does not exist yet in the 31st Millennium. It only opens after the Fall of Cadia (999.M41).</p>' : '';
     panelBody.innerHTML = `<h2>${esc(f.name)}</h2>
-      <div class="subtitle">${id === 'rift' ? 'Warp-Riss' : 'Warp-Anomalie'}</div>
+      <div class="subtitle">${id === 'rift' ? 'Warp rift' : 'Warp anomaly'}</div>
       <p>${esc(f.desc)}</p>${note}`;
   }
 
-  // ---------- Suche ----------
+  // ---------- Search ----------
   const searchInput = document.getElementById('search');
   const resultsEl = document.getElementById('search-results');
   const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -787,10 +787,10 @@
     const same = s.planets.length === 1 && D.planets[s.planets[0]] && D.planets[s.planets[0]].name === s.name;
     if (!same) index.push({ kind: 'System', label: s.name, route: ['system', s.id] });
   });
-  D.events.forEach(e => index.push({ kind: `Ereignis · ${ERAS[eventEra(e)].short}`, label: e.name, route: ['event', e.id] }));
-  Object.entries(D.books).forEach(([id, b]) => index.push({ kind: 'Buch', label: b.title, extra: b.author + ' ' + b.series, route: ['book', id] }));
-  D.features.forEach(f => index.push({ kind: 'Anomalie', label: f.name, route: ['feature', f.id] }));
-  index.push({ kind: 'Anomalie', label: D.rift.name, extra: 'Großer Riss', route: ['feature', 'rift'] });
+  D.events.forEach(e => index.push({ kind: `Event · ${ERAS[eventEra(e)].short}`, label: e.name, route: ['event', e.id] }));
+  Object.entries(D.books).forEach(([id, b]) => index.push({ kind: 'Book', label: b.title, extra: b.author + ' ' + b.series, route: ['book', id] }));
+  D.features.forEach(f => index.push({ kind: 'Anomaly', label: f.name, route: ['feature', f.id] }));
+  index.push({ kind: 'Anomaly', label: D.rift.name, extra: 'Great Rift', route: ['feature', 'rift'] });
   index.forEach(i => { i.key = norm(i.label + ' ' + (i.extra || '')); i.lkey = norm(i.label); });
 
   let results = [], active = -1;
@@ -832,23 +832,23 @@
   searchInput.addEventListener('blur', () => setTimeout(() => { resultsEl.hidden = true; }, 100));
   searchInput.addEventListener('focus', renderResults);
 
-  // ---------- Datenprüfung ----------
+  // ---------- Data validation ----------
   function validateData() {
-    const warn = m => console.warn('[Datenprüfung]', m);
+    const warn = m => console.warn('[Data check]', m);
     const seen = new Set();
     D.systems.forEach(s => {
-      if (seen.has(s.id)) warn(`System-ID doppelt: ${s.id}`);
+      if (seen.has(s.id)) warn(`Duplicate system ID: ${s.id}`);
       seen.add(s.id);
-      if (!segById[s.segmentum]) warn(`System ${s.id}: unbekanntes Segmentum "${s.segmentum}"`);
-      s.planets.forEach(p => { if (!D.planets[p]) warn(`System ${s.id}: unbekannter Planet "${p}"`); });
+      if (!segById[s.segmentum]) warn(`System ${s.id}: unknown segmentum "${s.segmentum}"`);
+      s.planets.forEach(p => { if (!D.planets[p]) warn(`System ${s.id}: unknown planet "${p}"`); });
     });
     Object.entries(D.planets).forEach(([id, p]) => {
-      if (!planetSystem[id]) warn(`Planet ${id} ist keinem System zugeordnet`);
-      (p.books || []).forEach(b => { if (!D.books[b]) warn(`Planet ${id}: unbekanntes Buch "${b}"`); });
+      if (!planetSystem[id]) warn(`Planet ${id} is not assigned to any system`);
+      (p.books || []).forEach(b => { if (!D.books[b]) warn(`Planet ${id}: unknown book "${b}"`); });
     });
     D.events.forEach(e => {
-      e.planets.forEach(p => { if (!D.planets[p]) warn(`Ereignis ${e.id}: unbekannter Planet "${p}"`); });
-      e.books.forEach(b => { if (!D.books[b]) warn(`Ereignis ${e.id}: unbekanntes Buch "${b}"`); });
+      e.planets.forEach(p => { if (!D.planets[p]) warn(`Event ${e.id}: unknown planet "${p}"`); });
+      e.books.forEach(b => { if (!D.books[b]) warn(`Event ${e.id}: unknown book "${b}"`); });
     });
   }
 

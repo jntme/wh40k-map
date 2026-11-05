@@ -15,7 +15,7 @@
   --accent-bg: rgba(179, 52, 43, .22);
 }
 
-/* 30K: messing-/bronzefarbene Akzente, kühleres Rot */
+/* 30K: brass/bronze accents, cooler red */
 body.era-30k {
   --gold: #d9a441;
   --gold-soft: #f0d9a0;
@@ -151,7 +151,7 @@ html, body {
 #search-results li.active { background: var(--panel-2); }
 #search-results .kind { color: var(--muted); font-size: 12px; }
 
-/* ---------- Zoom-Controls & Legende ---------- */
+/* ---------- Zoom controls & legend ---------- */
 .zoom-controls {
   position: absolute;
   right: 16px;
@@ -191,7 +191,7 @@ html, body {
 .dot-major { background: var(--gold); }
 .dot-warp { background: var(--warp); }
 
-/* ---------- SVG-Elemente ---------- */
+/* ---------- SVG elements ---------- */
 .seg-label {
   font-family: Cinzel, Georgia, serif;
   fill: rgba(231, 207, 141, .28);
@@ -389,7 +389,7 @@ a:hover { text-decoration: underline; }
   line-height: 1.4;
 }
 
-/* ---------- Mobil: Panel als Bottom-Sheet ---------- */
+/* ---------- Mobile: panel as bottom sheet ---------- */
 @media (max-width: 760px) {
   #app { flex-direction: column; }
   #panel {

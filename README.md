@@ -1,42 +1,44 @@
-# Galaxiekarte 40K
+# Galaxy Map 40K
 
-Interaktive Fan-Karte der Warhammer-40,000-Galaxie: Systeme und Planeten erkunden, hineinzoomen und zu jeder Welt die Handlungsstränge und passenden Bücher sehen. Oben lässt sich zwischen **30K** (Großer Kreuzzug und Horus-Häresie) und **40K** (M41 bis Dark Imperium) umschalten.
+Interactive fan map of the Warhammer 40,000 galaxy: explore systems and planets, zoom in, and see the storylines and matching books for each world. The toggle at the top switches between **30K** (the Great Crusade and the Horus Heresy) and **40K** (M41 to the Dark Imperium).
 
-## Lokal ansehen
+Live: https://jntme.github.io/wh40k-map/
 
-`index.html` im Browser öffnen. Ein Build-Schritt oder Server ist nicht nötig.
+## View locally
 
-## Aufbau
+Open `index.html` in a browser. No build step or server needed.
 
-| Datei | Inhalt |
+## Structure
+
+| File | Contents |
 |---|---|
-| `index.html` | Seitengerüst |
-| `style.css` | Gestaltung (Desktop und Mobil) |
-| `app.js` | Karte, Zoom und Verschieben, Zeitalter, Panel, Suche, Routing |
-| `data.js` | Alle Daten: Segmentums, Systeme, Planeten, Ereignisse, Bücher |
-| `tools/merge_content.py` | Fügt neue Daten aus einer JSON-Datei ein und prüft sie |
+| `index.html` | Page skeleton |
+| `style.css` | Styling (desktop and mobile) |
+| `app.js` | Map, zoom and panning, eras, panel, search, routing |
+| `data.js` | All data: segmentums, systems, planets, events, books |
+| `tools/merge_content.py` | Merges new data from a JSON file and checks it |
 
-## Daten ergänzen
+## Adding data
 
-Alles steht in `data.js` (JSON-Format):
+Everything lives in `data.js` (JSON format):
 
-1. **Buch** unter `books` mit einer ID anlegen.
-2. **Planet** unter `planets` anlegen und die ID im passenden System unter `systems[].planets` eintragen. Für ein neues System `x`/`y` setzen: Zentrum (0,0), Radius ca. 1050, x nach Osten, y nach Süden.
-3. **Ereignis** unter `events` mit `planets` und `books` verknüpfen. `sort` ist Jahrtausend × 1000 + Jahr, für 999.M41 also `41999`. Ereignisse mit `sort` unter 32000 erscheinen in 30K, alle anderen in 40K.
-4. **Zeitalter-Texte** für einen Planeten: `era30k` und `era40k` mit eigenem `type` und `desc` (z. B. Prospero als intakte Legionsheimat in 30K).
+1. **Book**: add it under `books` with an ID.
+2. **Planet**: add it under `planets` and list its ID in the matching system under `systems[].planets`. For a new system, set `x`/`y`: centre (0,0), radius approx. 1050, x grows east, y grows south.
+3. **Event**: link it under `events` to `planets` and `books`. `sort` is millennium × 1000 + year, so 999.M41 becomes `41999`. Events with `sort` below 32000 appear in 30K, all others in 40K.
+4. **Era texts** for a planet: `era30k` and `era40k`, each with its own `type` and `desc` (e.g. Prospero as an intact Legion homeworld in 30K).
 
-Grössere Datenmengen lassen sich als JSON-Datei im gleichen Aufbau einfügen:
+Larger batches can be merged from a JSON file with the same structure:
 
 ```
-python3 tools/merge_content.py data.js neu.json
+python3 tools/merge_content.py data.js new.json
 ```
 
-Das Script meldet Dubletten, zu nahe Systeme und unpassende Segmentums. Fehlerhafte Verweise meldet ausserdem die Browser-Konsole beim Laden (`[Datenprüfung]`).
+The script reports duplicates, systems placed too close together and mismatched segmentums. Broken references are also logged to the browser console on load (`[Data check]`).
 
-Direktlinks funktionieren über den Hash, z. B. `#/40k/planet/cadia`, `#/30k/event/siege_terra` oder `#/40k/book/helsreach`.
+Deep links work via the hash, e.g. `#/40k/planet/cadia`, `#/30k/event/siege_terra` or `#/40k/book/helsreach`.
 
-## Hinweise
+## Notes
 
-- Positionen sind schematisch, nicht massstabsgetreu.
-- Die Inhalte wurden mit KI-Unterstützung recherchiert und über Suchauszüge von [Lexicanum](https://wh40k.lexicanum.com), Wikipedia und Black Library geprüft. Einzelne Daten und viele Positionen sind Schätzungen, Korrekturen sind willkommen.
-- Inoffizielles Fanprojekt, nicht mit Games Workshop verbunden. Warhammer 40,000 ist eine Marke von Games Workshop Ltd.
+- Positions are schematic, not to scale.
+- The content was researched with AI assistance and checked against search excerpts from [Lexicanum](https://wh40k.lexicanum.com), Wikipedia and Black Library. Some dates and many positions are estimates; corrections are welcome.
+- Unofficial fan project, not affiliated with Games Workshop. Warhammer 40,000 is a trademark of Games Workshop Ltd.
