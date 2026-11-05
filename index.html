@@ -20,6 +20,16 @@
         </div>
         <button type="button" class="lib-close" id="lib-close" aria-label="Close library" title="Close library">×</button>
       </div>
+      <div class="lib-status">
+        <div class="lib-progress" id="lib-progress"></div>
+        <div class="lib-next" id="lib-next"></div>
+        <div class="lib-tools">
+          <button type="button" class="lib-shield" id="lib-shield" aria-pressed="true" title="Hide the content of books you have not read yet"></button>
+          <button type="button" class="btn-ghost small" id="lib-export" title="Download your reading list as a file">Export</button>
+          <button type="button" class="btn-ghost small" id="lib-import" title="Load a reading list file">Import</button>
+          <input type="file" id="lib-import-file" accept="application/json,.json" hidden>
+        </div>
+      </div>
       <div class="lib-filters">
         <input id="lib-filter" type="search" placeholder="Filter by title, author, Legion, character" autocomplete="off" aria-label="Filter books">
         <div class="lib-row">
@@ -30,9 +40,16 @@
             <option value="">All Legions &amp; factions</option>
           </select>
         </div>
-        <div class="lib-sort" role="group" aria-label="Sort order">
-          <button type="button" data-sort="series" aria-pressed="true">Reading order</button>
-          <button type="button" data-sort="chrono" aria-pressed="false">In-universe</button>
+        <div class="lib-row">
+          <select id="lib-status" aria-label="Reading status">
+            <option value="">Read and unread</option>
+            <option value="unread">Unread only</option>
+            <option value="read">Read only</option>
+          </select>
+          <div class="lib-sort" role="group" aria-label="Sort order">
+            <button type="button" data-sort="series" aria-pressed="true" title="Reading order by series">Series</button>
+            <button type="button" data-sort="chrono" aria-pressed="false" title="In-universe chronology">Timeline</button>
+          </div>
         </div>
       </div>
       <div class="lib-list" id="lib-list"></div>

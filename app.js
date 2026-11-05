@@ -66,6 +66,47 @@
 
   validateData();
 
+  // ---------- Reading progress & spoiler shield ----------
+  // Read books live in this browser only (localStorage); export/import moves them elsewhere.
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* ignore */ } }
+  };
+  const readSet = new Set((() => { try { return JSON.parse(store.get('read-books') || '[]'); } catch (e) { return []; } })()
+    .filter(b => D.books[b]));
+  let shield = store.get('spoiler-shield') !== '0';
+  const peekBooks = new Set(), peekEvents = new Set(), peekPlanets = new Set();
+  const listeners = [];
+  const isRead = bid => readSet.has(bid);
+  const isProtected = bid => HERESY_SERIES.test((D.books[bid] || {}).series || '');
+  const saveRead = () => store.set('read-books', JSON.stringify([...readSet]));
+
+  // A protected book's content stays hidden until it is read
+  const bookLocked = bid => shield && isProtected(bid) && !isRead(bid) && !peekBooks.has(bid);
+  // A 30K event is revealed by reading any of its books
+  const eventLocked = e => shield && !e.public && eventEra(e) === '30k' && !peekEvents.has(e.id) && !e.books.some(isRead);
+  // A world's Heresy-era fate is revealed once all its 30K storylines are
+  function planetLocked(pid) {
+    if (!shield || era !== '30k' || peekPlanets.has(pid)) return false;
+    const evs = eraEvents(eventsByPlanet[pid], '30k');
+    if (evs.length) return evs.some(eventLocked);
+    return (D.planets[pid].books || []).some(b => isProtected(b) && !isRead(b));
+  }
+
+  function setRead(bids, read) {
+    bids.forEach(b => (read ? readSet.add(b) : readSet.delete(b)));
+    saveRead();
+    progressChanged();
+  }
+  function setShield(on) {
+    shield = on;
+    store.set('spoiler-shield', on ? '1' : '0');
+    progressChanged();
+  }
+  function progressChanged() {
+    listeners.forEach(f => f());
+  }
+
   // ---------- Helpers ----------
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c =>
@@ -345,14 +386,17 @@
       const has = s.planets.some(p => D.planets[p] && planetHasContent(p));
       g.classList.toggle('dim', !has);
     });
-    Object.entries(planetEls).forEach(([pid, pe]) => {
-      const pe2 = planetEra(pid);
-      pe.body.setAttribute('fill', planetColor((pe2 && pe2.type) || D.planets[pid].type));
-      pe.g.classList.toggle('dim', !planetHasContent(pid));
-    });
+    recolor();
     computeLabelZoom();
     lastK = null;
     apply();
+  }
+
+  function recolor() {
+    Object.entries(planetEls).forEach(([pid, pe]) => {
+      pe.body.setAttribute('fill', planetColor(planetInfo(pid).type));
+      pe.g.classList.toggle('dim', !planetHasContent(pid));
+    });
   }
 
   function switchEra(target) {
@@ -608,9 +652,11 @@
       if (fly && s) flyTo(s.x, s.y, Math.max(K_SYSTEM, view.k));
     } else if (kind === 'event' && eventById[id]) {
       const e = eventById[id];
-      mark(e.planets, 'hl');
       renderEvent(e);
-      if (fly) fitSystems(e.planets.map(p => planetSystem[p]));
+      if (!eventLocked(e)) {
+        mark(e.planets, 'hl');
+        if (fly) fitSystems(e.planets.map(p => planetSystem[p]));
+      }
     } else if (kind === 'book' && D.books[id]) {
       const pids = bookPlanets(id);
       mark(pids, 'hl');
@@ -652,7 +698,7 @@
   function bookItem(bid) {
     const b = D.books[bid];
     if (!b) return '';
-    return `<li><a href="${link('book', bid)}">${esc(b.title)}</a>
+    return `<li class="${isRead(bid) ? 'read' : ''}"><a href="${link('book', bid)}">${esc(b.title)}</a>
       <div class="meta">${esc(b.author)} · ${esc(b.series)} · ${esc(b.year)}</div></li>`;
   }
 
@@ -668,7 +714,20 @@
       `<a class="chip" href="${link('planet', p)}">${esc(D.planets[p].name)}</a>`).join('')}</div>`;
   }
 
+  const bookTitles = ids => ids.filter(b => D.books[b]).map(b =>
+    `<a href="${link('book', b, '30k')}">${esc(D.books[b].title)}</a>`).join(', ');
+
+  function sealedCard(e, href = true) {
+    const books = e.books.filter(b => D.books[b]);
+    const inner = `<div class="card-head"><span class="card-title">🔒 Sealed storyline</span><span class="date">${esc(e.date)}</span></div>
+      <div class="sealed-note">${books.length ? `Revealed when you have read ${books.length > 1 ? 'one of ' : ''}${bookTitles(books)}.` : 'Not linked to a book yet.'}</div>`;
+    return href
+      ? `<div class="card sealed">${inner}<a class="peek" href="${link('event', e.id)}">Details</a></div>`
+      : `<div class="card sealed">${inner}</div>`;
+  }
+
   function eventCard(e, withBooks = true) {
+    if (eventLocked(e)) return sealedCard(e);
     return `<div class="card">
       <div class="card-head"><a class="card-title" href="${link('event', e.id)}">${esc(e.name)}</a><span class="date">${esc(e.date)}</span></div>
       <p>${esc(e.desc)}</p>
@@ -683,18 +742,33 @@
       <a href="${link(kind, id, o)}">Switch to ${ERAS[o].short} →</a></p>`;
   }
 
+  function sealedSummary(evs) {
+    const n = evs.filter(eventLocked).length;
+    return n ? `<p class="era-hint">🔒 ${n} ${n === 1 ? 'storyline is' : 'storylines are'} sealed until you read the books.</p>` : '';
+  }
+
   function renderOverview() {
     setCrumbs([]);
     const evs = eraEvents(D.events);
     const worlds = Object.keys(D.planets).filter(p => planetHasContent(p)).length;
     const books = Object.keys(D.books).filter(b => bookInEra(b)).length;
+    const sealed = evs.filter(eventLocked).length;
+    let intro = 'Zoom in to see systems and their planets. Select a world to explore its storylines and the books set there. Switch between 30K and 40K at the top.';
+    if (era === '30k') intro += ' Open the library to track the books you have read.';
     let html = `<h2>${ERAS[era].title}</h2>
       <div class="subtitle">${ERAS[era].sub}<br>${worlds} worlds · ${evs.length} events · ${books} books</div>
-      <p>Zoom in to see systems and their planets. Select a world to explore its storylines and the books set there. Switch between 30K and 40K at the top.</p>
+      ${era === '40k' && shield ? '<div class="era-box warn"><span class="era-tag">Spoilers</span> The 41st Millennium lies ten thousand years after the Horus Heresy, and its worlds reveal how the Heresy ended. Stay in 30K if you are still reading.</div>' : ''}
+      <p>${intro}</p>
+      ${era === '30k' && shield && sealed ? `<p class="era-hint">🛡 Spoiler shield on: ${evs.length - sealed} of ${evs.length} storylines revealed by the books you have read.</p>` : ''}
       <h3>Timeline</h3><div class="timeline">`;
     let group = null;
     evs.forEach(e => {
       if (e.era !== group) { group = e.era; html += `<div class="era">${esc(group)}</div>`; }
+      if (eventLocked(e)) {
+        html += `<a class="card sealed" href="${link('event', e.id)}">
+          <div class="card-head"><span class="card-title">🔒 Sealed storyline</span><span class="date">${esc(e.date)}</span></div></a>`;
+        return;
+      }
       const where = e.planets.map(p => D.planets[p] && D.planets[p].name).filter(Boolean).join(', ');
       html += `<a class="card" href="${link('event', e.id)}">
         <div class="card-head"><span class="card-title">${esc(e.name)}</span><span class="date">${esc(e.date)}</span></div>
@@ -705,10 +779,16 @@
     panelBody.innerHTML = html;
   }
 
+  // Type and texts of a world for the current era, honouring the spoiler shield
   function planetInfo(pid) {
     const p = D.planets[pid];
-    const pe = planetEra(pid);
-    return { type: (pe && pe.type) || p.type, eraDesc: pe && pe.desc };
+    if (era === '30k') {
+      const safe = p.safe30k, full = p.era30k;
+      if (planetLocked(pid)) return { type: (safe && safe.type) || 'World', desc: safe ? safe.desc : '', eraDesc: null, locked: true };
+      return { type: (full && full.type) || (safe && safe.type) || p.type, desc: safe ? safe.desc : p.desc, eraDesc: full && full.desc, locked: false };
+    }
+    const e40 = p.era40k;
+    return { type: (e40 && e40.type) || p.type, desc: p.desc, eraDesc: e40 && e40.desc, locked: false };
   }
 
   function renderSystem(s) {
@@ -722,9 +802,10 @@
       ${valid.map(pid => {
         const p = D.planets[pid];
         const info = planetInfo(pid);
+        const text = info.eraDesc || info.desc;
         return `<a class="card" href="${link('planet', pid)}" style="display:block">
           <div class="card-head"><span class="card-title">${esc(p.name)}</span><span class="date">${esc(info.type)}</span></div>
-          <p>${esc(info.eraDesc || p.desc)}</p></a>`;
+          ${text ? `<p>${esc(text)}</p>` : ''}</a>`;
       }).join('')}
       <h3>Storylines ${ERAS[era].short}</h3>
       ${evs.length ? evs.map(e => eventCard(e)).join('') : '<div class="empty">No events recorded for this era yet.</div>'}
@@ -744,18 +825,32 @@
     const otherCount = eraEvents(eventsByPlanet[pid], other()).length;
     const extraBooks = (p.books || []).filter(b => bookInEra(b) && !evs.some(e => e.books.includes(b)));
     const lex = `https://wh40k.lexicanum.com/wiki/${encodeURIComponent(p.name.replace(/ /g, '_'))}`;
+    const fate = info.locked
+      ? `<div class="era-box sealed-box"><span class="era-tag">🔒 ${ERAS[era].short}</span> This world's fate during the Heresy is sealed until you have read its storylines.
+          <button type="button" class="link-btn" data-peek-planet="${esc(pid)}">Reveal anyway</button></div>`
+      : (info.eraDesc ? `<div class="era-box"><span class="era-tag">${ERAS[era].short}</span> ${esc(info.eraDesc)}</div>` : '');
     panelBody.innerHTML = `<h2>${esc(p.name)}</h2>
       <div class="subtitle">${esc(info.type)} · ${s ? `<a href="${link('system', s.id)}">System ${esc(s.name)}</a>` : ''} · ${esc(segName(s && s.segmentum))}</div>
-      <p>${esc(p.desc)}</p>
-      ${info.eraDesc ? `<div class="era-box"><span class="era-tag">${ERAS[era].short}</span> ${esc(info.eraDesc)}</div>` : ''}
+      ${info.desc ? `<p>${esc(info.desc)}</p>` : ''}
+      ${fate}
       <h3>Storylines ${ERAS[era].short}</h3>
       ${evs.length ? evs.map(e => eventCard(e)).join('') : '<div class="empty">No events recorded for this era yet.</div>'}
       ${otherEraHint(otherCount, 'planet', pid, 'This world')}
       ${extraBooks.length ? `<h3>More books</h3>${bookList(extraBooks)}` : ''}
-      <p style="margin-top:18px"><a href="${lex}" target="_blank" rel="noopener">Read more on Lexicanum ↗</a></p>`;
+      ${info.locked ? '' : `<p style="margin-top:18px"><a href="${lex}" target="_blank" rel="noopener">Read more on Lexicanum ↗</a></p>`}`;
   }
 
   function renderEvent(e) {
+    if (eventLocked(e)) {
+      setCrumbs([[link('event', e.id), 'Sealed storyline']]);
+      const books = e.books.filter(b => D.books[b]);
+      panelBody.innerHTML = `<h2>🔒 Sealed storyline</h2>
+        <div class="subtitle">${esc(e.date)} · ${esc(e.era)}</div>
+        <p>This storyline is hidden by the spoiler shield.</p>
+        ${books.length ? `<h3>Revealed by reading</h3>${bookList(books)}` : '<p class="era-hint">No book is linked to it yet.</p>'}
+        <p style="margin-top:18px"><button type="button" class="btn-ghost" data-peek-event="${esc(e.id)}">Reveal anyway</button></p>`;
+      return;
+    }
     setCrumbs([[link('event', e.id), e.name]]);
     panelBody.innerHTML = `<h2>${esc(e.name)}</h2>
       <div class="subtitle">${esc(e.date)} · ${esc(e.era)}</div>
@@ -764,22 +859,53 @@
       <h3>Books</h3>${bookList(e.books)}`;
   }
 
+  function readButton(bid) {
+    const r = isRead(bid);
+    return `<button type="button" class="read-btn${r ? ' on' : ''}" data-read="${esc(bid)}" aria-pressed="${r}">${r ? '✓ Read' : 'Mark as read'}</button>`;
+  }
+
   function renderBook(bid) {
     const b = D.books[bid];
     setCrumbs([[link('book', bid), b.title]]);
     const evs = eraEvents(eventsByBook[bid]);
-    const seriesLine = [b.number ? `${esc(b.series)} #${b.number}` : esc(b.series), esc(b.format), esc(b.year)].filter(Boolean).join(' · ');
+    const locked = bookLocked(bid);
+    const seriesLine = [b.number ? `${esc(b.series)} #${b.number}` : esc(b.series), esc(b.format), esc(b.year),
+      b.pages ? `${b.pages} pages` : ''].filter(Boolean).join(' · ');
     const lex = `https://wh40k.lexicanum.com/wiki/Special:Search?search=${encodeURIComponent(b.title)}`;
+    const summary = b.summary || b.synopsis;
+    const earlier = b.number ? Object.keys(D.books).filter(k => D.books[k].series === b.series && D.books[k].number && D.books[k].number < b.number && !isRead(k)) : [];
+    const contents = (b.contents || []).length ? `<h3>Contents</h3><ol class="contents">${b.contents.map(c =>
+      `<li>${esc(c.title)} <span class="meta">${esc(c.author || '')}${c.format && c.format !== 'Short story' ? ' · ' + esc(c.format) : ''}</span></li>`).join('')}</ol>` : '';
+    const related = (b.related || []).filter(r => D.books[r]);
+    let body;
+    if (locked) {
+      body = `
+        ${b.premise ? `<details class="premise"><summary>Show spoiler-free premise</summary><p>${esc(b.premise)}</p></details>` : ''}
+        <div class="era-box sealed-box"><span class="era-tag">🔒</span> Summary, characters and storylines are sealed until you mark this book as read.
+          <button type="button" class="link-btn" data-peek-book="${esc(bid)}">Reveal anyway</button></div>`;
+    } else {
+      body = `
+        ${b.premise ? `<p class="premise-text">${esc(b.premise)}</p>` : ''}
+        ${summary ? `<h3>Summary</h3><p>${esc(summary)}</p>` : ''}
+        ${(b.characters || []).length ? `<h3>Characters</h3><ul class="characters">${b.characters.map(c => {
+          const [name, ...role] = String(c).split(' – ');
+          return `<li><b>${esc(name)}</b>${role.length ? ` <span class="meta">${esc(role.join(' – '))}</span>` : ''}</li>`;
+        }).join('')}</ul>` : ''}
+        <h3>Storylines</h3>
+        ${evs.length ? evs.map(e => eventCard(e, false)).join('') : '<div class="empty">Not linked to any event.</div>'}`;
+    }
     panelBody.innerHTML = `<h2>${esc(b.title)}</h2>
       <div class="subtitle">${esc(b.author)}<br>${seriesLine}</div>
+      <div class="book-actions">${readButton(bid)}
+        ${earlier.length && !isRead(bid) ? `<button type="button" class="btn-ghost" data-read-upto="${esc(bid)}">Also mark #1–${b.number - 1} as read</button>` : ''}</div>
       ${b.setting ? `<div class="era-box"><span class="era-tag">Set</span> ${esc(b.setting)}</div>` : ''}
-      ${b.synopsis ? `<p>${esc(b.synopsis)}</p>` : ''}
+      ${b.collected_in ? `<p class="era-hint">Also collected in ${D.books[b.collected_in] ? `<a href="${link('book', b.collected_in)}">${esc(D.books[b.collected_in].title)}</a>` : esc(b.collected_in)}.</p>` : ''}
       ${(b.legions || []).length ? `<h3>Legions &amp; factions</h3><div class="chips">${b.legions.map(l =>
         `<button type="button" class="chip" data-legion="${esc(l)}" title="Show all books with ${esc(l)}">${esc(l)}</button>`).join('')}</div>` : ''}
-      ${(b.characters || []).length ? `<h3>Characters</h3><p class="characters">${b.characters.map(esc).join(' · ')}</p>` : ''}
-      <h3>Storylines</h3>
-      ${evs.length ? evs.map(e => eventCard(e, false)).join('') : '<div class="empty">Not linked to any event.</div>'}
+      ${body}
       <h3>Locations</h3>${planetChips(bookPlanets(bid))}
+      ${contents}
+      ${related.length ? `<h3>Related books</h3>${bookList(related)}` : ''}
       <p style="margin-top:18px"><a href="${lex}" target="_blank" rel="noopener">Find on Lexicanum ↗</a></p>`;
   }
 
@@ -790,7 +916,7 @@
       ? '<p class="era-hint">The Great Rift does not exist yet in the 31st Millennium. It only opens after the Fall of Cadia (999.M41).</p>' : '';
     panelBody.innerHTML = `<h2>${esc(f.name)}</h2>
       <div class="subtitle">${id === 'rift' ? 'Warp rift' : 'Warp anomaly'}</div>
-      <p>${esc(f.desc)}</p>${note}`;
+      <p>${esc(era === '30k' && f.safe30k ? f.safe30k : f.desc)}</p>${note}`;
   }
 
   // ---------- Search ----------
@@ -803,7 +929,7 @@
     const same = s.planets.length === 1 && D.planets[s.planets[0]] && D.planets[s.planets[0]].name === s.name;
     if (!same) index.push({ kind: 'System', label: s.name, route: ['system', s.id] });
   });
-  D.events.forEach(e => index.push({ kind: `Event · ${ERAS[eventEra(e)].short}`, label: e.name, route: ['event', e.id] }));
+  D.events.forEach(e => index.push({ kind: `Event · ${ERAS[eventEra(e)].short}`, label: e.name, route: ['event', e.id], event: e }));
   Object.entries(D.books).forEach(([id, b]) => index.push({ kind: 'Book', label: b.title, extra: b.author + ' ' + b.series, route: ['book', id] }));
   D.features.forEach(f => index.push({ kind: 'Anomaly', label: f.name, route: ['feature', f.id] }));
   index.push({ kind: 'Anomaly', label: D.rift.name, extra: 'Great Rift', route: ['feature', 'rift'] });
@@ -830,7 +956,7 @@
   searchInput.addEventListener('input', () => {
     const q = norm(searchInput.value.trim());
     active = -1;
-    results = q ? index.filter(i => i.key.includes(q))
+    results = q ? index.filter(i => i.key.includes(q) && !(i.event && eventLocked(i.event)))
       .sort((a, b) => (b.lkey.startsWith(q) - a.lkey.startsWith(q)) || a.label.localeCompare(b.label))
       .slice(0, 14) : [];
     renderResults();
@@ -858,20 +984,19 @@
   const libSeriesOf = b => (b.series || '').replace(/\s*\((Novella|Novelle)\)$/i, '');
   const libRank = Object.fromEntries(LIB_SERIES.map(([s], i) => [s, i]));
   const libBooks = Object.keys(D.books).filter(bid => libSeriesOf(D.books[bid]) in libRank);
-  const libEl = document.getElementById('library');
-  const libList = document.getElementById('lib-list');
-  const libToggle = document.getElementById('lib-toggle');
-  const libFilter = document.getElementById('lib-filter');
-  const libSeriesSel = document.getElementById('lib-series');
-  const libLegionSel = document.getElementById('lib-legion');
+  const $ = id => document.getElementById(id);
+  const libEl = $('library');
+  const libList = $('lib-list');
+  const libToggle = $('lib-toggle');
+  const libFilter = $('lib-filter');
+  const libSeriesSel = $('lib-series');
+  const libLegionSel = $('lib-legion');
+  const libStatusSel = $('lib-status');
   const libSortBtns = [...libEl.querySelectorAll('[data-sort]')];
-  const store = {
-    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
-    set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* ignore */ } }
-  };
   let libOpen = store.get('lib-open') !== '0' && !isMobile();
-  let libSort = 'series';
+  let libSort = store.get('lib-sort') === 'chrono' ? 'chrono' : 'series';
   let libActive = null;
+  libSortBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.sort === libSort));
 
   LIB_SERIES.forEach(([s, label]) => {
     if (libBooks.some(bid => libSeriesOf(D.books[bid]) === s))
@@ -882,46 +1007,86 @@
   Object.keys(legionCount).sort((a, b) => a.localeCompare(b)).forEach(l =>
     libLegionSel.insertAdjacentHTML('beforeend', `<option value="${esc(l)}">${esc(l)} (${legionCount[l]})</option>`));
 
+  const bySeries = (a, b) => {
+    const A = D.books[a], B = D.books[b];
+    return (libRank[libSeriesOf(A)] - libRank[libSeriesOf(B)]) ||
+      ((A.number || 999) - (B.number || 999)) || ((A.year || 0) - (B.year || 0)) || A.title.localeCompare(B.title);
+  };
+
   function libFiltered() {
     const q = norm(libFilter.value.trim());
-    const ser = libSeriesSel.value, leg = libLegionSel.value;
+    const ser = libSeriesSel.value, leg = libLegionSel.value, st = libStatusSel.value;
     return libBooks.filter(bid => {
       const b = D.books[bid];
       if (ser && libSeriesOf(b) !== ser) return false;
       if (leg && !(b.legions || []).includes(leg)) return false;
+      if (st === 'read' && !isRead(bid)) return false;
+      if (st === 'unread' && isRead(bid)) return false;
       if (!q) return true;
-      return norm([b.title, b.author, ...(b.legions || []), ...(b.characters || [])].join(' ')).includes(q);
+      // Characters only count as searchable once the book is unlocked
+      const chars = bookLocked(bid) ? [] : (b.characters || []);
+      return norm([b.title, b.author, ...(b.legions || []), ...chars].join(' ')).includes(q);
     });
   }
 
   function libSorted(ids) {
-    const bySeries = (a, b) => {
-      const A = D.books[a], B = D.books[b];
-      return (libRank[libSeriesOf(A)] - libRank[libSeriesOf(B)]) ||
-        ((A.number || 999) - (B.number || 999)) || ((A.year || 0) - (B.year || 0)) || A.title.localeCompare(B.title);
-    };
     if (libSort === 'series') return ids.sort(bySeries);
     return ids.sort((a, b) => ((D.books[a].sort || 99999) - (D.books[b].sort || 99999)) || bySeries(a, b));
+  }
+
+  // Next unread book in reading order of the main series, then the others
+  function nextUp() {
+    return libBooks.filter(b => !isRead(b) && D.books[b].number).sort(bySeries)[0] || null;
+  }
+
+  function libProgress() {
+    const read = libBooks.filter(isRead).length;
+    const pct = libBooks.length ? Math.round(read / libBooks.length * 100) : 0;
+    $('lib-progress').innerHTML = `<div class="bar"><i style="width:${pct}%"></i></div>
+      <span>${read} of ${libBooks.length} read</span>`;
+    const nx = nextUp();
+    $('lib-next').innerHTML = nx
+      ? `Next up: <a href="${link('book', nx, '30k')}">${esc(D.books[nx].title)}</a> <span class="meta">${esc((LIB_SERIES[libRank[libSeriesOf(D.books[nx])]] || [])[1] || '')} #${D.books[nx].number}</span>`
+      : (read ? 'You have read every numbered book. Ave Imperator!' : '');
+    const sh = $('lib-shield');
+    sh.setAttribute('aria-pressed', shield);
+    sh.textContent = shield ? '🛡 Spoiler shield on' : '🛡 Spoiler shield off';
   }
 
   function libRender() {
     const ids = libSorted(libFiltered());
     const worlds = new Set();
     ids.forEach(bid => bookPlanets(bid).forEach(p => worlds.add(p)));
-    document.getElementById('lib-count').textContent =
+    $('lib-count').textContent =
       `${ids.length} of ${libBooks.length} books · ${worlds.size} ${worlds.size === 1 ? 'world' : 'worlds'} highlighted`;
+    libProgress();
     let html = '', group = null;
+    const groupTotals = {};
+    if (libSort === 'series') ids.forEach(bid => {
+      const g = libSeriesOf(D.books[bid]);
+      groupTotals[g] = groupTotals[g] || [0, 0];
+      groupTotals[g][1]++;
+      if (isRead(bid)) groupTotals[g][0]++;
+    });
     ids.forEach(bid => {
       const b = D.books[bid];
-      const g = libSort === 'series' ? (LIB_SERIES[libRank[libSeriesOf(b)]] || [])[1] : null;
-      if (g && g !== group) { group = g; html += `<div class="lib-group">${esc(g)}</div>`; }
+      const ser = libSeriesOf(b);
+      const g = libSort === 'series' ? (LIB_SERIES[libRank[ser]] || [])[1] : null;
+      if (g && g !== group) {
+        group = g;
+        const [r, t] = groupTotals[ser];
+        html += `<div class="lib-group"><span>${esc(g)}</span><span class="meta">${r}/${t}</span></div>`;
+      }
       const n = bookPlanets(bid).length;
       const lead = libSort === 'series' ? (b.number ? b.number : '·') : esc(b.setting || '?');
       const meta = [b.author, b.year, b.format && b.format !== 'Novel' ? b.format : ''].filter(Boolean).map(esc).join(' · ');
-      html += `<a class="lib-book${bid === libActive ? ' active' : ''}" href="${link('book', bid, '30k')}" data-bid="${esc(bid)}">
-        <span class="lib-num${libSort === 'series' ? '' : ' wide'}">${lead}</span>
-        <span class="lib-main"><span class="lib-title">${esc(b.title)}</span><span class="lib-meta">${meta}</span></span>
-        <span class="lib-worlds" title="${n} ${n === 1 ? 'world' : 'worlds'} on the map">${n || ''}</span></a>`;
+      const r = isRead(bid);
+      html += `<div class="lib-item${r ? ' read' : ''}${bid === libActive ? ' active' : ''}" data-bid="${esc(bid)}">
+        <button type="button" class="lib-check" data-read="${esc(bid)}" aria-pressed="${r}" title="${r ? 'Mark as unread' : 'Mark as read'}" aria-label="${r ? 'Mark as unread' : 'Mark as read'}: ${esc(b.title)}">${r ? '✓' : ''}</button>
+        <a class="lib-book" href="${link('book', bid, '30k')}">
+          <span class="lib-num${libSort === 'series' ? '' : ' wide'}">${lead}</span>
+          <span class="lib-main"><span class="lib-title">${esc(b.title)}</span><span class="lib-meta">${meta}</span></span>
+          <span class="lib-worlds" title="${n} ${n === 1 ? 'world' : 'worlds'} on the map">${n || ''}</span></a></div>`;
     });
     if (!ids.length) html = '<div class="empty" style="padding:12px 16px">No books match the filter.</div>';
     libList.innerHTML = html;
@@ -958,22 +1123,26 @@
 
   function libSync(activeBid) {
     libActive = activeBid;
-    libList.querySelectorAll('.lib-book').forEach(a => a.classList.toggle('active', a.dataset.bid === activeBid));
+    libList.querySelectorAll('.lib-item').forEach(a => a.classList.toggle('active', a.dataset.bid === activeBid));
   }
 
   libToggle.addEventListener('click', () => libSetOpen(!libOpen));
-  document.getElementById('lib-close').addEventListener('click', () => libSetOpen(false));
+  $('lib-close').addEventListener('click', () => libSetOpen(false));
   libFilter.addEventListener('input', libRender);
-  libSeriesSel.addEventListener('change', libRender);
-  libLegionSel.addEventListener('change', libRender);
+  [libSeriesSel, libLegionSel, libStatusSel].forEach(el => el.addEventListener('change', libRender));
   libSortBtns.forEach(btn => btn.addEventListener('click', () => {
     libSort = btn.dataset.sort;
+    store.set('lib-sort', libSort);
     libSortBtns.forEach(b => b.setAttribute('aria-pressed', b === btn));
     libRender();
   }));
+  $('lib-shield').addEventListener('click', () => {
+    if (shield && !confirm('Turn off the spoiler shield? Summaries, characters and storylines of unread books will be shown.')) return;
+    setShield(!shield);
+  });
   // Hover preview: show a book's worlds without selecting it
   libList.addEventListener('mouseover', e => {
-    const a = e.target.closest('.lib-book');
+    const a = e.target.closest('.lib-item');
     svg.querySelectorAll('.preview').forEach(n => n.classList.remove('preview'));
     if (a) mark(bookPlanets(a.dataset.bid), 'preview');
   });
@@ -981,14 +1150,61 @@
   libList.addEventListener('click', e => {
     if (e.target.closest('.lib-book') && isMobile()) libSetOpen(false, false);
   });
-  // Legion chips in the book panel filter the library
-  panelBody.addEventListener('click', e => {
-    const chip = e.target.closest('[data-legion]');
-    if (!chip) return;
-    libLegionSel.value = chip.dataset.legion;
-    libFilter.value = '';
-    libSeriesSel.value = '';
-    if (!libOpen) libSetOpen(true); else libRender();
+
+  // Export / import of the reading list
+  $('lib-export').addEventListener('click', () => {
+    const data = { app: 'galaxy-map-40k', read: [...readSet].sort(), exported: new Date().toISOString() };
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 1)], { type: 'application/json' }));
+    a.download = 'horus-heresy-reading-list.json';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+  });
+  $('lib-import').addEventListener('click', () => $('lib-import-file').click());
+  $('lib-import-file').addEventListener('change', async e => {
+    const f = e.target.files[0];
+    e.target.value = '';
+    if (!f) return;
+    try {
+      const data = JSON.parse(await f.text());
+      const ids = (Array.isArray(data) ? data : data.read || []).filter(b => D.books[b]);
+      if (!ids.length) { alert('No known books found in this file.'); return; }
+      if (!confirm(`Import ${ids.length} read books? They are added to your current list.`)) return;
+      setRead(ids, true);
+    } catch (err) {
+      alert('This file could not be read.');
+    }
+  });
+
+  // Buttons inside the panel and the library: read toggles, reveals, Legion chips
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-read],[data-read-upto],[data-peek-book],[data-peek-event],[data-peek-planet],[data-legion]');
+    if (!t) return;
+    e.preventDefault();
+    if (t.dataset.read) setRead([t.dataset.read], !isRead(t.dataset.read));
+    else if (t.dataset.readUpto) {
+      const b = D.books[t.dataset.readUpto];
+      setRead(Object.keys(D.books).filter(k => D.books[k].series === b.series && D.books[k].number && D.books[k].number <= b.number), true);
+    } else if (t.dataset.peekBook) { peekBooks.add(t.dataset.peekBook); progressChanged(); }
+    else if (t.dataset.peekEvent) { peekEvents.add(t.dataset.peekEvent); show(location.hash, { fly: true }); }
+    else if (t.dataset.peekPlanet) { peekPlanets.add(t.dataset.peekPlanet); progressChanged(); }
+    else if (t.dataset.legion) {
+      libLegionSel.value = t.dataset.legion;
+      libFilter.value = '';
+      libSeriesSel.value = '';
+      libStatusSel.value = '';
+      if (!libOpen) libSetOpen(true); else libRender();
+    }
+  });
+
+  // Re-render everything that depends on reading progress
+  listeners.push(() => {
+    recolor();
+    if (libVisible()) libRender();
+    const scroll = panelBody.scrollTop;
+    show(location.hash, { fly: false });
+    panelBody.scrollTop = scroll;
   });
 
   // ---------- Data validation ----------
