@@ -12,6 +12,15 @@
   --sys: #9fc3ff;
   --hl: #ffcf5a;
   --panel-w: 380px;
+  --accent-bg: rgba(179, 52, 43, .22);
+}
+
+/* 30K: messing-/bronzefarbene Akzente, kühleres Rot */
+body.era-30k {
+  --gold: #d9a441;
+  --gold-soft: #f0d9a0;
+  --red: #4fa3c7;
+  --accent-bg: rgba(79, 163, 199, .2);
 }
 
 * { box-sizing: border-box; }
@@ -71,6 +80,33 @@ html, body {
   white-space: nowrap;
 }
 .brand span { color: var(--red); }
+
+.era-toggle {
+  display: inline-flex;
+  pointer-events: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(13, 15, 22, .9);
+  flex: none;
+}
+.era-toggle button {
+  font: inherit;
+  font-size: 13px;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.era-toggle button b { font-family: Cinzel, Georgia, serif; letter-spacing: .05em; }
+.era-toggle button:hover { color: var(--text); }
+.era-toggle button[aria-pressed="true"] {
+  background: var(--accent-bg);
+  color: var(--gold-soft);
+  box-shadow: inset 0 -2px 0 var(--gold);
+}
 
 .search {
   position: relative;
@@ -190,6 +226,10 @@ html, body {
   pointer-events: none;
 }
 .system.major .sys-label { fill: var(--gold-soft); }
+.system.dim { opacity: .4; }
+.system.dim.hl, .system.dim.selected { opacity: 1; }
+.system.nolabel:not(.hl):not(.selected):not(:hover) .sys-label { display: none; }
+.planet.dim { opacity: .55; }
 
 .orbits { transition: opacity .25s; }
 .orbit { fill: none; stroke: rgba(159, 195, 255, .25); }
@@ -291,6 +331,22 @@ a:hover { text-decoration: underline; }
 }
 .books .meta { color: var(--muted); font-size: 12px; }
 .empty { color: var(--muted); font-style: italic; font-size: 13px; }
+.era-hint { font-size: 13px; color: var(--muted); }
+.era-box {
+  font-size: 14px;
+  line-height: 1.5;
+  border-left: 3px solid var(--gold);
+  background: var(--panel-2);
+  padding: 8px 12px;
+  border-radius: 0 6px 6px 0;
+  margin: 10px 0;
+}
+.era-tag {
+  font-family: Cinzel, Georgia, serif;
+  font-weight: 700;
+  color: var(--gold);
+  margin-right: 4px;
+}
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
 .chip {
@@ -362,6 +418,8 @@ a:hover { text-decoration: underline; }
   .topbar { flex-direction: column; align-items: stretch; gap: 8px; }
   .brand { font-size: 17px; }
   .search { width: 100%; }
+  .era-toggle { align-self: flex-start; }
+  .era-toggle button span { display: none; }
   .legend { display: none; }
   .zoom-controls { bottom: calc(46vh + 12px); }
   body.panel-collapsed .zoom-controls { bottom: 76px; }

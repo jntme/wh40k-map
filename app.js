@@ -12,8 +12,18 @@
   const K_ORBIT_START = 2.2;  // ab hier werden Planetenbahnen eingeblendet
   const K_ORBIT_FULL = 3.2;   // ab hier voll sichtbar
   const K_SYSTEM = 6;         // Zoom beim Anwählen eines Systems
-  const K_MAX = 18;
+  const K_MAX = 22;
   const GALAXY_R = 1050;
+  const ORBIT0 = 6, ORBIT_STEP = 4.5;
+
+  // ---------- Zeitalter ----------
+  const ERAS = {
+    '30k': { short: '30K', label: 'Horus-Häresie', title: 'Das 31. Jahrtausend', sub: 'Großer Kreuzzug und Horus-Häresie' },
+    '40k': { short: '40K', label: 'Dunkles Imperium', title: 'Das 41. Jahrtausend', sub: 'Vom Ende des M41 bis ins Dark Imperium' }
+  };
+  let era = '40k';
+  const eventEra = e => (e.sort < 32000 ? '30k' : '40k');
+  const inEra = obj => !obj || !obj.eras || obj.eras.includes(era);
 
   // ---------- Indizes ----------
   const segById = Object.fromEntries(D.segmentums.map(s => [s.id, s]));
@@ -33,6 +43,22 @@
   Object.entries(D.planets).forEach(([pid, p]) =>
     (p.books || []).forEach(b => (planetsByBook[b] = planetsByBook[b] || []).push(pid)));
 
+  // Zeitalter eines Buchs: aus seinen Ereignissen, sonst aus der Reihe
+  const HERESY_SERIES = /horus heresy|siege of terra|primarchs/i;
+  const bookEras = {};
+  Object.entries(D.books).forEach(([bid, b]) => {
+    const set = new Set((eventsByBook[bid] || []).map(eventEra));
+    if (!set.size) set.add(HERESY_SERIES.test(b.series || '') ? '30k' : '40k');
+    bookEras[bid] = set;
+  });
+  const bookInEra = (bid, er = era) => bookEras[bid] && bookEras[bid].has(er);
+  const eraEvents = (list, er = era) => (list || []).filter(e => eventEra(e) === er);
+  const planetEra = (pid, er = era) => (D.planets[pid] || {})['era' + er] || null;
+  const planetHasContent = (pid, er = era) =>
+    eraEvents(eventsByPlanet[pid], er).length > 0 ||
+    !!planetEra(pid, er) ||
+    (D.planets[pid].books || []).some(b => bookInEra(b, er));
+
   validateData();
 
   // ---------- Hilfsfunktionen ----------
@@ -41,6 +67,7 @@
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const isMobile = () => window.matchMedia('(max-width: 760px)').matches;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const link = (kind, id, er = era) => `#/${er}/${kind}/${encodeURIComponent(id)}`;
 
   function el(tag, attrs, parent) {
     const n = document.createElementNS(NS, tag);
@@ -76,14 +103,16 @@
   }
 
   function planetColor(type) {
-    const t = type.toLowerCase();
-    if (t.includes('zerstört') || t.includes('verwüstet')) return '#6b2a24';
+    const t = (type || '').toLowerCase();
+    if (t.includes('zerstört') || t.includes('verwüstet') || t.includes('vernichtet')) return '#6b2a24';
     if (t.includes('thron')) return '#e8c25a';
     if (t.includes('schmiede')) return '#c4502e';
     if (t.includes('festung')) return '#8a8f99';
     if (t.includes('todes') || t.includes('eis')) return '#bfe0f0';
-    if (t.includes('wald')) return '#3f8a4a';
+    if (t.includes('dämonen') || t.includes('chaos')) return '#9b3fbf';
+    if (t.includes('wald') || t.includes('dschungel') || t.includes('agrar')) return '#3f8a4a';
     if (t.includes('wüste')) return '#d2b071';
+    if (t.includes('ozean')) return '#3a74b8';
     if (t.includes('makropol')) return '#9a8570';
     return '#7fa7d9';
   }
@@ -118,10 +147,11 @@
 
   drawGalaxy();
   drawSegmentums();
-  drawRift();
+  const riftGroup = drawRift();
   drawFeatures();
   const systemEls = {};
   const planetEls = {};
+  const sysLabelMinK = {};
   drawSystems();
 
   function drawGalaxy() {
@@ -137,14 +167,13 @@
         const r = 90 + t * 940;
         const spread = (rand() + rand() + rand() - 1.5) * (0.42 - t * 0.12);
         const th = off + t * 4.4 + spread;
-        const c = el('circle', {
+        frag.appendChild(el('circle', {
           cx: (Math.cos(th) * r).toFixed(1),
           cy: (Math.sin(th) * r).toFixed(1),
           r: (0.5 + rand() * 1.8).toFixed(2),
           fill: rand() < 0.15 ? '#ffd9a8' : (rand() < 0.3 ? '#b8ccff' : '#f4f1ff'),
           'fill-opacity': (0.25 + rand() * 0.6).toFixed(2)
-        });
-        frag.appendChild(c);
+        }));
       }
     }
     for (let i = 0; i < 700; i++) {
@@ -182,12 +211,11 @@
 
   function drawRift() {
     const r = D.rift;
-    const g = el('g', { 'data-route': '#/feature/rift' }, world);
+    const g = el('g', { class: 'rift-group', 'data-route': 'feature/rift' }, world);
     const d = smoothPath(r.points);
     el('path', { d, class: 'rift', stroke: '#a14ad6', 'stroke-opacity': .12, 'stroke-width': 70 }, g);
     el('path', { d, class: 'rift', stroke: '#b03fbf', 'stroke-opacity': .25, 'stroke-width': 30 }, g);
     el('path', { d, id: 'rift-path', class: 'rift', stroke: '#e3a6ff', 'stroke-opacity': .7, 'stroke-width': 4 }, g);
-    // Beschriftung folgt dem Riss
     const label = el('text', { class: 'rift-label' }, g);
     const tp = el('textPath', { href: '#rift-path', startOffset: '30%' }, label);
     tp.textContent = r.name;
@@ -196,11 +224,12 @@
       label.setAttribute('font-size', 14 / k);
       label.setAttribute('stroke-width', 3 / k);
     });
+    return g;
   }
 
   function drawFeatures() {
     D.features.forEach(f => {
-      const g = el('g', { class: 'feature', 'data-route': `#/feature/${f.id}`, transform: `translate(${f.x},${f.y})` }, world);
+      const g = el('g', { class: 'feature', 'data-route': `feature/${f.id}`, transform: `translate(${f.x},${f.y})` }, world);
       el('circle', { r: f.r, fill: 'url(#g-warp)' }, g);
       el('circle', { r: f.r * 0.55, fill: 'none', stroke: '#d48ef0', 'stroke-opacity': .35, 'stroke-dasharray': '4 6', 'vector-effect': 'non-scaling-stroke' }, g);
       const t = el('text', { class: 'feature-label' }, g);
@@ -219,30 +248,29 @@
       const g = el('g', {
         class: 'system' + (s.major ? ' major' : ''),
         transform: `translate(${s.x},${s.y})`,
-        'data-route': `#/system/${s.id}`
+        'data-route': `system/${s.id}`
       }, layer);
       systemEls[s.id] = g;
 
       // Planetenbahnen (nur bei starkem Zoom sichtbar)
       const orbits = el('g', { class: 'orbits' }, g);
-      el('circle', { r: 2.2, class: 'star', fill: 'url(#g-star)' }, orbits);
-      s.planets.forEach((pid, i) => {
-        const p = D.planets[pid];
-        if (!p) return;
-        const R = 7 + i * 6;
+      el('circle', { r: 2, class: 'star', fill: 'url(#g-star)' }, orbits);
+      const valid = s.planets.filter(pid => D.planets[pid]);
+      valid.forEach((pid, i) => {
+        const R = ORBIT0 + i * ORBIT_STEP;
         el('circle', { r: R, class: 'orbit', 'vector-effect': 'non-scaling-stroke' }, orbits);
         const a = hashAngle(pid);
         const px = Math.cos(a) * R, py = Math.sin(a) * R;
-        const pg = el('g', { class: 'planet', 'data-route': `#/planet/${pid}` }, orbits);
+        const pg = el('g', { class: 'planet', 'data-route': `planet/${pid}` }, orbits);
         const ring = el('circle', { cx: px, cy: py, class: 'ring', 'vector-effect': 'non-scaling-stroke', 'stroke-width': 2 }, pg);
-        const body = el('circle', { cx: px, cy: py, class: 'body', fill: planetColor(p.type), 'vector-effect': 'non-scaling-stroke' }, pg);
+        const body = el('circle', { cx: px, cy: py, class: 'body', 'vector-effect': 'non-scaling-stroke' }, pg);
         const label = el('text', { class: 'planet-label' }, pg);
-        label.textContent = p.name;
-        planetEls[pid] = pg;
+        label.textContent = D.planets[pid].name;
+        planetEls[pid] = { g: pg, body };
         scalers.push(k => {
-          body.setAttribute('r', 6 / k);
-          ring.setAttribute('r', 10 / k);
-          label.setAttribute('x', px + 13 / k);
+          body.setAttribute('r', 5.5 / k);
+          ring.setAttribute('r', 9 / k);
+          label.setAttribute('x', px + 11 / k);
           label.setAttribute('y', py + 4 / k);
           label.setAttribute('font-size', 12 / k);
           label.setAttribute('stroke-width', 3 / k);
@@ -253,6 +281,7 @@
       const dot = el('circle', { class: 'sys-dot' }, g);
       const label = el('text', { class: 'sys-label', 'text-anchor': 'middle' }, g);
       label.textContent = s.name;
+      const outer = valid.length ? ORBIT0 + (valid.length - 1) * ORBIT_STEP : 0;
 
       scalers.push(k => {
         const o = clamp((k - K_ORBIT_START) / (K_ORBIT_FULL - K_ORBIT_START), 0, 1);
@@ -260,14 +289,73 @@
         orbits.style.display = o === 0 ? 'none' : '';
         orbits.style.pointerEvents = o > 0.5 ? '' : 'none';
         dot.style.display = o >= 1 ? 'none' : '';
-        const outer = s.planets.length ? 7 + (s.planets.length - 1) * 6 : 0;
-        halo.setAttribute('r', o >= 1 ? outer + 14 / k : (s.major ? 10 : 8) / k);
+        halo.setAttribute('r', o >= 1 ? outer + 12 / k : (s.major ? 10 : 8) / k);
         dot.setAttribute('r', (s.major ? 5.5 : 4) / k);
-        label.setAttribute('y', o >= 1 ? -(outer + 22 / k) : -13 / k);
+        label.setAttribute('y', o >= 1 ? -(outer + 20 / k) : -13 / k);
         label.setAttribute('font-size', (s.major ? 14 : 12.5) / k);
         label.setAttribute('stroke-width', 3 / k);
+        g.classList.toggle('nolabel', o < 1 && k < (sysLabelMinK[s.id] || 0));
       });
     });
+  }
+
+  // Beschriftungen entflechten: Ab welchem Zoom ein Label frei steht
+  function computeLabelZoom() {
+    const visible = D.systems.filter(s => inEra(s));
+    const score = s => (s.major ? 1e6 : 0) +
+      s.planets.reduce((n, p) => n + (D.planets[p] ? eraEvents(eventsByPlanet[p]).length * 10 + (planetHasContent(p) ? 1 : 0) : 0), 0);
+    const order = visible.slice().sort((a, b) => score(b) - score(a) || a.name.localeCompare(b.name));
+    const width = s => s.name.length * (s.major ? 7.6 : 6.9) + 8;
+    const placed = [];
+    order.forEach(s => {
+      let need = 0;
+      if (!s.major) {
+        placed.forEach(o => {
+          const dx = Math.abs(s.x - o.x), dy = Math.abs(s.y - o.y);
+          const kx = dx ? (width(s) + width(o)) / 2 / dx : Infinity;
+          const ky = dy ? 17 / dy : Infinity;
+          const kij = Math.min(kx, ky);
+          if (kij > (sysLabelMinK[o.id] || 0)) need = Math.max(need, kij);
+        });
+      }
+      sysLabelMinK[s.id] = need;
+      placed.push(s);
+    });
+  }
+
+  // ---------- Zeitalter anwenden ----------
+  const eraButtons = [...document.querySelectorAll('[data-era]')];
+  eraButtons.forEach(b => b.addEventListener('click', () => switchEra(b.dataset.era)));
+
+  function applyEra() {
+    document.body.classList.toggle('era-30k', era === '30k');
+    document.body.classList.toggle('era-40k', era === '40k');
+    eraButtons.forEach(b => b.setAttribute('aria-pressed', b.dataset.era === era));
+    document.getElementById('brand-era').textContent = ERAS[era].short;
+    riftGroup.style.display = inEra(D.rift) ? '' : 'none';
+    D.systems.forEach(s => {
+      const g = systemEls[s.id];
+      g.style.display = inEra(s) ? '' : 'none';
+      const has = s.planets.some(p => D.planets[p] && planetHasContent(p));
+      g.classList.toggle('dim', !has);
+    });
+    Object.entries(planetEls).forEach(([pid, pe]) => {
+      const pe2 = planetEra(pid);
+      pe.body.setAttribute('fill', planetColor((pe2 && pe2.type) || D.planets[pid].type));
+      pe.g.classList.toggle('dim', !planetHasContent(pid));
+    });
+    computeLabelZoom();
+    lastK = null;
+    apply();
+  }
+
+  function switchEra(target) {
+    if (target === era) return;
+    const { kind, id } = parse(location.hash);
+    let next = `#/${target}/`;
+    if (kind === 'planet' || kind === 'system' || kind === 'feature') next = link(kind, id, target);
+    else if (kind === 'book' && bookInEra(id, target)) next = link(kind, id, target);
+    navigate(next, { fly: false });
   }
 
   // ---------- Ansicht / Zoom ----------
@@ -408,7 +496,10 @@
       svg.classList.remove('dragging');
       if (e.type === 'pointerup' && down && !down.moved) {
         const node = down.target.closest && down.target.closest('[data-route]');
-        if (node) navigate(node.getAttribute('data-route'));
+        if (node) {
+          const [kind, id] = node.getAttribute('data-route').split('/');
+          navigate(link(kind, id));
+        }
       }
       down = null;
     }
@@ -436,7 +527,7 @@
   };
   document.getElementById('zoom-in').addEventListener('click', () => zoomCenter(1.8));
   document.getElementById('zoom-out').addEventListener('click', () => zoomCenter(1 / 1.8));
-  document.getElementById('zoom-reset').addEventListener('click', () => navigate('#/'));
+  document.getElementById('zoom-reset').addEventListener('click', () => navigate(`#/${era}/`));
 
   window.addEventListener('resize', () => {
     const c = center();
@@ -451,16 +542,25 @@
   });
 
   // ---------- Routing ----------
-  function navigate(hash) {
-    if (location.hash === hash || (hash === '#/' && !location.hash)) show(hash);
+  // Format: #/<30k|40k>/<art>/<id>, z. B. #/30k/planet/prospero
+  let pendingOpts = null;
+
+  function navigate(hash, opts) {
+    pendingOpts = opts || null;
+    if (location.hash === hash) show(hash, opts);
     else location.hash = hash;
   }
 
-  window.addEventListener('hashchange', () => show(location.hash));
+  window.addEventListener('hashchange', () => {
+    const opts = pendingOpts || {};
+    pendingOpts = null;
+    show(location.hash, opts);
+  });
 
   function parse(hash) {
-    const [, kind, id] = (hash || '').replace(/^#/, '').split('/');
-    return { kind: kind || '', id: id ? decodeURIComponent(id) : '' };
+    const parts = (hash || '').replace(/^#\/?/, '').split('/').filter(Boolean);
+    const er = ERAS[parts[0]] ? parts.shift() : null;
+    return { era: er, kind: parts[0] || '', id: parts[1] ? decodeURIComponent(parts[1]) : '' };
   }
 
   function clearMarks() {
@@ -469,14 +569,19 @@
 
   function mark(planetIds, cls) {
     planetIds.forEach(pid => {
-      planetEls[pid] && planetEls[pid].classList.add(cls);
+      planetEls[pid] && planetEls[pid].g.classList.add(cls);
       const s = planetSystem[pid];
       s && systemEls[s.id] && systemEls[s.id].classList.add(cls);
     });
   }
 
   function show(hash, opts = {}) {
-    const { kind, id } = parse(hash);
+    let { era: er, kind, id } = parse(hash);
+    // Ereignisse und Bücher gehören zu einem Zeitalter
+    if (kind === 'event' && eventById[id]) er = eventEra(eventById[id]);
+    if (kind === 'book' && D.books[id] && !bookInEra(id, er || era)) er = [...bookEras[id]][0];
+    if (er && er !== era) { era = er; applyEra(); }
+
     clearMarks();
     if (isMobile()) {
       panel.classList.remove('collapsed');
@@ -503,7 +608,7 @@
       const pids = bookPlanets(id);
       mark(pids, 'hl');
       renderBook(id);
-      if (fly) fitSystems([...new Set(pids.map(p => planetSystem[p]))]);
+      if (fly) fitSystems(pids.map(p => planetSystem[p]));
     } else if (kind === 'feature' && (featureById[id] || id === 'rift')) {
       renderFeature(id);
       const f = featureById[id];
@@ -520,13 +625,13 @@
 
   function bookPlanets(bid) {
     const set = new Set(planetsByBook[bid] || []);
-    (eventsByBook[bid] || []).forEach(e => e.planets.forEach(p => set.add(p)));
+    (eventsByBook[bid] || []).forEach(e => { if (eventEra(e) === era) e.planets.forEach(p => set.add(p)); });
     return [...set];
   }
 
   // ---------- Panel-Inhalte ----------
   function setCrumbs(parts) {
-    crumbs.innerHTML = [['#/', 'Galaxie'], ...parts]
+    crumbs.innerHTML = [[`#/${era}/`, `Galaxie ${ERAS[era].short}`], ...parts]
       .map(([href, label], i, arr) => i === arr.length - 1 && arr.length > 1
         ? `<span>${esc(label)}</span>`
         : `<a href="${href}">${esc(label)}</a>`)
@@ -534,11 +639,12 @@
   }
 
   const segName = id => (segById[id] || {}).name || '';
+  const other = () => (era === '30k' ? '40k' : '30k');
 
   function bookItem(bid) {
     const b = D.books[bid];
     if (!b) return '';
-    return `<li><a href="#/book/${bid}">${esc(b.title)}</a>
+    return `<li><a href="${link('book', bid)}">${esc(b.title)}</a>
       <div class="meta">${esc(b.author)} · ${esc(b.series)} · ${esc(b.year)}</div></li>`;
   }
 
@@ -549,73 +655,100 @@
   }
 
   function planetChips(ids) {
+    if (!ids.some(p => D.planets[p])) return '<div class="empty">Kein fester Schauplatz erfasst.</div>';
     return `<div class="chips">${ids.filter(p => D.planets[p]).map(p =>
-      `<a class="chip" href="#/planet/${p}">${esc(D.planets[p].name)}</a>`).join('')}</div>`;
+      `<a class="chip" href="${link('planet', p)}">${esc(D.planets[p].name)}</a>`).join('')}</div>`;
   }
 
   function eventCard(e, withBooks = true) {
     return `<div class="card">
-      <div class="card-head"><a class="card-title" href="#/event/${e.id}">${esc(e.name)}</a><span class="date">${esc(e.date)}</span></div>
+      <div class="card-head"><a class="card-title" href="${link('event', e.id)}">${esc(e.name)}</a><span class="date">${esc(e.date)}</span></div>
       <p>${esc(e.desc)}</p>
       ${withBooks ? bookList(e.books) : ''}
     </div>`;
   }
 
+  function otherEraHint(count, kind, id, what) {
+    if (!count) return '';
+    const o = other();
+    return `<p class="era-hint">${what} im Zeitalter ${ERAS[o].short}: ${count} ${count === 1 ? 'Ereignis' : 'Ereignisse'}.
+      <a href="${link(kind, id, o)}">Zu ${ERAS[o].short} wechseln →</a></p>`;
+  }
+
   function renderOverview() {
     setCrumbs([]);
-    let html = `<h2>Die Galaxie</h2>
-      <div class="subtitle">${Object.keys(D.planets).length} Welten · ${D.events.length} Ereignisse · ${Object.keys(D.books).length} Bücher</div>
-      <p>Zoome hinein, um Systeme und ihre Planeten zu sehen. Wähle eine Welt, um ihre Handlungsstränge und die passenden Bücher zu entdecken.</p>
+    const evs = eraEvents(D.events);
+    const worlds = Object.keys(D.planets).filter(p => planetHasContent(p)).length;
+    const books = Object.keys(D.books).filter(b => bookInEra(b)).length;
+    let html = `<h2>${ERAS[era].title}</h2>
+      <div class="subtitle">${ERAS[era].sub}<br>${worlds} Welten · ${evs.length} Ereignisse · ${books} Bücher</div>
+      <p>Zoome hinein, um Systeme und ihre Planeten zu sehen. Wähle eine Welt, um ihre Handlungsstränge und die passenden Bücher zu entdecken. Oben wechselst du zwischen 30K und 40K.</p>
       <h3>Zeitleiste</h3><div class="timeline">`;
-    let era = null;
-    D.events.forEach(e => {
-      if (e.era !== era) { era = e.era; html += `<div class="era">${esc(era)}</div>`; }
+    let group = null;
+    evs.forEach(e => {
+      if (e.era !== group) { group = e.era; html += `<div class="era">${esc(group)}</div>`; }
       const where = e.planets.map(p => D.planets[p] && D.planets[p].name).filter(Boolean).join(', ');
-      html += `<a class="card" href="#/event/${e.id}">
+      html += `<a class="card" href="${link('event', e.id)}">
         <div class="card-head"><span class="card-title">${esc(e.name)}</span><span class="date">${esc(e.date)}</span></div>
         <div class="subtitle" style="margin:4px 0 0">${esc(where)}</div></a>`;
     });
+    if (!evs.length) html += '<div class="empty">Noch keine Ereignisse erfasst.</div>';
     html += `</div>`;
     panelBody.innerHTML = html;
   }
 
+  function planetInfo(pid) {
+    const p = D.planets[pid];
+    const pe = planetEra(pid);
+    return { type: (pe && pe.type) || p.type, eraDesc: pe && pe.desc };
+  }
+
   function renderSystem(s) {
-    setCrumbs([['#/', segName(s.segmentum)], [`#/system/${s.id}`, `System ${s.name}`]]);
-    const evs = D.events.filter(e => e.planets.some(p => s.planets.includes(p)));
+    setCrumbs([[`#/${era}/`, segName(s.segmentum)], [link('system', s.id), `System ${s.name}`]]);
+    const valid = s.planets.filter(p => D.planets[p]);
+    const evs = eraEvents(D.events.filter(e => e.planets.some(p => valid.includes(p))));
+    const otherCount = eraEvents(D.events.filter(e => e.planets.some(p => valid.includes(p))), other()).length;
     panelBody.innerHTML = `<h2>${esc(s.name)}</h2>
-      <div class="subtitle">${esc(segName(s.segmentum))} · ${s.planets.length} ${s.planets.length === 1 ? 'Welt' : 'Welten'} erfasst</div>
+      <div class="subtitle">${esc(segName(s.segmentum))} · ${valid.length} ${valid.length === 1 ? 'Welt' : 'Welten'} erfasst</div>
       <h3>Welten</h3>
-      ${s.planets.filter(p => D.planets[p]).map(pid => {
+      ${valid.map(pid => {
         const p = D.planets[pid];
-        return `<a class="card" href="#/planet/${pid}" style="display:block">
-          <div class="card-head"><span class="card-title">${esc(p.name)}</span><span class="date">${esc(p.type)}</span></div>
-          <p>${esc(p.desc)}</p></a>`;
+        const info = planetInfo(pid);
+        return `<a class="card" href="${link('planet', pid)}" style="display:block">
+          <div class="card-head"><span class="card-title">${esc(p.name)}</span><span class="date">${esc(info.type)}</span></div>
+          <p>${esc(info.eraDesc || p.desc)}</p></a>`;
       }).join('')}
-      <h3>Handlungsstränge</h3>
-      ${evs.length ? evs.map(e => eventCard(e)).join('') : '<div class="empty">Noch keine Ereignisse erfasst.</div>'}`;
+      <h3>Handlungsstränge ${ERAS[era].short}</h3>
+      ${evs.length ? evs.map(e => eventCard(e)).join('') : '<div class="empty">In diesem Zeitalter noch keine Ereignisse erfasst.</div>'}
+      ${otherEraHint(otherCount, 'system', s.id, 'Dieses System')}`;
   }
 
   function renderPlanet(pid) {
     const p = D.planets[pid];
     const s = planetSystem[pid];
+    const info = planetInfo(pid);
     setCrumbs([
-      ['#/', segName(s && s.segmentum)],
-      [`#/system/${s ? s.id : ''}`, `System ${s ? s.name : '?'}`],
-      [`#/planet/${pid}`, p.name]
+      [`#/${era}/`, segName(s && s.segmentum)],
+      [s ? link('system', s.id) : `#/${era}/`, `System ${s ? s.name : '?'}`],
+      [link('planet', pid), p.name]
     ]);
-    const evs = eventsByPlanet[pid] || [];
+    const evs = eraEvents(eventsByPlanet[pid]);
+    const otherCount = eraEvents(eventsByPlanet[pid], other()).length;
+    const extraBooks = (p.books || []).filter(b => bookInEra(b) && !evs.some(e => e.books.includes(b)));
     const lex = `https://wh40k.lexicanum.com/wiki/${encodeURIComponent(p.name.replace(/ /g, '_'))}`;
     panelBody.innerHTML = `<h2>${esc(p.name)}</h2>
-      <div class="subtitle">${esc(p.type)} · ${s ? `<a href="#/system/${s.id}">System ${esc(s.name)}</a>` : ''} · ${esc(segName(s && s.segmentum))}</div>
+      <div class="subtitle">${esc(info.type)} · ${s ? `<a href="${link('system', s.id)}">System ${esc(s.name)}</a>` : ''} · ${esc(segName(s && s.segmentum))}</div>
       <p>${esc(p.desc)}</p>
-      <h3>Handlungsstränge</h3>
-      ${evs.length ? evs.map(e => eventCard(e)).join('') : '<div class="empty">Noch keine Ereignisse erfasst.</div>'}
-      ${p.books && p.books.length ? `<h3>Weitere Bücher</h3>${bookList(p.books)}` : ''}
+      ${info.eraDesc ? `<div class="era-box"><span class="era-tag">${ERAS[era].short}</span> ${esc(info.eraDesc)}</div>` : ''}
+      <h3>Handlungsstränge ${ERAS[era].short}</h3>
+      ${evs.length ? evs.map(e => eventCard(e)).join('') : '<div class="empty">In diesem Zeitalter noch keine Ereignisse erfasst.</div>'}
+      ${otherEraHint(otherCount, 'planet', pid, 'Diese Welt')}
+      ${extraBooks.length ? `<h3>Weitere Bücher</h3>${bookList(extraBooks)}` : ''}
       <p style="margin-top:18px"><a href="${lex}" target="_blank" rel="noopener">Auf Lexicanum nachlesen ↗</a></p>`;
   }
 
   function renderEvent(e) {
-    setCrumbs([[`#/event/${e.id}`, e.name]]);
+    setCrumbs([[link('event', e.id), e.name]]);
     panelBody.innerHTML = `<h2>${esc(e.name)}</h2>
       <div class="subtitle">${esc(e.date)} · ${esc(e.era)}</div>
       <p>${esc(e.desc)}</p>
@@ -625,8 +758,8 @@
 
   function renderBook(bid) {
     const b = D.books[bid];
-    setCrumbs([[`#/book/${bid}`, b.title]]);
-    const evs = eventsByBook[bid] || [];
+    setCrumbs([[link('book', bid), b.title]]);
+    const evs = eraEvents(eventsByBook[bid]);
     panelBody.innerHTML = `<h2>${esc(b.title)}</h2>
       <div class="subtitle">${esc(b.author)} · ${esc(b.series)} · ${esc(b.year)}</div>
       <h3>Handlungsstränge</h3>
@@ -636,10 +769,12 @@
 
   function renderFeature(id) {
     const f = featureById[id] || D.rift;
-    setCrumbs([[`#/feature/${id}`, f.name]]);
+    setCrumbs([[link('feature', id), f.name]]);
+    const note = id === 'rift' && era === '30k'
+      ? '<p class="era-hint">Im 31. Jahrtausend existiert der Große Riss noch nicht. Er öffnet sich erst nach dem Fall von Cadia (999.M41).</p>' : '';
     panelBody.innerHTML = `<h2>${esc(f.name)}</h2>
       <div class="subtitle">${id === 'rift' ? 'Warp-Riss' : 'Warp-Anomalie'}</div>
-      <p>${esc(f.desc)}</p>`;
+      <p>${esc(f.desc)}</p>${note}`;
   }
 
   // ---------- Suche ----------
@@ -647,15 +782,15 @@
   const resultsEl = document.getElementById('search-results');
   const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   const index = [];
-  Object.entries(D.planets).forEach(([id, p]) => index.push({ kind: 'Planet', label: p.name, hash: `#/planet/${id}` }));
+  Object.entries(D.planets).forEach(([id, p]) => index.push({ kind: 'Planet', label: p.name, route: ['planet', id] }));
   D.systems.forEach(s => {
     const same = s.planets.length === 1 && D.planets[s.planets[0]] && D.planets[s.planets[0]].name === s.name;
-    if (!same) index.push({ kind: 'System', label: s.name, hash: `#/system/${s.id}` });
+    if (!same) index.push({ kind: 'System', label: s.name, route: ['system', s.id] });
   });
-  D.events.forEach(e => index.push({ kind: 'Ereignis', label: e.name, hash: `#/event/${e.id}` }));
-  Object.entries(D.books).forEach(([id, b]) => index.push({ kind: 'Buch', label: b.title, extra: b.author + ' ' + b.series, hash: `#/book/${id}` }));
-  D.features.forEach(f => index.push({ kind: 'Anomalie', label: f.name, hash: `#/feature/${f.id}` }));
-  index.push({ kind: 'Anomalie', label: D.rift.name, extra: 'Großer Riss', hash: '#/feature/rift' });
+  D.events.forEach(e => index.push({ kind: `Ereignis · ${ERAS[eventEra(e)].short}`, label: e.name, route: ['event', e.id] }));
+  Object.entries(D.books).forEach(([id, b]) => index.push({ kind: 'Buch', label: b.title, extra: b.author + ' ' + b.series, route: ['book', id] }));
+  D.features.forEach(f => index.push({ kind: 'Anomalie', label: f.name, route: ['feature', f.id] }));
+  index.push({ kind: 'Anomalie', label: D.rift.name, extra: 'Großer Riss', route: ['feature', 'rift'] });
   index.forEach(i => { i.key = norm(i.label + ' ' + (i.extra || '')); i.lkey = norm(i.label); });
 
   let results = [], active = -1;
@@ -664,7 +799,7 @@
     if (!results.length) { resultsEl.hidden = true; return; }
     resultsEl.hidden = false;
     resultsEl.innerHTML = results.map((r, i) =>
-      `<li role="option" data-i="${i}" class="${i === active ? 'active' : ''}"><span>${esc(r.label)}</span><span class="kind">${r.kind}</span></li>`).join('');
+      `<li role="option" data-i="${i}" class="${i === active ? 'active' : ''}"><span>${esc(r.label)}</span><span class="kind">${esc(r.kind)}</span></li>`).join('');
   }
 
   function choose(r) {
@@ -673,7 +808,7 @@
     results = []; active = -1;
     renderResults();
     searchInput.blur();
-    navigate(r.hash);
+    navigate(link(r.route[0], r.route[1]));
   }
 
   searchInput.addEventListener('input', () => {
@@ -681,7 +816,7 @@
     active = -1;
     results = q ? index.filter(i => i.key.includes(q))
       .sort((a, b) => (b.lkey.startsWith(q) - a.lkey.startsWith(q)) || a.label.localeCompare(b.label))
-      .slice(0, 12) : [];
+      .slice(0, 14) : [];
     renderResults();
   });
   searchInput.addEventListener('keydown', e => {
@@ -700,7 +835,10 @@
   // ---------- Datenprüfung ----------
   function validateData() {
     const warn = m => console.warn('[Datenprüfung]', m);
+    const seen = new Set();
     D.systems.forEach(s => {
+      if (seen.has(s.id)) warn(`System-ID doppelt: ${s.id}`);
+      seen.add(s.id);
       if (!segById[s.segmentum]) warn(`System ${s.id}: unbekanntes Segmentum "${s.segmentum}"`);
       s.planets.forEach(p => { if (!D.planets[p]) warn(`System ${s.id}: unbekannter Planet "${p}"`); });
     });
@@ -716,6 +854,9 @@
 
   // ---------- Start ----------
   measure();
+  const start = parse(location.hash);
+  era = start.era || '40k';
+  applyEra();
   setView(0, 0, kFit);
-  show(location.hash, { fly: !!location.hash });
+  show(location.hash, { fly: !!start.kind });
 })();
