@@ -72,14 +72,27 @@
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* ignore */ } }
   };
-  const readSet = new Set((() => { try { return JSON.parse(store.get('read-books') || '[]'); } catch (e) { return []; } })()
-    .filter(b => D.books[b]));
+  // marks: { bookId: [1 = read / 0 = unread, timestamp] }; the newer mark wins when devices sync
+  const marks = (() => {
+    try {
+      const m = JSON.parse(store.get('read-marks') || 'null');
+      if (m) return m;
+      const old = JSON.parse(store.get('read-books') || '[]');
+      return Object.fromEntries(old.map(b => [b, [1, 0]]));
+    } catch (e) { return {}; }
+  })();
+  const readSet = new Set();
+  const rebuildRead = () => {
+    readSet.clear();
+    Object.entries(marks).forEach(([b, [r]]) => { if (r && D.books[b]) readSet.add(b); });
+  };
+  rebuildRead();
   let shield = store.get('spoiler-shield') !== '0';
   const peekBooks = new Set(), peekEvents = new Set(), peekPlanets = new Set();
   const listeners = [];
   const isRead = bid => readSet.has(bid);
   const isProtected = bid => HERESY_SERIES.test((D.books[bid] || {}).series || '');
-  const saveRead = () => store.set('read-books', JSON.stringify([...readSet]));
+  const saveRead = () => store.set('read-marks', JSON.stringify(marks));
 
   // A protected book's content stays hidden until it is read
   const bookLocked = bid => shield && isProtected(bid) && !isRead(bid) && !peekBooks.has(bid);
@@ -94,10 +107,25 @@
   }
 
   function setRead(bids, read) {
-    bids.forEach(b => (read ? readSet.add(b) : readSet.delete(b)));
+    const now = Date.now();
+    bids.forEach(b => { marks[b] = [read ? 1 : 0, now]; });
+    rebuildRead();
     saveRead();
     progressChanged();
+    syncSoon();
   }
+  // Merge marks from another device; returns true if anything changed here
+  function mergeMarks(remote) {
+    let changed = false;
+    Object.entries(remote || {}).forEach(([b, m]) => {
+      if (!D.books[b] || !Array.isArray(m)) return;
+      const l = marks[b];
+      if (!l || m[1] > l[1]) { marks[b] = [m[0] ? 1 : 0, m[1]]; changed = true; }
+    });
+    if (changed) { rebuildRead(); saveRead(); }
+    return changed;
+  }
+  let syncSoon = () => {};
   function setShield(on) {
     shield = on;
     store.set('spoiler-shield', on ? '1' : '0');
@@ -424,7 +452,7 @@
 
   function visCenter() {
     let h = H;
-    if (isMobile() && !panel.classList.contains('collapsed')) h = Math.max(H * 0.35, H - panel.offsetHeight);
+    if (isMobile()) h = Math.max(H * 0.3, H - sheetHeight(sheetState));
     return { x: W / 2, y: h / 2 };
   }
 
@@ -581,16 +609,69 @@
 
   function onResize() {
     const c = center();
+    if (isMobile()) setSheet(sheetState, false);
+    else { panel.style.height = ''; delete document.body.dataset.sheet; }
     measure();
     setView(c.x, c.y, clamp(view.k, kMin(), K_MAX));
   }
   window.addEventListener('resize', onResize);
 
   // Mobile: expand/collapse panel
-  document.getElementById('panel-handle').addEventListener('click', () => {
-    panel.classList.toggle('collapsed');
-    document.body.classList.toggle('panel-collapsed', panel.classList.contains('collapsed'));
+  // ---------- Mobile bottom sheet: peek, half, full; drag the grip to resize ----------
+  const SHEETS = ['peek', 'half', 'full'];
+  let sheetState = 'peek';
+  function sheetHeight(st) {
+    const vh = window.innerHeight;
+    if (st === 'peek') return Math.min(150, vh * 0.3);
+    if (st === 'half') return Math.round(vh * 0.5);
+    return vh - 64;
+  }
+  function setSheet(st, recenter = true) {
+    if (!isMobile()) return;
+    const c = center();
+    sheetState = st;
+    panel.dataset.sheet = st;
+    panel.style.height = sheetHeight(st) + 'px';
+    document.body.dataset.sheet = st;
+    document.documentElement.style.setProperty('--sheet-h', sheetHeight(st) + 'px');
+    if (recenter) setView(c.x, c.y, view.k);
+  }
+  const grip = document.getElementById('panel-handle');
+  let drag = null;
+  grip.addEventListener('pointerdown', e => {
+    if (!isMobile()) return;
+    drag = { y: e.clientY, h: panel.offsetHeight, t: performance.now(), moved: false };
+    grip.setPointerCapture(e.pointerId);
+    panel.classList.add('dragging');
   });
+  grip.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const dy = e.clientY - drag.y;
+    if (Math.abs(dy) > 4) drag.moved = true;
+    panel.style.height = clamp(drag.h - dy, 80, window.innerHeight - 40) + 'px';
+  });
+  const endDrag = e => {
+    if (!drag) return;
+    panel.classList.remove('dragging');
+    const d = drag;
+    drag = null;
+    if (!d.moved) { // tap: step up, or back down from full
+      setSheet(sheetState === 'full' ? 'peek' : SHEETS[SHEETS.indexOf(sheetState) + 1]);
+      return;
+    }
+    const h = panel.offsetHeight;
+    const v = (h - d.h) / Math.max(1, performance.now() - d.t); // px/ms, positive = upwards
+    let target = SHEETS.reduce((a, b) => Math.abs(sheetHeight(b) - h) < Math.abs(sheetHeight(a) - h) ? b : a);
+    if (Math.abs(v) > 0.6) {
+      const i = SHEETS.indexOf(target);
+      const cur = SHEETS.reduce((a, b) => Math.abs(sheetHeight(b) - d.h) < Math.abs(sheetHeight(a) - d.h) ? b : a);
+      const ci = SHEETS.indexOf(cur);
+      target = SHEETS[clamp(v > 0 ? Math.max(i, ci + 1) : Math.min(i, ci - 1), 0, 2)];
+    }
+    setSheet(target);
+  };
+  grip.addEventListener('pointerup', endDrag);
+  grip.addEventListener('pointercancel', endDrag);
 
   // ---------- Routing ----------
   // Format: #/<30k|40k>/<kind>/<id>, e.g. #/30k/planet/prospero
@@ -615,7 +696,7 @@
   }
 
   function clearMarks() {
-    svg.querySelectorAll('.hl, .selected').forEach(n => n.classList.remove('hl', 'selected'));
+    svg.querySelectorAll('.hl, .selected, .preview').forEach(n => n.classList.remove('hl', 'selected', 'preview'));
   }
 
   function mark(planetIds, cls) {
@@ -634,10 +715,7 @@
     if (er && er !== era) { era = er; applyEra(); }
 
     clearMarks();
-    if (isMobile()) {
-      panel.classList.remove('collapsed');
-      document.body.classList.remove('panel-collapsed');
-    }
+    if (isMobile() && !opts.keepSheet) setSheet(kind ? 'half' : 'peek', false);
     const fly = opts.fly !== false;
 
     if (kind === 'system' && systemById[id]) {
@@ -894,7 +972,8 @@
         <h3>Storylines</h3>
         ${evs.length ? evs.map(e => eventCard(e, false)).join('') : '<div class="empty">Not linked to any event.</div>'}`;
     }
-    panelBody.innerHTML = `<h2>${esc(b.title)}</h2>
+    const back = era === '30k' && libBooks.includes(bid) ? '<button type="button" class="btn-ghost small back-lib" data-open-lib="1">‹ Library</button>' : '';
+    panelBody.innerHTML = `${back}<h2>${esc(b.title)}</h2>
       <div class="subtitle">${esc(b.author)}<br>${seriesLine}</div>
       <div class="book-actions">${readButton(bid)}
         ${earlier.length && !isRead(bid) ? `<button type="button" class="btn-ghost" data-read-upto="${esc(bid)}">Also mark #1–${b.number - 1} as read</button>` : ''}</div>
@@ -1039,6 +1118,10 @@
     return libBooks.filter(b => !isRead(b) && D.books[b].number).sort(bySeries)[0] || null;
   }
 
+  function libBadge() {
+    $('lib-badge').textContent = `${libBooks.filter(isRead).length}/${libBooks.length}`;
+  }
+
   function libProgress() {
     const read = libBooks.filter(isRead).length;
     const pct = libBooks.length ? Math.round(read / libBooks.length * 100) : 0;
@@ -1050,7 +1133,8 @@
       : (read ? 'You have read every numbered book. Ave Imperator!' : '');
     const sh = $('lib-shield');
     sh.setAttribute('aria-pressed', shield);
-    sh.textContent = shield ? '🛡 Spoiler shield on' : '🛡 Spoiler shield off';
+    sh.textContent = shield ? '🛡 Shield on' : '🛡 Shield off';
+    sh.title = shield ? 'Spoiler shield on: content of unread books is hidden' : 'Spoiler shield off: everything is shown';
   }
 
   function libRender() {
@@ -1117,6 +1201,10 @@
     libToggle.classList.toggle('on', vis);
     if (vis) libRender(); else libMark(null);
     onResize();
+    if (vis && isMobile()) {
+      const act = libList.querySelector('.lib-item.active') || libList.querySelector('.lib-item:not(.read)');
+      if (act) act.scrollIntoView({ block: 'center' });
+    }
   }
 
   function libEraChanged() { libApply(); }
@@ -1128,6 +1216,17 @@
 
   libToggle.addEventListener('click', () => libSetOpen(!libOpen));
   $('lib-close').addEventListener('click', () => libSetOpen(false));
+  function libFilterLabel() {
+    const n = [libFilter.value.trim(), libSeriesSel.value, libLegionSel.value, libStatusSel.value].filter(Boolean).length;
+    const open = libEl.classList.contains('filters-open');
+    $('lib-filters-toggle').textContent = `Filter & sort${n ? ` · ${n} active` : ''} ${open ? '▴' : '▾'}`;
+    $('lib-filters-toggle').setAttribute('aria-expanded', open);
+  }
+  $('lib-filters-toggle').addEventListener('click', () => {
+    libEl.classList.toggle('filters-open');
+    libFilterLabel();
+  });
+  [libFilter, libSeriesSel, libLegionSel, libStatusSel].forEach(el => el.addEventListener('input', libFilterLabel));
   libFilter.addEventListener('input', libRender);
   [libSeriesSel, libLegionSel, libStatusSel].forEach(el => el.addEventListener('change', libRender));
   libSortBtns.forEach(btn => btn.addEventListener('click', () => {
@@ -1179,7 +1278,7 @@
 
   // Buttons inside the panel and the library: read toggles, reveals, Legion chips
   document.addEventListener('click', e => {
-    const t = e.target.closest('[data-read],[data-read-upto],[data-peek-book],[data-peek-event],[data-peek-planet],[data-legion]');
+    const t = e.target.closest('[data-read],[data-read-upto],[data-peek-book],[data-peek-event],[data-peek-planet],[data-legion],[data-open-lib]');
     if (!t) return;
     e.preventDefault();
     if (t.dataset.read) setRead([t.dataset.read], !isRead(t.dataset.read));
@@ -1189,6 +1288,7 @@
     } else if (t.dataset.peekBook) { peekBooks.add(t.dataset.peekBook); progressChanged(); }
     else if (t.dataset.peekEvent) { peekEvents.add(t.dataset.peekEvent); show(location.hash, { fly: true }); }
     else if (t.dataset.peekPlanet) { peekPlanets.add(t.dataset.peekPlanet); progressChanged(); }
+    else if (t.dataset.openLib) libSetOpen(true, false);
     else if (t.dataset.legion) {
       libLegionSel.value = t.dataset.legion;
       libFilter.value = '';
@@ -1198,12 +1298,181 @@
     }
   });
 
+  // ---------- Sync across devices via a private GitHub Gist ----------
+  // Not meant to be secure: the token lives in this browser and in the sync link.
+  const SYNC_FILE = 'galaxy-map-reading.json';
+  const TOKEN_URL = 'https://github.com/settings/tokens/new?scopes=gist&description=Galaxy%20Map%20reading%20sync';
+  let sync = (() => { try { return JSON.parse(store.get('sync') || 'null'); } catch (e) { return null; } })();
+  let syncState = { busy: false, last: Number(store.get('sync-last')) || 0, error: '' };
+  let syncTimer = null;
+  const syncEl = $('lib-sync'), syncStatusEl = $('lib-sync-status');
+
+  async function gh(path, opt = {}, token = sync && sync.token) {
+    const r = await fetch('https://api.github.com' + path, {
+      ...opt,
+      cache: 'no-store',
+      headers: {
+        Accept: 'application/vnd.github+json',
+        Authorization: 'Bearer ' + token,
+        ...(opt.body ? { 'Content-Type': 'application/json' } : {})
+      }
+    });
+    if (!r.ok) {
+      const msg = r.status === 401 ? 'token rejected' : r.status === 404 ? 'sync file not found' : `GitHub error ${r.status}`;
+      throw new Error(msg);
+    }
+    return r.json();
+  }
+
+  const payload = () => JSON.stringify({ app: 'galaxy-map-40k', version: 1, updated: new Date().toISOString(), marks }, null, 1);
+
+  async function syncPull() {
+    const g = await gh('/gists/' + sync.gist);
+    const f = g.files && g.files[SYNC_FILE];
+    let data = {};
+    if (f) {
+      const content = f.truncated ? await (await fetch(f.raw_url, { cache: 'no-store' })).text() : f.content;
+      try { data = JSON.parse(content); } catch (e) { data = {}; }
+    }
+    return mergeMarks(data.marks);
+  }
+
+  // Pull, merge, then write the merged list back
+  async function syncNow() {
+    if (!sync || syncState.busy) return;
+    syncState.busy = true; syncState.error = '';
+    renderSyncStatus();
+    try {
+      const changed = await syncPull();
+      await gh('/gists/' + sync.gist, { method: 'PATCH', body: JSON.stringify({ files: { [SYNC_FILE]: { content: payload() } } }) });
+      syncState.last = Date.now();
+      store.set('sync-last', String(syncState.last));
+      if (changed) progressChanged();
+    } catch (err) {
+      syncState.error = err.message || 'sync failed';
+    }
+    syncState.busy = false;
+    renderSyncStatus();
+  }
+  syncSoon = () => {
+    if (!sync) return;
+    clearTimeout(syncTimer);
+    syncTimer = setTimeout(syncNow, 1500);
+  };
+
+  // Connect with a token: reuse an existing sync gist of this account, or create one
+  async function syncConnect(token, gistId) {
+    token = token.trim();
+    let gist = (gistId || '').trim();
+    if (!gist) {
+      const list = await gh('/gists?per_page=100', {}, token);
+      const found = list.find(g => g.files && g.files[SYNC_FILE]);
+      if (found) gist = found.id;
+    }
+    if (!gist) {
+      const g = await gh('/gists', { method: 'POST', body: JSON.stringify({
+        description: 'Galaxy Map 40K: Horus Heresy reading list', public: false,
+        files: { [SYNC_FILE]: { content: payload() } } }) }, token);
+      gist = g.id;
+    }
+    sync = { token, gist };
+    store.set('sync', JSON.stringify(sync));
+    await syncNow();
+  }
+
+  function syncLink() {
+    const code = btoa(JSON.stringify({ t: sync.token, g: sync.gist })).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    return location.origin + location.pathname + '#sync=' + code;
+  }
+
+  function ago(t) {
+    const s = Math.round((Date.now() - t) / 1000);
+    if (s < 45) return 'just now';
+    if (s < 3600) return `${Math.round(s / 60)} min ago`;
+    if (s < 86400) return `${Math.round(s / 3600)} h ago`;
+    return new Date(t).toLocaleDateString();
+  }
+
+  function renderSyncStatus() {
+    if (!sync) { syncStatusEl.textContent = ''; return; }
+    syncStatusEl.className = 'lib-sync-status' + (syncState.error ? ' err' : '');
+    syncStatusEl.textContent = syncState.busy ? '☁ Syncing…'
+      : syncState.error ? `☁ Sync problem: ${syncState.error}`
+      : syncState.last ? `☁ Synced ${ago(syncState.last)}` : '☁ Sync on';
+    if (!syncEl.hidden) renderSyncPanel();
+  }
+
+  function renderSyncPanel() {
+    if (sync) {
+      syncEl.innerHTML = `<p>Your reading list syncs through a private GitHub Gist. Open this link once on your other devices to connect them:</p>
+        <div class="sync-row"><input type="text" readonly id="sync-link" value="${esc(syncLink())}" aria-label="Sync link">
+          <button type="button" class="btn-ghost small" id="sync-copy">Copy</button></div>
+        <div class="sync-row"><button type="button" class="btn-ghost small" id="sync-now">Sync now</button>
+          <button type="button" class="btn-ghost small" id="sync-off">Disconnect this device</button></div>
+        <p class="meta">The link contains your token: anyone with it can edit your gists. Revoke the token on GitHub to cut access.</p>`;
+    } else {
+      syncEl.innerHTML = `<p>Keep your reading list in step across devices with a private GitHub Gist.</p>
+        <ol>
+          <li><a href="${TOKEN_URL}" target="_blank" rel="noopener">Create a GitHub token ↗</a> with only the <b>gist</b> scope (and no expiry, if you like).</li>
+          <li>Paste it here and connect. On your other devices, use the sync link shown afterwards.</li>
+        </ol>
+        <div class="sync-row"><input type="password" id="sync-token" placeholder="ghp_… or github_pat_…" autocomplete="off" aria-label="GitHub token">
+          <button type="button" class="read-btn" id="sync-connect">Connect</button></div>
+        <p class="meta" id="sync-msg"></p>`;
+    }
+  }
+
+  $('lib-sync-btn').addEventListener('click', () => {
+    syncEl.hidden = !syncEl.hidden;
+    $('lib-sync-btn').setAttribute('aria-expanded', !syncEl.hidden);
+    if (!syncEl.hidden) renderSyncPanel();
+  });
+  syncEl.addEventListener('click', async e => {
+    const id = e.target.id;
+    if (id === 'sync-connect') {
+      const token = $('sync-token').value;
+      if (!token.trim()) return;
+      $('sync-msg').textContent = 'Connecting…';
+      try { await syncConnect(token); renderSyncPanel(); }
+      catch (err) { sync = null; store.set('sync', 'null'); $('sync-msg').textContent = `Could not connect: ${err.message}.`; }
+    } else if (id === 'sync-copy') {
+      const inp = $('sync-link');
+      try { await navigator.clipboard.writeText(inp.value); e.target.textContent = 'Copied'; }
+      catch (err) { inp.select(); }
+    } else if (id === 'sync-now') syncNow();
+    else if (id === 'sync-off') {
+      if (!confirm('Disconnect this device? Your reading list stays here and in the gist.')) return;
+      sync = null;
+      store.set('sync', 'null');
+      renderSyncStatus();
+      renderSyncPanel();
+    }
+  });
+  // Pull changes from other devices whenever the page comes back into view
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && sync && Date.now() - syncState.last > 20000) syncNow();
+  });
+
+  // A sync link (#sync=…) connects this device, then opens the library
+  function consumeSyncLink() {
+    const m = location.hash.match(/^#sync=([\w-]+)/);
+    if (!m) return false;
+    try {
+      const b64 = m[1].replace(/-/g, '+').replace(/_/g, '/');
+      const { t, g } = JSON.parse(atob(b64 + '==='.slice((b64.length + 3) % 4)));
+      if (t && g) { sync = { token: t, gist: g }; store.set('sync', JSON.stringify(sync)); }
+    } catch (e) { /* ignore a broken link */ }
+    history.replaceState(null, '', location.pathname + '#/30k/');
+    return true;
+  }
+
   // Re-render everything that depends on reading progress
   listeners.push(() => {
     recolor();
+    libBadge();
     if (libVisible()) libRender();
     const scroll = panelBody.scrollTop;
-    show(location.hash, { fly: false });
+    show(location.hash, { fly: false, keepSheet: true });
     panelBody.scrollTop = scroll;
   });
 
@@ -1229,8 +1498,14 @@
 
   // ---------- Start ----------
   measure();
+  const fromLink = consumeSyncLink();
   const start = parse(location.hash);
   era = start.era || '40k';
+  libBadge();
+  libFilterLabel();
+  renderSyncStatus();
+  if (sync) syncNow();
+  if (fromLink && sync) { libOpen = true; syncEl.hidden = false; }
   applyEra();
   setView(0, 0, kFit);
   show(location.hash, { fly: !!start.kind });

@@ -13,7 +13,19 @@ Tick books as read in the library or with **Mark as read** on a book. The list s
 - A world shows its spoiler-free 30K description until all its 30K storylines are revealed; then its fate during the Heresy appears.
 - 40K shows a warning, since it reveals how the Heresy ended.
 
-Every sealed item has a **Reveal anyway** link. Your reading list is stored in your browser only; use **Export** and **Import** in the library to move it to another browser or device.
+Every sealed item has a **Reveal anyway** link.
+
+### Syncing your reading list across devices
+
+The reading list lives in the browser. To share it between devices, the library's **☁ Sync** button connects it to a private GitHub Gist:
+
+1. Create a [GitHub token with only the `gist` scope](https://github.com/settings/tokens/new?scopes=gist&description=Galaxy%20Map%20reading%20sync).
+2. Paste it under **☁ Sync** and connect. The app reuses an existing sync gist of your account or creates one.
+3. Open the **sync link** shown there once on every other device (e.g. send it to your phone).
+
+Changes sync a moment after you tick a book and whenever the page comes back into view; for each book the newer change wins, so unticking also syncs. This is convenience, not security: the token is stored in the browser and inside the sync link, and anyone with the link can edit your gists. Revoke the token on GitHub to cut access. **Export**/**Import** still work as a manual backup.
+
+On phones the details panel is a bottom sheet: drag or tap its grip to switch between a peek, half and full height.
 
 Live: https://jntme.github.io/wh40k-map/
 

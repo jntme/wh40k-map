@@ -25,11 +25,15 @@
         <div class="lib-next" id="lib-next"></div>
         <div class="lib-tools">
           <button type="button" class="lib-shield" id="lib-shield" aria-pressed="true" title="Hide the content of books you have not read yet"></button>
+          <button type="button" class="btn-ghost small" id="lib-sync-btn" aria-expanded="false" title="Sync your reading list across devices">☁ Sync</button>
           <button type="button" class="btn-ghost small" id="lib-export" title="Download your reading list as a file">Export</button>
           <button type="button" class="btn-ghost small" id="lib-import" title="Load a reading list file">Import</button>
           <input type="file" id="lib-import-file" accept="application/json,.json" hidden>
         </div>
+        <div class="lib-sync-status" id="lib-sync-status"></div>
+        <div class="lib-sync" id="lib-sync" hidden></div>
       </div>
+      <button type="button" class="lib-filters-toggle" id="lib-filters-toggle" aria-expanded="false">Filter &amp; sort ▾</button>
       <div class="lib-filters">
         <input id="lib-filter" type="search" placeholder="Filter by title, author, Legion, character" autocomplete="off" aria-label="Filter books">
         <div class="lib-row">
@@ -64,7 +68,7 @@
           <button type="button" data-era="30k" aria-pressed="false"><b>30K</b><span> · Horus Heresy</span></button>
           <button type="button" data-era="40k" aria-pressed="true"><b>40K</b><span> · Dark Imperium</span></button>
         </div>
-        <button type="button" class="lib-toggle" id="lib-toggle" aria-controls="library" aria-expanded="false">📚 <span>Library</span></button>
+        <button type="button" class="lib-toggle" id="lib-toggle" aria-controls="library" aria-expanded="false">📚 <span class="lib-label">Library</span><span class="lib-badge" id="lib-badge"></span></button>
         <div class="search">
           <input id="search" type="search" placeholder="Search planets, events or books" autocomplete="off" aria-label="Search">
           <ul id="search-results" role="listbox" hidden></ul>
