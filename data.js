@@ -1204,6 +1204,236 @@ window.WH40K_DATA = {
    "planets": [
     "sotha"
    ]
+  },
+  {
+   "id": "murder",
+   "name": "Murder",
+   "segmentum": "ultima",
+   "x": 760,
+   "y": -390,
+   "planets": [
+    "murder"
+   ]
+  },
+  {
+   "id": "xenobia",
+   "name": "Xenobia",
+   "segmentum": "ultima",
+   "x": 820,
+   "y": -300,
+   "planets": [
+    "xenobia"
+   ]
+  },
+  {
+   "id": "laeran",
+   "name": "Laeran",
+   "segmentum": "ultima",
+   "x": 480,
+   "y": -280,
+   "planets": [
+    "laeran"
+   ]
+  },
+  {
+   "id": "sarosh",
+   "name": "Sarosh",
+   "segmentum": "obscurus",
+   "x": -150,
+   "y": -520,
+   "planets": [
+    "sarosh"
+   ]
+  },
+  {
+   "id": "nurth",
+   "name": "Nurth",
+   "segmentum": "ultima",
+   "x": 150,
+   "y": -200,
+   "planets": [
+    "nurth"
+   ]
+  },
+  {
+   "id": "aghoru",
+   "name": "Aghoru",
+   "segmentum": "ultima",
+   "x": 300,
+   "y": -560,
+   "planets": [
+    "aghoru"
+   ]
+  },
+  {
+   "id": "dagonet",
+   "name": "Dagonet",
+   "segmentum": "solar",
+   "x": -450,
+   "y": -30,
+   "planets": [
+    "dagonet"
+   ]
+  },
+  {
+   "id": "pythos",
+   "name": "Pythos",
+   "segmentum": "ultima",
+   "x": 510,
+   "y": -240,
+   "planets": [
+    "pythos"
+   ]
+  },
+  {
+   "id": "traoris",
+   "name": "Traoris",
+   "segmentum": "ultima",
+   "x": 540,
+   "y": -40,
+   "planets": [
+    "traoris"
+   ]
+  },
+  {
+   "id": "planet_of_the_sorcerers",
+   "name": "Planet of the Sorcerers",
+   "segmentum": "obscurus",
+   "x": -555,
+   "y": -525,
+   "planets": [
+    "planet_of_the_sorcerers"
+   ]
+  },
+  {
+   "id": "thoas",
+   "name": "Thoas",
+   "segmentum": "ultima",
+   "x": 900,
+   "y": 250,
+   "planets": [
+    "thoas"
+   ]
+  },
+  {
+   "id": "dulan",
+   "name": "Dulan",
+   "segmentum": "obscurus",
+   "x": -400,
+   "y": -720,
+   "planets": [
+    "dulan"
+   ]
+  },
+  {
+   "id": "morningstar",
+   "name": "Morningstar",
+   "segmentum": "ultima",
+   "x": 360,
+   "y": -500,
+   "planets": [
+    "morningstar"
+   ]
+  },
+  {
+   "id": "byzas",
+   "name": "Byzas",
+   "segmentum": "ultima",
+   "x": 100,
+   "y": 250,
+   "planets": [
+    "byzas"
+   ]
+  },
+  {
+   "id": "gardinaal",
+   "name": "Gardinaal",
+   "segmentum": "obscurus",
+   "x": -50,
+   "y": -480,
+   "planets": [
+    "gardinaal_prime"
+   ]
+  },
+  {
+   "id": "taras",
+   "name": "Taras",
+   "segmentum": "ultima",
+   "x": 550,
+   "y": 380,
+   "planets": [
+    "antaeum"
+   ]
+  },
+  {
+   "id": "muspel",
+   "name": "Muspel",
+   "segmentum": "obscurus",
+   "x": -50,
+   "y": -930,
+   "planets": [
+    "muspel"
+   ]
+  },
+  {
+   "id": "galaspar",
+   "name": "Galaspar",
+   "segmentum": "pacificus",
+   "x": -980,
+   "y": 140,
+   "planets": [
+    "galaspar"
+   ]
+  },
+  {
+   "id": "one_five_four_four",
+   "name": "One-Five-Four Four",
+   "segmentum": "pacificus",
+   "x": -570,
+   "y": -100,
+   "planets": [
+    "one_five_four_four"
+   ]
+  },
+  {
+   "id": "constanix",
+   "name": "Constanix",
+   "segmentum": "tempestus",
+   "x": 150,
+   "y": 800,
+   "planets": [
+    "constanix_ii"
+   ]
+  },
+  {
+   "id": "carandiru",
+   "name": "Carandiru",
+   "segmentum": "tempestus",
+   "x": -250,
+   "y": 760,
+   "planets": [
+    "carandiru"
+   ]
+  },
+  {
+   "id": "percepton",
+   "name": "Percepton",
+   "segmentum": "ultima",
+   "x": 720,
+   "y": 560,
+   "planets": [
+    "percepton_primus"
+   ]
+  },
+  {
+   "id": "helwain",
+   "name": "Helwain",
+   "segmentum": "pacificus",
+   "x": -850,
+   "y": 80,
+   "planets": [
+    "helwain"
+   ]
   }
  ],
  "planets": {
@@ -2354,6 +2584,144 @@ window.WH40K_DATA = {
    "books": [
     "pharos"
    ]
+  },
+  "murder": {
+   "name": "Murder",
+   "type": "Death World",
+   "desc": "A world of the Interex, designated One-Forty Twenty by the Imperium, where the megarachnid were kept. The Luna Wolves fought there to relieve the trapped Blood Angels and the Imperial Army.",
+   "books": []
+  },
+  "xenobia": {
+   "name": "Xenobia",
+   "type": "Civilised World",
+   "desc": "A border world of the human Interex. Peace talks between the Interex and Horus broke down there after their Kinebrach weapons museum was raided.",
+   "books": []
+  },
+  "laeran": {
+   "name": "Laeran",
+   "type": "Ocean World",
+   "desc": "An ocean world and homeworld of the xenos Laer. The Emperor's Children destroyed it, and at its temple Fulgrim took the daemon-touched Laer blade.",
+   "books": []
+  },
+  "sarosh": {
+   "name": "Sarosh",
+   "type": "Imperial World",
+   "desc": "A human world that the Dark Angels brought into compliance. A betrayal there deepened the rift between Lion El'Jonson and Luther.",
+   "books": []
+  },
+  "nurth": {
+   "name": "Nurth",
+   "type": "Compliant World",
+   "desc": "A backwater world where the 670th Expedition and the Alpha Legion fought a long compliance campaign, with ancient sorcerous powers at work.",
+   "books": []
+  },
+  "aghoru": {
+   "name": "Aghoru",
+   "type": "Desert World",
+   "desc": "An arid world where the Thousand Sons and Space Wolves fought alongside each other during the Great Crusade. Magnus explored its mysterious Mountain there.",
+   "books": []
+  },
+  "dagonet": {
+   "name": "Dagonet",
+   "type": "Imperial World",
+   "desc": "A world that the Officio Assassinorum's Execution Force chose as the place to ambush and kill Horus.",
+   "books": []
+  },
+  "pythos": {
+   "name": "Pythos",
+   "type": "Death World",
+   "desc": "A jungle-choked death world full of monstrous predators. Survivors of the Shattered Legions took refuge here after Isstvan V, and a warp anomaly at its heart drew daemonic forces to it.",
+   "books": []
+  },
+  "traoris": {
+   "name": "Traoris",
+   "type": "Imperial World",
+   "desc": "A ravaged world where loyalist Shattered Legion survivors and Word Bearers raced to excavate a mysterious artefact after the Dropsite Massacre.",
+   "books": []
+  },
+  "planet_of_the_sorcerers": {
+   "name": "Planet of the Sorcerers",
+   "type": "Daemon World",
+   "desc": "The daemon world inside the Eye of Terror where the Thousand Sons fled after the burning of Prospero. It became the Legion's home and Magnus the Red's domain.",
+   "books": []
+  },
+  "thoas": {
+   "name": "Thoas",
+   "type": "Xenos World",
+   "desc": "Heart of an ork empire spanning a dozen systems, destroyed by Roboute Guilliman and the Ultramarines during the Great Crusade.",
+   "books": []
+  },
+  "dulan": {
+   "name": "Dulan",
+   "type": "Industrial World",
+   "desc": "Red, hyper-industrial throneworld of the Faash, ringed by an iron defence halo. Conquered by the Space Wolves and Dark Angels in 870.M30.",
+   "books": []
+  },
+  "morningstar": {
+   "name": "Morningstar",
+   "type": "Imperial World",
+   "desc": "Human world wracked by magnetic storms; Magnus and Perturabo tried to evacuate it before destroying it to contain an ancient corruption.",
+   "books": []
+  },
+  "byzas": {
+   "name": "Byzas",
+   "type": "Compliant World",
+   "desc": "Aristocratic world ruled through byzantine politics; the first world brought to compliance by Fulgrim's 28th Expedition.",
+   "books": []
+  },
+  "gardinaal_prime": {
+   "name": "Gardinaal Prime",
+   "type": "Civilised World",
+   "desc": "Capital of the eleven-world Gardinaal empire in Astrid's Necklace, crushed by Ferrus Manus and the Iron Hands in 869.M30.",
+   "books": []
+  },
+  "antaeum": {
+   "name": "Antaeum",
+   "type": "Death World",
+   "desc": "Volcanic world in the Taras System where the XVIII Legion made its last stand against the orks until Vulkan arrived.",
+   "books": []
+  },
+  "muspel": {
+   "name": "Muspel",
+   "type": "Imperial World",
+   "desc": "Rebellious world on the Northern Fringe whose population fell under the psychic domination of the xenos Khrave; liberated by the Dark Angels in 997.M30.",
+   "books": []
+  },
+  "galaspar": {
+   "name": "Galaspar",
+   "type": "Hive World",
+   "desc": "Hive world and seat of the Order that ruled the Galaspar Cluster, brought to compliance by Mortarion's Death Guard.",
+   "books": []
+  },
+  "one_five_four_four": {
+   "name": "One-Five-Four Four",
+   "type": "Feral World",
+   "desc": "Jungle world held by the eldar, later called Caldera; conquered by the Iron Hands, Death Guard and Salamanders during the Great Crusade.",
+   "books": []
+  },
+  "constanix_ii": {
+   "name": "Constanix II",
+   "type": "Forge World",
+   "desc": "Minor, isolated forge world of acid seas and barge-cities; it sided with the Word Bearers until Corax's Raven Guard retook it.",
+   "books": []
+  },
+  "carandiru": {
+   "name": "Carandiru",
+   "type": "Penal Colony",
+   "desc": "Prison colony whose liberation by Corax's Raven Guard during the Horus Heresy is told in Ravenlord.",
+   "books": []
+  },
+  "percepton_primus": {
+   "name": "Percepton Primus",
+   "type": "Imperial World",
+   "desc": "Isolated world of Ultramar purged by the Word Bearers' 34th Company during the Shadow Crusade.",
+   "books": []
+  },
+  "helwain": {
+   "name": "Helwain",
+   "type": "Dead World",
+   "desc": "Desolate, ghost-haunted world where Zardu Layak seeks the Anakatis Blades.",
+   "books": []
   }
  },
  "events": [
@@ -2882,7 +3250,9 @@ window.WH40K_DATA = {
     "mortis",
     "warhawk",
     "echoes_eternity",
-    "end_and_death",
+    "end_and_death_volume_i",
+    "end_and_death_volume_ii",
+    "end_and_death_volume_iii",
     "sons_of_the_selenar"
    ]
   },
@@ -4031,109 +4401,473 @@ window.WH40K_DATA = {
    "title": "The Solar War",
    "author": "John French",
    "series": "The Siege of Terra",
-   "year": 2019
+   "year": 2019,
+   "number": 1,
+   "format": "Novel",
+   "synopsis": "Horus's armada reaches the Sol System, and Rogal Dorn's outer defences must stand against the full strength of the traitor fleet. Across the void and on the outer worlds, Sigismund, Ezekyle Abaddon and countless lesser warriors fight battles that decide whether Terra can be reached. The opening book of the Siege of Terra shows the scale of the final war.",
+   "legions": [
+    "Imperial Fists",
+    "Sons of Horus",
+    "Iron Warriors",
+    "White Scars",
+    "Death Guard"
+   ],
+   "characters": [
+    "Rogal Dorn",
+    "Sigismund",
+    "Ezekyle Abaddon",
+    "Horus Lupercal",
+    "Mersadie Oliton"
+   ],
+   "setting": "014.M31",
+   "sort": 31014,
+   "planets": [
+    "pluto",
+    "terra"
+   ]
   },
   "lost_and_damned": {
    "title": "The Lost and the Damned",
    "author": "Guy Haley",
    "series": "The Siege of Terra",
-   "year": 2019
+   "year": 2019,
+   "number": 2,
+   "format": "Novel",
+   "synopsis": "With Terra's void defences broken, the traitor armies make landfall and Perturabo begins the methodical siege of the Imperial Palace. Soldiers, refugees and Legiones Astartes alike endure the bombardment and ground war outside the walls. The novel shows the human cost of the siege through both great commanders and ordinary defenders.",
+   "legions": [
+    "Iron Warriors",
+    "Imperial Fists",
+    "Blood Angels",
+    "Death Guard",
+    "Solar Auxilia"
+   ],
+   "characters": [
+    "Perturabo",
+    "Rogal Dorn",
+    "Fafnir Rann",
+    "Kyril Sindermann"
+   ],
+   "setting": "014.M31",
+   "sort": 31014,
+   "planets": [
+    "terra"
+   ]
   },
   "first_wall": {
    "title": "The First Wall",
    "author": "Gav Thorpe",
    "series": "The Siege of Terra",
-   "year": 2020
+   "year": 2020,
+   "number": 3,
+   "format": "Novel",
+   "synopsis": "Horus's forces target the Lion's Gate spaceport, whose capture would let the traitors land an endless tide of reinforcements beside the Palace. As the Neverborn begin to walk on Terra, the defenders fight to hold the outer fortifications. The book marks the moment the siege turns from an ordinary war into something more otherworldly.",
+   "legions": [
+    "Imperial Fists",
+    "Sons of Horus",
+    "Iron Warriors",
+    "Blood Angels",
+    "White Scars"
+   ],
+   "characters": [
+    "Rogal Dorn",
+    "Sigismund",
+    "Ezekyle Abaddon"
+   ],
+   "setting": "014.M31",
+   "sort": 31014,
+   "planets": [
+    "terra"
+   ]
   },
   "saturnine": {
    "title": "Saturnine",
    "author": "Dan Abnett",
    "series": "The Siege of Terra",
-   "year": 2020
+   "year": 2020,
+   "number": 4,
+   "format": "Novel",
+   "synopsis": "Rogal Dorn springs a carefully hidden plan against a weakened section of the Palace wall where the traitors expect easy victory. The battle for the Saturnine defences becomes one of the most desperate gambits of the siege. Meanwhile, tensions build among the defenders as they weigh what they are willing to sacrifice.",
+   "legions": [
+    "Imperial Fists",
+    "Sons of Horus",
+    "Iron Warriors",
+    "Blood Angels"
+   ],
+   "characters": [
+    "Rogal Dorn",
+    "Fafnir Rann"
+   ],
+   "setting": "014.M31",
+   "sort": 31014,
+   "planets": [
+    "terra"
+   ]
   },
   "mortis": {
    "title": "Mortis",
    "author": "John French",
    "series": "The Siege of Terra",
-   "year": 2021
+   "year": 2021,
+   "number": 5,
+   "format": "Novel",
+   "synopsis": "Titans of the Legio Mortis lead the traitor assault on the Palace's defences while the war grows ever more nightmarish. As the walls fail and reinforcements dwindle, Rogal Dorn and his allies struggle to keep the defence from collapsing. The novel follows both god-engine and individual soldier as the siege enters its darkest phase.",
+   "legions": [
+    "Legio Mortis",
+    "Imperial Fists",
+    "Sons of Horus",
+    "Iron Warriors"
+   ],
+   "characters": [
+    "Rogal Dorn",
+    "Vulkan",
+    "Ezekyle Abaddon"
+   ],
+   "setting": "014.M31",
+   "sort": 31014,
+   "planets": [
+    "terra"
+   ]
   },
   "warhawk": {
    "title": "Warhawk",
    "author": "Chris Wraight",
    "series": "The Siege of Terra",
-   "year": 2021
+   "year": 2021,
+   "number": 6,
+   "format": "Novel",
+   "synopsis": "Jaghatai Khan leads the White Scars in an audacious attempt to retake the Lion's Gate spaceport from the traitors. His campaign brings him face to face with Mortarion and the Death Guard. The novel is a portrait of the Khan as both commander and brother at the climax of the Heresy.",
+   "legions": [
+    "White Scars",
+    "Death Guard",
+    "Imperial Fists"
+   ],
+   "characters": [
+    "Jaghatai Khan",
+    "Shiban Khan",
+    "Ilya Ravallion",
+    "Mortarion"
+   ],
+   "setting": "014.M31",
+   "sort": 31014,
+   "planets": [
+    "terra"
+   ]
   },
   "echoes_eternity": {
    "title": "Echoes of Eternity",
    "author": "Aaron Dembski-Bowden",
    "series": "The Siege of Terra",
-   "year": 2022
-  },
-  "end_and_death": {
-   "title": "The End and the Death (Bd. I–III)",
-   "author": "Dan Abnett",
-   "series": "The Siege of Terra",
-   "year": "ab 2023"
+   "year": 2022,
+   "number": 7,
+   "format": "Novel",
+   "synopsis": "With the outer defences collapsing, Angron leads the traitor host against the Sanctum Imperialis, the Palace's last stronghold. Sanguinius and the Blood Angels prepare a final defence in the ruins as daemons and World Eaters pour into the city. The novel turns on the two brothers' fates and the legacy each leaves behind.",
+   "legions": [
+    "Blood Angels",
+    "World Eaters",
+    "Daemons",
+    "Legio Custodes"
+   ],
+   "characters": [
+    "Sanguinius",
+    "Angron",
+    "Khârn",
+    "Zephon",
+    "Raldoron"
+   ],
+   "setting": "014.M31",
+   "sort": 31014,
+   "planets": [
+    "terra"
+   ]
   },
   "mechanicum": {
    "title": "Mechanicum",
    "author": "Graham McNeill",
    "series": "The Horus Heresy",
-   "year": 2008
+   "year": 2008,
+   "number": 9,
+   "format": "Novel",
+   "synopsis": "As Horus's rebellion spreads, the forge world of Mars splits between those who stay loyal to the Emperor and those who follow Fabricator General Kelbor-Hal into heresy. A young adept, Dalia Cythera, holds knowledge the Emperor needs, while Titan Legions turn on one another in a civil war on the Red Planet.",
+   "legions": [
+    "Mechanicum",
+    "Dark Mechanicum",
+    "Legio Titanicus",
+    "Imperial Knights",
+    "Legio Custodes"
+   ],
+   "characters": [
+    "Dalia Cythera",
+    "Kelbor-Hal",
+    "Koriel Zeth",
+    "Regulus",
+    "Rogal Dorn",
+    "Ipluvien Maximal"
+   ],
+   "planets": [
+    "mars",
+    "terra"
+   ],
+   "setting": "005.M31",
+   "sort": 31005
   },
   "galaxy_in_flames": {
    "title": "Galaxy in Flames",
    "author": "Ben Counter",
    "series": "The Horus Heresy",
-   "year": 2006
+   "year": 2006,
+   "number": 3,
+   "format": "Novel",
+   "synopsis": "Recovered from his wounds, Horus moves openly against the Emperor and plans to purge the loyalist elements of four Legions on Isstvan III. Garviel Loken, Saul Tarvitz and Nathaniel Garro are among those who learn of the treachery, and the virus-bombing of the world marks the true beginning of the civil war.",
+   "legions": [
+    "Sons of Horus",
+    "World Eaters",
+    "Emperor's Children",
+    "Death Guard"
+   ],
+   "characters": [
+    "Horus",
+    "Garviel Loken",
+    "Saul Tarvitz",
+    "Nathaniel Garro",
+    "Angron",
+    "Fulgrim",
+    "Ezekyle Abaddon",
+    "Euphrati Keeler"
+   ],
+   "planets": [
+    "isstvan3"
+   ],
+   "setting": "005.M31",
+   "sort": 31005
   },
   "flight_eisenstein": {
    "title": "The Flight of the Eisenstein",
    "author": "James Swallow",
    "series": "The Horus Heresy",
-   "year": 2007
+   "year": 2007,
+   "number": 4,
+   "format": "Novel",
+   "synopsis": "Death Guard Battle-Captain Nathaniel Garro witnesses the corruption spreading through his Legion and seizes the frigate Eisenstein to escape the Isstvan system. After a perilous journey through the warp he must reach Terra to warn the Emperor that Horus has turned traitor.",
+   "legions": [
+    "Death Guard",
+    "Sons of Horus",
+    "Legio Custodes"
+   ],
+   "characters": [
+    "Nathaniel Garro",
+    "Mortarion",
+    "Ignatius Grulgor",
+    "Euphrati Keeler",
+    "Kaleb Arin",
+    "Rogal Dorn",
+    "Malcador"
+   ],
+   "planets": [
+    "isstvan3",
+    "terra"
+   ],
+   "setting": "005.M31",
+   "sort": 31005
   },
   "fulgrim": {
    "title": "Fulgrim",
    "author": "Graham McNeill",
    "series": "The Horus Heresy",
-   "year": 2007
+   "year": 2007,
+   "number": 5,
+   "format": "Novel",
+   "synopsis": "Fulgrim's Emperor's Children pursue perfection in the war against the alien Laer, where a daemon-haunted blade and the excesses of the Legion begin to corrupt the Phoenician. The story follows the Legion's fall from grace through to its betrayal of Ferrus Manus and the Iron Hands at the Drop Site Massacre on Isstvan V.",
+   "legions": [
+    "Emperor's Children",
+    "Iron Hands",
+    "Sons of Horus",
+    "Salamanders",
+    "Raven Guard"
+   ],
+   "characters": [
+    "Fulgrim",
+    "Ferrus Manus",
+    "Horus",
+    "Saul Tarvitz",
+    "Lucius",
+    "Eidolon",
+    "Ostian Delafour",
+    "Serena d'Angelus"
+   ],
+   "planets": [
+    "laeran",
+    "isstvan5"
+   ]
   },
   "false_gods": {
    "title": "False Gods",
    "author": "Graham McNeill",
    "series": "The Horus Heresy",
-   "year": 2006
+   "year": 2006,
+   "number": 2,
+   "format": "Novel",
+   "synopsis": "Horus returns to the moon of Davin to put down a rebellion by a former Imperial commander, only to be struck down by a corrupted blade. As the Warmaster lies near death, Erebus and the Davinite lodges steer his salvation, and in dreams of the warp Horus is shown a future that turns him against the Emperor.",
+   "legions": [
+    "Luna Wolves",
+    "Sons of Horus",
+    "Word Bearers",
+    "Imperial Army"
+   ],
+   "characters": [
+    "Horus",
+    "Erebus",
+    "Garviel Loken",
+    "Ezekyle Abaddon",
+    "Euphrati Keeler",
+    "Petronella Vivar",
+    "Eugen Temba"
+   ],
+   "planets": [
+    "davin"
+   ],
+   "setting": "004.M31",
+   "sort": 31004
   },
   "know_no_fear": {
    "title": "Know No Fear",
    "author": "Dan Abnett",
    "series": "The Horus Heresy",
-   "year": 2012
+   "year": 2012,
+   "number": 19,
+   "format": "Novel",
+   "synopsis": "Roboute Guilliman gathers the Ultramarines at Calth to muster for a campaign against Ork forces, unaware that Kor Phaeron and the Word Bearers have come not as allies but as betrayers. The surprise attack turns the system into a battlefield as Calth's sun is poisoned and the Ultramarines fight for survival.",
+   "legions": [
+    "Ultramarines",
+    "Word Bearers",
+    "Mechanicum",
+    "Imperial Army",
+    "Legio Titanicus"
+   ],
+   "characters": [
+    "Roboute Guilliman",
+    "Kor Phaeron",
+    "Erebus",
+    "Marius Gage",
+    "Ventanus",
+    "Oll Persson",
+    "Aeonid Thiel"
+   ],
+   "planets": [
+    "calth",
+    "macragge"
+   ],
+   "setting": "007.M31",
+   "sort": 31007
   },
   "thousand_sons": {
    "title": "A Thousand Sons",
    "author": "Graham McNeill",
    "series": "The Horus Heresy",
-   "year": 2010
+   "year": 2010,
+   "number": 12,
+   "format": "Novel",
+   "synopsis": "Magnus the Red and his scholarly, psychically gifted Thousand Sons fight for the Great Crusade on Aghoru while the Council of Nikaea debates the use of sorcery. Convinced he alone can save his father from Horus, Magnus breaks the Emperor's edict with catastrophic consequences that bring ruin to Prospero.",
+   "legions": [
+    "Thousand Sons",
+    "Space Wolves",
+    "Legio Custodes",
+    "Sisters of Silence"
+   ],
+   "characters": [
+    "Magnus the Red",
+    "Ahzek Ahriman",
+    "Lemuel Gaumon",
+    "Camille Shivani",
+    "Kallista Eris",
+    "Leman Russ",
+    "Yasu Nagasena"
+   ],
+   "planets": [
+    "aghoru",
+    "nikaea",
+    "prospero"
+   ]
   },
   "prospero_burns": {
    "title": "Prospero Burns",
    "author": "Dan Abnett",
    "series": "The Horus Heresy",
-   "year": 2010
+   "year": 2010,
+   "number": 15,
+   "format": "Novel",
+   "synopsis": "Remembrancer Kasper Hawser is taken in by the Space Wolves and lives among the warriors of Fenris, slowly learning their sagas and their purpose. Told from within the VI Legion, the novel shows the Wolves' attack on Prospero from their own perspective and how they became the Emperor's executioners.",
+   "legions": [
+    "Space Wolves",
+    "Thousand Sons",
+    "Legio Custodes",
+    "Sisters of Silence"
+   ],
+   "characters": [
+    "Kasper Hawser",
+    "Leman Russ",
+    "Bear",
+    "Ogvai Ogvai Helmschrot",
+    "Magnus the Red",
+    "Ahzek Ahriman"
+   ],
+   "planets": [
+    "fenris",
+    "prospero",
+    "terra"
+   ],
+   "setting": "004–005.M31",
+   "sort": 31005
   },
   "descent_angels": {
    "title": "Descent of Angels",
    "author": "Mitchel Scanlon",
    "series": "The Horus Heresy",
-   "year": 2007
+   "year": 2007,
+   "number": 6,
+   "format": "Novel",
+   "synopsis": "On the forested world of Caliban, young Zahariel rises through the knightly Order as Lion El'Jonson wages war on the planet's great beasts. When the Emperor arrives and the Order is absorbed into the Dark Angels Legion, Zahariel and his comrades join the Great Crusade, and the Sarosh campaign sows the first rifts between the Lion and Luther.",
+   "legions": [
+    "Dark Angels",
+    "The Order"
+   ],
+   "characters": [
+    "Zahariel",
+    "Nemiel",
+    "Lion El'Jonson",
+    "Luther",
+    "Lord Cypher"
+   ],
+   "planets": [
+    "caliban",
+    "sarosh"
+   ]
   },
   "fallen_angels": {
    "title": "Fallen Angels",
    "author": "Mike Lee",
    "series": "The Horus Heresy",
-   "year": 2009
+   "year": 2009,
+   "number": 11,
+   "format": "Novel",
+   "synopsis": "The Dark Angels are split between two fronts: the Lion leads the Legion against Horus's forces on the forge world of Diamat, while Luther, Zahariel and the exiled warriors on Caliban face a growing rebellion fuelled by forces in the warp. The novel follows the widening rift that will lead to the Fall of Caliban.",
+   "legions": [
+    "Dark Angels",
+    "Sons of Horus",
+    "Mechanicum",
+    "Imperial Army"
+   ],
+   "characters": [
+    "Lion El'Jonson",
+    "Luther",
+    "Zahariel",
+    "Nemiel",
+    "Astelan",
+    "Lord Cypher"
+   ],
+   "planets": [
+    "diamat",
+    "caliban"
+   ]
   },
   "helsreach": {
    "title": "Helsreach",
@@ -4144,19 +4878,19 @@ window.WH40K_DATA = {
   "ghazghkull": {
    "title": "Ghazghkull Thraka: Prophet of the Waaagh!",
    "author": "Nate Crowley",
-   "series": "Einzelroman",
+   "series": "Standalone novel",
    "year": 2022
   },
   "cadia_stands": {
    "title": "Cadia Stands",
    "author": "Justin D. Hill",
-   "series": "Einzelroman",
+   "series": "Standalone novel",
    "year": 2018
   },
   "gs_fall_cadia": {
    "title": "Gathering Storm I: Fall of Cadia",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2017
   },
   "devastation_baal": {
@@ -4199,7 +4933,22 @@ window.WH40K_DATA = {
    "title": "Konrad Curze: The Night Haunter",
    "author": "Guy Haley",
    "series": "The Horus Heresy: Primarchs",
-   "year": 2018
+   "year": 2019,
+   "number": 12,
+   "format": "Novella",
+   "synopsis": "On Tsagualsa, Konrad Curze spends what he knows are his final hours waiting for the assassin sent to kill him. His memories range from his brutal youth on Nostramo through the Great Crusade, the Night Lords' rule of terror and the destruction of his homeworld, painting a portrait of a primarch tormented by visions.",
+   "legions": [
+    "Night Lords"
+   ],
+   "characters": [
+    "Konrad Curze",
+    "Jago Sevatarion",
+    "M'Shen"
+   ],
+   "planets": [
+    "tsagualsa",
+    "nostramo"
+   ]
   },
   "space_wolf": {
    "title": "Space Wolf",
@@ -4210,13 +4959,13 @@ window.WH40K_DATA = {
   "vigilus_defiant": {
    "title": "Vigilus Defiant",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2018
   },
   "vigilus_ablaze": {
    "title": "Vigilus Ablaze",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2019
   },
   "i_am_slaughter": {
@@ -4360,7 +5109,7 @@ window.WH40K_DATA = {
   "octarius_rising_tide": {
    "title": "War Zone Octarius Book 1: Rising Tide",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2021
   },
   "salamander": {
@@ -4384,13 +5133,13 @@ window.WH40K_DATA = {
   "gs_fracture_biel_tan": {
    "title": "Gathering Storm II: Fracture of Biel-Tan",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2017
   },
   "gs_rise_primarch": {
    "title": "Gathering Storm III: Rise of the Primarch",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2017
   },
   "dante": {
@@ -4456,7 +5205,7 @@ window.WH40K_DATA = {
   "indomitus": {
    "title": "Indomitus",
    "author": "Gav Thorpe",
-   "series": "Einzelroman",
+   "series": "Standalone novel",
    "year": 2020
   },
   "godblight": {
@@ -4468,67 +5217,67 @@ window.WH40K_DATA = {
   "pa_faith_and_fury": {
    "title": "Psychic Awakening: Faith and Fury",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2019
   },
   "pa_blood_of_baal": {
    "title": "Psychic Awakening: Blood of Baal",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2020
   },
   "pa_ritual_of_the_damned": {
    "title": "Psychic Awakening: Ritual of the Damned",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2020
   },
   "pa_pariah": {
    "title": "Psychic Awakening: Pariah",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2020
   },
   "charadon_book_of_rust": {
    "title": "War Zone Charadon – Act I: The Book of Rust",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2021
   },
   "charadon_book_of_fire": {
    "title": "War Zone Charadon – Act II: The Book of Fire",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2021
   },
   "aoo_abaddon": {
    "title": "Arks of Omen: Abaddon",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2023
   },
   "aoo_angron": {
    "title": "Arks of Omen: Angron",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2023
   },
   "aoo_vashtorr": {
    "title": "Arks of Omen: Vashtorr",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2023
   },
   "aoo_lion": {
    "title": "Arks of Omen: The Lion",
    "author": "Games Workshop",
-   "series": "Kampagnenbuch",
+   "series": "Campaign book",
    "year": 2023
   },
   "lion_son_of_the_forest": {
    "title": "The Lion: Son of the Forest",
    "author": "Mike Brooks",
-   "series": "Einzelroman",
+   "series": "Standalone novel",
    "year": 2023
   },
   "soul_drinker": {
@@ -4738,7 +5487,7 @@ window.WH40K_DATA = {
   "iron_star": {
    "title": "The Iron Star",
    "author": "Dan Abnett",
-   "series": "Gaunt's Ghosts (Novelle)",
+   "series": "Gaunt's Ghosts (Novella)",
    "year": 2008
   },
   "blood_pact": {
@@ -4774,13 +5523,13 @@ window.WH40K_DATA = {
   "sabbat_worlds_crusade": {
    "title": "The Sabbat Worlds Crusade",
    "author": "Dan Abnett",
-   "series": "Sabbat Worlds (Hintergrundband)",
+   "series": "Sabbat Worlds (background book)",
    "year": 2005
   },
   "titanicus": {
    "title": "Titanicus",
    "author": "Dan Abnett",
-   "series": "Einzelroman",
+   "series": "Standalone novel",
    "year": 2008
   },
   "xenos": {
@@ -4960,7 +5709,7 @@ window.WH40K_DATA = {
   "fall_of_cadia_rath": {
    "title": "The Fall of Cadia",
    "author": "Robert Rath",
-   "series": "Einzelroman",
+   "series": "Standalone novel",
    "year": 2023
   },
   "creed_ashes_of_cadia": {
@@ -5069,187 +5818,843 @@ window.WH40K_DATA = {
    "title": "Horus Rising",
    "author": "Dan Abnett",
    "series": "The Horus Heresy",
-   "year": 2006
+   "year": 2006,
+   "number": 1,
+   "format": "Novel",
+   "synopsis": "Newly named Warmaster after the triumph at Ullanor, Horus leads the 63rd Expedition onward while his Luna Wolves fight to bring a deceptive human empire and the alien-haunted world of Murder into compliance. Through the eyes of Captain Garviel Loken, the novel shows the Great Crusade at its height and plants the first doubts and secret lodges that will grow into rebellion.",
+   "legions": [
+    "Luna Wolves",
+    "Imperial Army",
+    "Emperor's Children"
+   ],
+   "characters": [
+    "Horus",
+    "Garviel Loken",
+    "Ezekyle Abaddon",
+    "Horus Aximand",
+    "Tarik Torgaddon",
+    "Kyril Sindermann",
+    "Mersadie Oliton",
+    "Saul Tarvitz"
+   ],
+   "planets": [
+    "sixty_three_nineteen",
+    "murder",
+    "xenobia"
+   ],
+   "setting": "000–001.M31",
+   "sort": 31001
   },
   "battle_for_the_abyss": {
    "title": "Battle for the Abyss",
    "author": "Ben Counter",
    "series": "The Horus Heresy",
-   "year": 2008
+   "year": 2008,
+   "number": 8,
+   "format": "Novel",
+   "synopsis": "The Word Bearers' new warship, the Furious Abyss, sets out from the Jovian shipyards to strike at Ultramar. A small band of loyalist Astartes from several Legions, led by Ultramarine Cestus, races to stop it before it can cripple the Ultramarines.",
+   "legions": [
+    "Word Bearers",
+    "Ultramarines",
+    "Space Wolves",
+    "World Eaters",
+    "Thousand Sons"
+   ],
+   "characters": [
+    "Cestus",
+    "Zadkiel",
+    "Brynngar",
+    "Skraal",
+    "Mhotep",
+    "Antiges"
+   ],
+   "planets": [],
+   "setting": "007.M31",
+   "sort": 31007
   },
   "first_heretic": {
    "title": "The First Heretic",
    "author": "Aaron Dembski-Bowden",
    "series": "The Horus Heresy",
-   "year": 2010
+   "year": 2010,
+   "number": 14,
+   "format": "Novel",
+   "synopsis": "Rebuked by the Emperor for worshipping him as a god, Lorgar and his Word Bearers are humiliated on the ashes of Monarchia. Searching for a new truth, the primarch is drawn towards the powers of the warp, and the story follows the Legion's journey into heresy all the way to the Drop Site Massacre on Isstvan V.",
+   "legions": [
+    "Word Bearers",
+    "Legio Custodes",
+    "Sisters of Silence",
+    "Raven Guard",
+    "Salamanders",
+    "Iron Hands"
+   ],
+   "characters": [
+    "Lorgar",
+    "Argel Tal",
+    "Kor Phaeron",
+    "Erebus",
+    "Cyrene Valantion",
+    "Xaphen",
+    "Aquillon"
+   ],
+   "planets": [
+    "khur",
+    "cadia",
+    "isstvan5"
+   ]
   },
   "outcast_dead": {
    "title": "The Outcast Dead",
    "author": "Graham McNeill",
    "series": "The Horus Heresy",
-   "year": 2011
+   "year": 2011,
+   "number": 17,
+   "format": "Novel",
+   "synopsis": "On Terra, the astropath Kai Zulane receives a vision so dangerous that he becomes the most hunted man in the Imperial Palace. He escapes with a band of renegade Astartes imprisoned after Isstvan, and the Legio Custodes and Sisters of Silence pursue them through the underbelly of the Throneworld.",
+   "legions": [
+    "Legio Custodes",
+    "Sisters of Silence",
+    "Thousand Sons",
+    "World Eaters",
+    "Death Guard",
+    "Space Wolves",
+    "Sons of Horus"
+   ],
+   "characters": [
+    "Kai Zulane",
+    "Atharva",
+    "Subha",
+    "Severian",
+    "Kiron",
+    "Tagore",
+    "Malcador"
+   ],
+   "planets": [
+    "terra"
+   ]
   },
   "deliverance_lost": {
    "title": "Deliverance Lost",
    "author": "Gav Thorpe",
    "series": "The Horus Heresy",
-   "year": 2012
+   "year": 2012,
+   "number": 18,
+   "format": "Novel",
+   "synopsis": "Corvus Corax escapes the Drop Site Massacre with only a remnant of his Raven Guard and returns to Terra and Deliverance to rebuild his Legion. Secretly gaining access to the Emperor's gene-science, he seeks to restore his strength, unaware that the Alpha Legion have already infiltrated his ranks.",
+   "legions": [
+    "Raven Guard",
+    "Alpha Legion",
+    "Legio Custodes"
+   ],
+   "characters": [
+    "Corvus Corax",
+    "Alpharius",
+    "Branne",
+    "Agapito",
+    "Alvarex Maun",
+    "Malcador",
+    "The Emperor"
+   ],
+   "planets": [
+    "isstvan5",
+    "terra",
+    "deliverance"
+   ]
   },
   "fear_to_tread": {
    "title": "Fear to Tread",
    "author": "James Swallow",
    "series": "The Horus Heresy",
-   "year": 2012
+   "year": 2012,
+   "number": 21,
+   "format": "Novel",
+   "synopsis": "Horus sends Sanguinius and the Blood Angels to the Signus Cluster, supposedly to purge a xenos threat. The world they find is a trap engineered by the Word Bearers, who mean to break the IX Legion by unleashing the curse hidden in its gene-seed. Against a daemon host, Sanguinius must hold his sons back from the Red Thirst and from damnation.",
+   "legions": [
+    "Blood Angels",
+    "Word Bearers"
+   ],
+   "characters": [
+    "Sanguinius",
+    "Raldoron",
+    "Azkaellon",
+    "Meros",
+    "Nassir Amit",
+    "Ka'Bandha"
+   ],
+   "setting": "005–006.M31",
+   "sort": 31006,
+   "planets": [
+    "signus_prime"
+   ]
   },
   "shadows_of_treachery": {
    "title": "Shadows of Treachery",
-   "author": "Christian Dunn, Nick Kyme (Hrsg.)",
+   "author": "Various",
    "series": "The Horus Heresy",
-   "year": 2012
+   "year": 2012,
+   "number": 22,
+   "format": "Anthology",
+   "synopsis": "This anthology gathers earlier stories and two new novellas. Most deal with the Imperial Fists and Night Lords in the first months of the Heresy. Highlights include the Imperial Fists' fateful clash with the Iron Warriors at Phall, Rogal Dorn's doubts as Terra is fortified, the Raven Guard's escape from Isstvan V, and Sevatar's bid to hold the fracturing VIII Legion together.",
+   "legions": [
+    "Imperial Fists",
+    "Night Lords",
+    "Iron Warriors",
+    "Raven Guard",
+    "Dark Angels"
+   ],
+   "characters": [
+    "Rogal Dorn",
+    "Konrad Curze",
+    "Alexis Polux",
+    "Sevatar",
+    "Corax",
+    "Perturabo"
+   ],
+   "planets": [
+    "phall",
+    "terra",
+    "isstvan5"
+   ]
   },
   "angel_exterminatus": {
    "title": "Angel Exterminatus",
    "author": "Graham McNeill",
    "series": "The Horus Heresy",
-   "year": 2012
+   "year": 2012,
+   "number": 23,
+   "format": "Novel",
+   "synopsis": "Fulgrim tempts Perturabo into a joint expedition into the Eye of Terror to claim an ancient Eldar weapon. Meanwhile a vengeful band of Iron Hands, survivors of Isstvan V, hunts the Emperor's Children. The trail ends on the crone world of Iydris, where the alliance of the two Traitor Primarchs is put to the test.",
+   "legions": [
+    "Iron Warriors",
+    "Emperor's Children",
+    "Iron Hands",
+    "Raven Guard",
+    "Salamanders",
+    "Aeldari"
+   ],
+   "characters": [
+    "Perturabo",
+    "Fulgrim",
+    "Lucius",
+    "Forrix",
+    "Kroeger",
+    "Sharrowkyn"
+   ],
+   "setting": "007.M31",
+   "sort": 31007,
+   "planets": [
+    "iydris"
+   ]
   },
   "betrayer": {
    "title": "Betrayer",
    "author": "Aaron Dembski-Bowden",
    "series": "The Horus Heresy",
-   "year": 2012
+   "year": 2012,
+   "number": 24,
+   "format": "Novel",
+   "synopsis": "During the Shadow Crusade, the World Eaters and Word Bearers ravage Ultramar side by side, but Angron's Butcher's Nails are slowly killing him. Lorgar works on a plan to save his brother in his own way. The campaign builds to a confrontation with Roboute Guilliman on Armatura and to the World Eaters' fateful return to Nuceria.",
+   "legions": [
+    "World Eaters",
+    "Word Bearers",
+    "Ultramarines"
+   ],
+   "characters": [
+    "Angron",
+    "Lorgar",
+    "Khârn",
+    "Argel Tal",
+    "Lotara Sarrin",
+    "Roboute Guilliman"
+   ],
+   "setting": "008.M31",
+   "sort": 31008,
+   "planets": [
+    "armatura",
+    "nuceria"
+   ]
   },
   "mark_of_calth": {
    "title": "Mark of Calth",
-   "author": "Laurie Goulding (Hrsg.)",
+   "author": "Various",
    "series": "The Horus Heresy",
-   "year": 2013
+   "year": 2013,
+   "number": 25,
+   "format": "Anthology",
+   "synopsis": "An anthology set during and after the Word Bearers' betrayal at Calth. Its stories follow the war beneath the irradiated surface, where Ultramarines and survivors keep fighting in the arcologies. Others show the Word Bearers' sorcerous schemes and the aftermath of the Battle of Calth from both sides.",
+   "legions": [
+    "Ultramarines",
+    "Word Bearers",
+    "Imperial Army"
+   ],
+   "characters": [
+    "Erebus",
+    "Kor Phaeron",
+    "Remus Ventanus",
+    "Oll Persson",
+    "Roboute Guilliman"
+   ],
+   "setting": "007.M31",
+   "sort": 31007,
+   "planets": [
+    "calth"
+   ]
   },
   "vulkan_lives": {
    "title": "Vulkan Lives",
    "author": "Nick Kyme",
    "series": "The Horus Heresy",
-   "year": 2013
+   "year": 2013,
+   "number": 26,
+   "format": "Novel",
+   "synopsis": "After the Dropsite Massacre, Vulkan is taken prisoner by Konrad Curze, who tortures and kills him again and again, only to find that his brother keeps coming back to life. Elsewhere, Artellus Numeon leads a group of Shattered Legion survivors. On the ravaged world of Traoris, loyalists and Word Bearers race to claim a mysterious artefact.",
+   "legions": [
+    "Salamanders",
+    "Night Lords",
+    "Word Bearers",
+    "Iron Hands",
+    "Raven Guard"
+   ],
+   "characters": [
+    "Vulkan",
+    "Konrad Curze",
+    "Artellus Numeon",
+    "Narek"
+   ],
+   "planets": [
+    "traoris"
+   ]
   },
   "unremembered_empire": {
    "title": "The Unremembered Empire",
    "author": "Dan Abnett",
    "series": "The Horus Heresy",
-   "year": 2013
+   "year": 2013,
+   "number": 27,
+   "format": "Novel",
+   "synopsis": "Cut off from Terra by the Ruinstorm, Ultramar is lit by the beacon of the Pharos. Roboute Guilliman proclaims Imperium Secundus on Macragge and gathers the Primarchs who are able to answer. Sanguinius, Lion El'Jonson and Vulkan come together while a hidden assassin stalks Macragge's streets and old rivalries and mistrust threaten the new empire from within.",
+   "legions": [
+    "Ultramarines",
+    "Blood Angels",
+    "Dark Angels",
+    "Salamanders",
+    "Night Lords",
+    "Word Bearers"
+   ],
+   "characters": [
+    "Roboute Guilliman",
+    "Lion El'Jonson",
+    "Sanguinius",
+    "Vulkan",
+    "Konrad Curze",
+    "John Grammaticus",
+    "Narek"
+   ],
+   "planets": [
+    "macragge"
+   ]
   },
   "scars": {
    "title": "Scars",
    "author": "Chris Wraight",
    "series": "The Horus Heresy",
-   "year": 2014
+   "year": 2014,
+   "number": 28,
+   "format": "Novel",
+   "synopsis": "Isolated by warp storms at the end of the Chondax campaign, the White Scars hear conflicting reports of Horus's rebellion. Jaghatai Khan must choose between the Warmaster and the Emperor, while secret warrior lodges work to tip the Legion towards treachery. Bad blood with the Space Wolves over Prospero brings the V and VI Legions to the edge of war.",
+   "legions": [
+    "White Scars",
+    "Space Wolves",
+    "Alpha Legion"
+   ],
+   "characters": [
+    "Jaghatai Khan",
+    "Shiban",
+    "Targutai Yesugei",
+    "Torghun",
+    "Ilya Ravallion",
+    "Leman Russ",
+    "Malcador the Sigillite"
+   ],
+   "setting": "c. 006.M31",
+   "sort": 31006,
+   "planets": [
+    "chondax",
+    "terra"
+   ]
   },
   "vengeful_spirit": {
    "title": "Vengeful Spirit",
    "author": "Graham McNeill",
    "series": "The Horus Heresy",
-   "year": 2014
+   "year": 2014,
+   "number": 29,
+   "format": "Novel",
+   "synopsis": "Horus invades the fortified world of Molech, which guards a secret from the Emperor's past and a path to power in the Warp. Garviel Loken and a cell of Malcador's Knights Errant infiltrate the Warmaster's fleet while Imperial Knights and Titan Legions defend the planet. The campaign marks a turning point in Horus's ascendancy.",
+   "legions": [
+    "Sons of Horus",
+    "Knights Errant",
+    "Imperial Army",
+    "Imperial Knights",
+    "Legio Titanicus"
+   ],
+   "characters": [
+    "Horus",
+    "Ezekyle Abaddon",
+    "Garviel Loken",
+    "Tylos Rubio",
+    "Severian",
+    "Raeven"
+   ],
+   "setting": "009.M31",
+   "sort": 31009,
+   "planets": [
+    "molech"
+   ]
   },
   "deathfire": {
    "title": "Deathfire",
    "author": "Nick Kyme",
    "series": "The Horus Heresy",
-   "year": 2015
+   "year": 2015,
+   "number": 32,
+   "format": "Novel",
+   "synopsis": "Artellus Numeon believes that Vulkan's lifeless body can be restored on the Primarch's home world. He leads the Salamanders out of Ultramar and through the Ruinstorm towards Nocturne. Word Bearers and Death Guard hunt them all the way, and the journey tests the faith of the XVIII Legion's last loyal sons.",
+   "legions": [
+    "Salamanders",
+    "Ultramarines",
+    "Death Guard",
+    "Word Bearers"
+   ],
+   "characters": [
+    "Artellus Numeon",
+    "Vulkan",
+    "Barek Zytos",
+    "Xathen",
+    "Thiel",
+    "Prayto"
+   ],
+   "planets": [
+    "macragge",
+    "nocturne"
+   ]
   },
   "pharos": {
    "title": "Pharos",
    "author": "Guy Haley",
    "series": "The Horus Heresy",
-   "year": 2015
+   "year": 2015,
+   "number": 34,
+   "format": "Novel",
+   "synopsis": "On Sotha, the xenos beacon inside Mount Pharos keeps Imperium Secundus connected through the Ruinstorm. That makes it a prime target for the Night Lords. As Konrad Curze's Legion falls on the world, Ultramarines defenders and Sanguinius must hold the Pharos, while the device itself proves far stranger than anyone suspected.",
+   "legions": [
+    "Ultramarines",
+    "Night Lords",
+    "Blood Angels",
+    "Imperial Army"
+   ],
+   "characters": [
+    "Sanguinius",
+    "Konrad Curze",
+    "Krieg Acerbus"
+   ],
+   "setting": "c. 009.M31",
+   "sort": 31009,
+   "planets": [
+    "sotha"
+   ]
   },
   "angels_of_caliban": {
    "title": "Angels of Caliban",
    "author": "Gav Thorpe",
    "series": "The Horus Heresy",
-   "year": 2016
+   "year": 2016,
+   "number": 38,
+   "format": "Novel",
+   "synopsis": "As Lord Protector of Imperium Secundus, Lion El'Jonson hunts Konrad Curze across the worlds of Ultramar. Far away on Caliban, Luther and the exiled Dark Angels drift further from their Primarch, and the decisions they make will tear the First Legion apart.",
+   "legions": [
+    "Dark Angels",
+    "Night Lords",
+    "Ultramarines"
+   ],
+   "characters": [
+    "Lion El'Jonson",
+    "Luther",
+    "Konrad Curze",
+    "Zahariel",
+    "Holguin"
+   ],
+   "planets": [
+    "macragge",
+    "caliban"
+   ]
   },
   "praetorian_of_dorn": {
    "title": "Praetorian of Dorn",
    "author": "John French",
    "series": "The Horus Heresy",
-   "year": 2016
+   "year": 2016,
+   "number": 39,
+   "format": "Novel",
+   "synopsis": "The Alpha Legion launches its first strike on the Sol System, exposing weaknesses in the defences Rogal Dorn has built around Terra. The Praetorian and his huscarl Archamus have to hunt an enemy that hides in plain sight. The war against the XX Legion stretches from Pluto to the heart of the Imperial Palace.",
+   "legions": [
+    "Imperial Fists",
+    "Alpha Legion",
+    "Legio Custodes",
+    "Imperial Army"
+   ],
+   "characters": [
+    "Rogal Dorn",
+    "Archamus",
+    "Alpharius",
+    "Sigismund"
+   ],
+   "setting": "010.M31",
+   "sort": 31010,
+   "planets": [
+    "terra",
+    "pluto"
+   ]
   },
   "corax": {
    "title": "Corax",
    "author": "Gav Thorpe",
    "series": "The Horus Heresy",
-   "year": 2016
+   "year": 2016,
+   "number": 40,
+   "format": "Anthology",
+   "synopsis": "This single-author collection follows Corax after Isstvan V and the Battle of Ravendelve. It gathers the novellas Soulforge and Ravenlord, several short stories, and the new novella Weregeld. Corax wages a guerrilla war against the Traitors and struggles to keep his shattered Legion together, while his gene-altered Raptors face a grim fate.",
+   "legions": [
+    "Raven Guard",
+    "Alpha Legion",
+    "Night Lords",
+    "Mechanicum"
+   ],
+   "characters": [
+    "Corax",
+    "Branne",
+    "Agapito",
+    "Alvarex Solaro"
+   ],
+   "planets": [
+    "deliverance"
+   ]
   },
   "master_of_mankind": {
    "title": "The Master of Mankind",
    "author": "Aaron Dembski-Bowden",
    "series": "The Horus Heresy",
-   "year": 2016
+   "year": 2016,
+   "number": 41,
+   "format": "Novel",
+   "synopsis": "Beneath the Imperial Palace, the Emperor's unfinished Webway project has been breached by daemonic hosts after Magnus the Red's reckless warning. The Legio Custodes, the Sisters of Silence and the Mechanicum forces of Fabricator-General Kane wage a hopeless war in the labyrinth dimension to hold the gateways to Terra. At its heart, the novel shows the Emperor Himself, enthroned and at war, and asks what His ambitions really cost.",
+   "legions": [
+    "Legio Custodes",
+    "Sisters of Silence",
+    "Mechanicum",
+    "Daemons"
+   ],
+   "characters": [
+    "The Emperor",
+    "Constantin Valdor",
+    "Ra Endymion",
+    "Diocletian Coros",
+    "Arkhan Land",
+    "Zagreus Kane"
+   ],
+   "setting": "004-014.M31",
+   "sort": 31004,
+   "planets": [
+    "terra"
+   ]
   },
   "garro": {
    "title": "Garro",
    "author": "James Swallow",
    "series": "The Horus Heresy",
-   "year": 2017
+   "year": 2017,
+   "number": 42,
+   "format": "Novel",
+   "synopsis": "Nathaniel Garro, the Death Guard captain who brought warning of Horus's treachery to Terra, now serves Malcador the Sigillite as his Agentia Primus. Sent across a galaxy in flames, he gathers warriors from broken and traitor Legions to form the first Knights-Errant. Along the way he must reckon with the rising faith of the Lectitio Divinitatus and his own doubts about the Regent's purposes.",
+   "legions": [
+    "Knights Errant",
+    "Death Guard",
+    "Ultramarines",
+    "World Eaters"
+   ],
+   "characters": [
+    "Nathaniel Garro",
+    "Malcador the Sigillite",
+    "Tylos Rubio",
+    "Varren",
+    "Euphrati Keeler"
+   ],
+   "planets": [
+    "terra"
+   ]
   },
   "crimson_king": {
    "title": "The Crimson King",
    "author": "Graham McNeill",
    "series": "The Horus Heresy",
-   "year": 2017
+   "year": 2017,
+   "number": 44,
+   "format": "Novel",
+   "synopsis": "After the burning of Prospero, the Thousand Sons have retreated to the Planet of the Sorcerers in the Eye of Terror, but their primarch is a shattered, fading shadow of himself. Ahzek Ahriman and his brothers search the warp for the scattered fragments of Magnus's soul, hoping to restore him before his Legion falls apart. Their quest pulls them into the schemes of other powers and toward a choice about what the Thousand Sons will become.",
+   "legions": [
+    "Thousand Sons"
+   ],
+   "characters": [
+    "Magnus the Red",
+    "Ahzek Ahriman",
+    "Amon",
+    "Lemuel Gaumon",
+    "Kallista Eris"
+   ],
+   "planets": [
+    "planet_of_the_sorcerers"
+   ]
   },
   "tallarn": {
    "title": "Tallarn",
    "author": "John French",
    "series": "The Horus Heresy",
-   "year": 2017
+   "year": 2017,
+   "number": 45,
+   "format": "Novel",
+   "synopsis": "Perturabo's Iron Warriors arrive at Tallarn and poison the world with a virus bombardment, leaving its survivors sheltering in underground bunkers. What follows is the largest armoured war of the Heresy, fought by tank crews in sealed vehicles across a dead surface. The book combines the novella Executioner, the novel Ironclad and two short stories, and hints that the Iron Warriors came looking for something more than slaughter.",
+   "legions": [
+    "Iron Warriors",
+    "Imperial Army",
+    "Alpha Legion",
+    "Mechanicum"
+   ],
+   "characters": [
+    "Perturabo",
+    "Akil Sulan",
+    "Susada Syn",
+    "Argonis",
+    "Iaeo"
+   ],
+   "setting": "010-012.M31",
+   "sort": 31010,
+   "planets": [
+    "tallarn"
+   ]
   },
   "ruinstorm": {
    "title": "Ruinstorm",
    "author": "David Annandale",
    "series": "The Horus Heresy",
-   "year": 2017
+   "year": 2017,
+   "number": 46,
+   "format": "Novel",
+   "synopsis": "With Imperium Secundus dissolved, Roboute Guilliman, Sanguinius and Lion El'Jonson lead the fleets of three Legions out from Macragge into the daemon-haunted Ruinstorm. Seeking the source of the warp storm that has cut the galaxy in two, they fight toward Davin while Sanguinius is tormented by the temptations of a daemon. Their success would finally open the way back toward Terra.",
+   "legions": [
+    "Ultramarines",
+    "Blood Angels",
+    "Dark Angels",
+    "Word Bearers",
+    "Daemons"
+   ],
+   "characters": [
+    "Roboute Guilliman",
+    "Sanguinius",
+    "Lion El'Jonson",
+    "Madail"
+   ],
+   "setting": "011.M31",
+   "sort": 31011,
+   "planets": [
+    "macragge",
+    "davin"
+   ]
   },
   "old_earth": {
    "title": "Old Earth",
    "author": "Nick Kyme",
    "series": "The Horus Heresy",
-   "year": 2017
+   "year": 2017,
+   "number": 47,
+   "format": "Novel",
+   "synopsis": "The reborn Vulkan gathers his most loyal Salamanders for the last leg of a journey toward Terra, a road that leads through the hidden paths of the webway. Meanwhile Shadrak Meduson's Shattered Legions wage an increasingly desperate war against the traitors, and their alliance begins to fracture. The novel closes the Salamanders arc begun in Vulkan Lives and Deathfire.",
+   "legions": [
+    "Salamanders",
+    "Iron Hands",
+    "Raven Guard",
+    "Word Bearers",
+    "Aeldari"
+   ],
+   "characters": [
+    "Vulkan",
+    "Shadrak Meduson",
+    "Barthusa Narek",
+    "Eldrad Ulthran"
+   ],
+   "planets": [
+    "nocturne",
+    "terra"
+   ]
   },
   "wolfsbane": {
    "title": "Wolfsbane",
    "author": "Guy Haley",
    "series": "The Horus Heresy",
-   "year": 2018
+   "year": 2018,
+   "number": 49,
+   "format": "Novel",
+   "synopsis": "Leman Russ resolves to stop Horus before the Warmaster can reach the Sol System, even if it costs him his Legion. Leading the Space Wolves in a desperate strike against the Vengeful Spirit at Trisolian, the Wolf King confronts his brother in person. Interwoven memories of Russ's youth on Fenris explain why he believes this hunt is his alone.",
+   "legions": [
+    "Space Wolves",
+    "Sons of Horus"
+   ],
+   "characters": [
+    "Leman Russ",
+    "Horus Lupercal",
+    "Bjorn",
+    "Belisarius Cawl"
+   ],
+   "setting": "012.M31",
+   "sort": 31012,
+   "planets": [
+    "trisolian",
+    "fenris"
+   ]
   },
   "slaves_to_darkness": {
    "title": "Slaves to Darkness",
    "author": "John French",
    "series": "The Horus Heresy",
-   "year": 2018
+   "year": 2018,
+   "number": 51,
+   "format": "Novel",
+   "synopsis": "After the victory at Beta-Garmon the traitor host assembles at Ullanor for the final push on Terra, but Horus is weakened by a wound that will not heal. As the Warmaster's Legions jostle for power and the Ruinous Powers tighten their hold, the defenders of Terra make their last preparations. The novel sets the stage for the Siege of Terra.",
+   "legions": [
+    "Sons of Horus",
+    "Word Bearers",
+    "Imperial Fists",
+    "Death Guard",
+    "World Eaters"
+   ],
+   "characters": [
+    "Horus Lupercal",
+    "Ezekyle Abaddon",
+    "Lorgar Aurelian",
+    "Erebus",
+    "Rogal Dorn",
+    "Malcador the Sigillite"
+   ],
+   "planets": [
+    "ullanor",
+    "terra"
+   ]
   },
   "titandeath": {
    "title": "Titandeath",
    "author": "Guy Haley",
    "series": "The Horus Heresy",
-   "year": 2018
+   "year": 2018,
+   "number": 53,
+   "format": "Novel",
+   "synopsis": "In the Beta-Garmon Cluster, loyalist and traitor Titan Legions meet in the largest god-engine battle in history on the irradiated fields of Beta-Garmon II. Princeps Esha Ani Mohana of the Legio Solaria fights for survival while her rivalry with Legio Vulpa becomes deeply personal. Over the course of the battle, the gathering corruption of the traitor Legios becomes impossible to ignore.",
+   "legions": [
+    "Legio Solaria",
+    "Legio Vulpa",
+    "Legio Mortis",
+    "Sons of Horus",
+    "Blood Angels"
+   ],
+   "characters": [
+    "Esha Ani Mohana",
+    "Mohana Mankata VI",
+    "Terent Harrtek"
+   ],
+   "setting": "013.M31",
+   "sort": 31013,
+   "planets": [
+    "beta_garmon2"
+   ]
   },
   "buried_dagger": {
    "title": "The Buried Dagger",
    "author": "James Swallow",
    "series": "The Horus Heresy",
-   "year": 2019
+   "year": 2019,
+   "number": 54,
+   "format": "Novel",
+   "synopsis": "On their way to Terra, Mortarion and the Death Guard are trapped in the warp, and a terrible plague turns the Legion into Nurgle's servants. On Titan, Nathaniel Garro and Malcador's Knights-Errant prepare for the founding of a secret order that will outlast the Heresy. The two storylines show the fall of a Legion and the birth of the Grey Knights.",
+   "legions": [
+    "Death Guard",
+    "Knights Errant",
+    "Grey Knights"
+   ],
+   "characters": [
+    "Mortarion",
+    "Calas Typhon",
+    "Nathaniel Garro",
+    "Malcador the Sigillite",
+    "Tylos Rubio"
+   ],
+   "planets": [
+    "titan",
+    "terra"
+   ]
   },
   "dropsite_massacre": {
    "title": "Dropsite Massacre",
    "author": "John French",
    "series": "The Horus Heresy",
-   "year": 2025
+   "year": 2025,
+   "format": "Novel",
+   "synopsis": "Rogal Dorn and Malcador send the largest loyalist force ever assembled to Isstvan V to punish Horus' rebellion, unaware of how deep the betrayal runs. The slaughter that follows is told through the eyes of both traitors and loyalists, from Sons of Horus and World Eaters to the shattered Iron Hands and Raven Guard.",
+   "legions": [
+    "Sons of Horus",
+    "World Eaters",
+    "Iron Hands",
+    "Raven Guard",
+    "Salamanders",
+    "Night Lords",
+    "Iron Warriors",
+    "Alpha Legion",
+    "Word Bearers"
+   ],
+   "characters": [
+    "Maloghurst",
+    "Khârn",
+    "Castrmen Orth",
+    "Kaedes Nex",
+    "Horus",
+    "Ferrus Manus"
+   ],
+   "setting": "006.M31",
+   "sort": 31006,
+   "planets": [
+    "isstvan5"
+   ]
   },
   "sons_of_the_selenar": {
    "title": "Sons of the Selenar",
    "author": "Graham McNeill",
-   "series": "The Siege of Terra (Novelle)",
-   "year": 2020
+   "series": "The Siege of Terra",
+   "year": 2020,
+   "format": "Novella",
+   "synopsis": "As the siege begins, a crew of Shattered Legions warriors aboard the Sisypheum returns to the Sol System and is drawn to embattled Luna by a garbled distress call. Deep beneath the lunar surface, traitor forces hunt for a secret of the Selenar gene-cults that could give Horus power over the Astartes. The novella reveals hidden truths about the Emperor's genesmiths.",
+   "legions": [
+    "Iron Hands",
+    "Raven Guard",
+    "Salamanders",
+    "Selenar gene-cults"
+   ],
+   "characters": [
+    "Nykona Sharrowkyn",
+    "Ulrach Branthan",
+    "Wayland"
+   ],
+   "setting": "014.M31",
+   "sort": 31014,
+   "planets": [
+    "luna"
+   ]
   },
   "ashes_of_the_imperium": {
    "title": "Ashes of the Imperium",
@@ -5261,91 +6666,1399 @@ window.WH40K_DATA = {
    "title": "Roboute Guilliman: Lord of Ultramar",
    "author": "David Annandale",
    "series": "The Horus Heresy: Primarchs",
-   "year": 2016
+   "year": 2016,
+   "number": 1,
+   "format": "Novella",
+   "synopsis": "During the Great Crusade, Guilliman leads the Ultramarines against an ork empire whose heart lies on the world of Thoas. The campaign tests how far the Lord of Ultramar is willing to go to win, and how he weighs the cost of total victory against the kind of Imperium he wants to build. Interludes reveal the statesman behind the general.",
+   "legions": [
+    "Ultramarines"
+   ],
+   "characters": [
+    "Roboute Guilliman",
+    "Marius Gage",
+    "Ork Emperor of Thoas"
+   ],
+   "setting": "after 903.M30",
+   "sort": 30903,
+   "planets": [
+    "thoas"
+   ]
   },
   "great_wolf": {
    "title": "Leman Russ: The Great Wolf",
    "author": "Chris Wraight",
    "series": "The Horus Heresy: Primarchs",
-   "year": 2017
+   "year": 2016,
+   "number": 2,
+   "format": "Novella",
+   "synopsis": "The Space Wolves are sent to break the Faash and their Tyrant on the hyper-industrial throneworld of Dulan. Fighting alongside the Dark Angels, Russ and his Wolf Lords grow ever more at odds with Lion El'Jonson. The campaign's end sparks the infamous clash between the two primarchs.",
+   "legions": [
+    "Space Wolves",
+    "Dark Angels"
+   ],
+   "characters": [
+    "Leman Russ",
+    "Lion El'Jonson",
+    "Durath",
+    "Kloja"
+   ],
+   "setting": "870.M30",
+   "sort": 30870,
+   "planets": [
+    "dulan"
+   ]
   },
   "master_of_prospero": {
    "title": "Magnus the Red: Master of Prospero",
    "author": "Graham McNeill",
    "series": "The Horus Heresy: Primarchs",
-   "year": 2017
+   "year": 2017,
+   "number": 3,
+   "format": "Novella",
+   "synopsis": "Magnus and Perturabo join forces to evacuate the colony world of Morningstar, which is being torn apart by magnetic storms. A doomsday cult called the Sons of Shaitan resists the rescue, and something ancient stirs beneath the planet. The two primarchs and their Legions must decide what price is acceptable to stop its corruption from spreading.",
+   "legions": [
+    "Thousand Sons",
+    "Iron Warriors"
+   ],
+   "characters": [
+    "Magnus the Red",
+    "Perturabo",
+    "Ahzek Ahriman",
+    "Forrix",
+    "Atharva",
+    "Konrad Vargha"
+   ],
+   "planets": [
+    "morningstar"
+   ]
   },
   "hammer_of_olympia": {
    "title": "Perturabo: The Hammer of Olympia",
    "author": "Guy Haley",
    "series": "The Horus Heresy: Primarchs",
-   "year": 2017
+   "year": 2017,
+   "number": 4,
+   "format": "Novella",
+   "synopsis": "Two timelines frame the lord of the Iron Warriors: his precocious youth among the city-states of Olympia, and a bitter Great Crusade war against the time-bending hrud. When news of a revolt on his adopted homeworld arrives, Perturabo abandons the campaign and turns his Legion's full weight on Olympia.",
+   "legions": [
+    "Iron Warriors"
+   ],
+   "characters": [
+    "Perturabo",
+    "Dammekos",
+    "Calliphone"
+   ],
+   "planets": [
+    "olympia"
+   ]
   },
   "bearer_of_the_word": {
    "title": "Lorgar: Bearer of the Word",
    "author": "Gav Thorpe",
    "series": "The Horus Heresy: Primarchs",
-   "year": 2017
+   "year": 2017,
+   "number": 5,
+   "format": "Novella",
+   "synopsis": "On the desert world of Colchis, the disgraced preacher Kor Phaeron discovers a golden child among nomad outcasts and resolves to use him. The novel follows the young Lorgar's rise from prophet to master of the Covenant, largely through Kor Phaeron's scheming eyes, and the faith that will shape the Word Bearers.",
+   "legions": [
+    "Word Bearers"
+   ],
+   "characters": [
+    "Lorgar",
+    "Kor Phaeron"
+   ],
+   "planets": [
+    "colchis"
+   ]
   },
   "palatine_phoenix": {
    "title": "Fulgrim: The Palatine Phoenix",
    "author": "Josh Reynolds",
    "series": "The Horus Heresy: Primarchs",
-   "year": 2018
+   "year": 2017,
+   "number": 6,
+   "format": "Novella",
+   "synopsis": "At the start of the 28th Expedition, Fulgrim sets out to bring the world of Byzas into compliance with only a handful of his Emperor's Children. Byzas is a maze of aristocratic intrigue, and the Phoenician must win with diplomacy and the blade rather than sheer numbers, proving to himself that perfection needs no help.",
+   "legions": [
+    "Emperor's Children"
+   ],
+   "characters": [
+    "Fulgrim",
+    "Fabius",
+    "Golconda Pyke",
+    "Narvo Quin",
+    "Grythan Thorn",
+    "Kasperos Telmar",
+    "Cyrius"
+   ],
+   "planets": [
+    "byzas"
+   ]
   },
   "gorgon_of_medusa": {
    "title": "Ferrus Manus: The Gorgon of Medusa",
    "author": "David Guymer",
    "series": "The Horus Heresy: Primarchs",
-   "year": 2018
+   "year": 2018,
+   "number": 7,
+   "format": "Novella",
+   "synopsis": "The 413th Expedition is stalled against the stubbornly non-compliant human empire of Gardinaal. Commanding a mixed host that includes leaderless contingents of Ultramarines, Thousand Sons and Emperor's Children, Ferrus Manus decides to crush Gardinaal himself and send a message to his brothers and his father.",
+   "legions": [
+    "Iron Hands",
+    "Ultramarines",
+    "Thousand Sons",
+    "Emperor's Children"
+   ],
+   "characters": [
+    "Ferrus Manus",
+    "Gabriel Santar"
+   ],
+   "setting": "869.M30",
+   "sort": 30869,
+   "planets": [
+    "gardinaal_prime"
+   ]
   },
   "warhawk_of_chogoris": {
    "title": "Jaghatai Khan: Warhawk of Chogoris",
    "author": "Chris Wraight",
    "series": "The Horus Heresy: Primarchs",
-   "year": 2018
+   "year": 2018,
+   "number": 8,
+   "format": "Novella",
+   "synopsis": "Years after Chogoris was brought into the Imperium, the White Scars' warrior mysticism sits uneasily with the Imperial Truth. As the Librarius project takes shape, the Khan must weigh loyalty to the Emperor's vision against the heritage of his homeworld, while recollections reveal his rise to power on the steppes.",
+   "legions": [
+    "White Scars"
+   ],
+   "characters": [
+    "Jaghatai Khan",
+    "Qin Xa",
+    "Hasik",
+    "Targutai Yesugei"
+   ],
+   "planets": [
+    "chogoris"
+   ]
   },
   "lord_of_drakes": {
    "title": "Vulkan: Lord of Drakes",
    "author": "David Annandale",
    "series": "The Horus Heresy: Primarchs",
-   "year": 2018
+   "year": 2018,
+   "number": 9,
+   "format": "Novella",
+   "synopsis": "The Terran-born warriors of the XVIII Legion are making a last stand against an ork invasion in the Taras Division, unaware their primarch has already been found. On Nocturne, Vulkan has trained a new generation of warriors and finally leads them to war, to save his beleaguered sons and forge two halves into one Legion.",
+   "legions": [
+    "Salamanders"
+   ],
+   "characters": [
+    "Vulkan",
+    "Cassian Vaughn",
+    "Reth Sho'mar",
+    "Tukeren Na'shor",
+    "The Emperor"
+   ],
+   "planets": [
+    "antaeum",
+    "nocturne"
+   ]
   },
   "lord_of_shadows": {
    "title": "Corax: Lord of Shadows",
    "author": "Guy Haley",
    "series": "The Horus Heresy: Primarchs",
-   "year": 2018
+   "year": 2018,
+   "number": 10,
+   "format": "Novella",
+   "synopsis": "The Raven Guard and an Imperial Army war host are sent to force the void-cities of the Carinae Sodality into compliance. When an ancient bio-weapon is unleashed at the void-city of Zenith, allies turn on each other and the campaign teeters on collapse. Meanwhile, on Deliverance, a movement claiming to act in Corax's name takes vengeance into its own hands.",
+   "legions": [
+    "Raven Guard",
+    "Night Lords"
+   ],
+   "characters": [
+    "Corvus Corax",
+    "Effe Dellius",
+    "Arch-Comptroller Agarth",
+    "Konrad Curze",
+    "Jago Sevatarion"
+   ],
+   "planets": [
+    "deliverance"
+   ]
   },
   "slave_of_nuceria": {
    "title": "Angron: Slave of Nuceria",
    "author": "Ian St. Martin",
    "series": "The Horus Heresy: Primarchs",
-   "year": 2019
+   "year": 2019,
+   "number": 11,
+   "format": "Novella",
+   "synopsis": "Angron commands a Legion he never wanted in service of a father he cannot forgive. Flashbacks to his years as a gladiator-slave on Nuceria alternate with a Great Crusade campaign in which he demands that his sons take the Butcher's Nails, an ultimatum that will change the World Eaters forever.",
+   "legions": [
+    "World Eaters"
+   ],
+   "characters": [
+    "Angron",
+    "Khârn",
+    "Mago"
+   ],
+   "planets": [
+    "nuceria"
+   ]
   },
   "lord_of_the_first": {
    "title": "Lion El'Jonson: Lord of the First",
    "author": "David Guymer",
    "series": "The Horus Heresy: Primarchs",
-   "year": 2020
+   "year": 2020,
+   "number": 13,
+   "format": "Novella",
+   "synopsis": "While the Emperor gathers his sons for Ullanor, the Lion leads the Dark Angels to the Northern Fringe to subdue the rebellious world of Muspel. There they face the Khrave, psychic xenos able to seize the minds of lesser beings, and the Legion's habit of secrecy becomes both a weapon and a weakness.",
+   "legions": [
+    "Dark Angels"
+   ],
+   "characters": [
+    "Lion El'Jonson",
+    "The Autochthonar"
+   ],
+   "setting": "997.M30",
+   "sort": 30997,
+   "planets": [
+    "muspel"
+   ]
   },
   "pale_king": {
    "title": "Mortarion: The Pale King",
    "author": "David Annandale",
    "series": "The Horus Heresy: Primarchs",
-   "year": 2022
+   "year": 2022,
+   "number": 15,
+   "format": "Novella",
+   "synopsis": "Mortarion leads the Death Guard in a merciless compliance of the Galaspar Cluster, whose ruling Order enslaves and works its people to death, much like the tyrants of his own youth. When two of his brothers arrive to call him to account for the slaughter, the Pale King refuses to apologise for his methods.",
+   "legions": [
+    "Death Guard"
+   ],
+   "characters": [
+    "Mortarion",
+    "Horus",
+    "Sanguinius"
+   ],
+   "planets": [
+    "galaspar"
+   ]
   },
   "valdor": {
    "title": "Valdor: Birth of the Imperium",
    "author": "Chris Wraight",
    "series": "The Horus Heresy: Characters",
-   "year": 2020
+   "year": 2019,
+   "format": "Novel",
+   "synopsis": "Near the end of the Unification Wars, Constantin Valdor, Captain-General of the Custodians, fights to complete the Emperor's conquest of Terra. As the new Legiones Astartes rise and the Thunder Warriors grow restless, Valdor must carry out the darker deeds that the birth of the Imperium demands.",
+   "legions": [
+    "Legio Custodes",
+    "Thunder Warriors"
+   ],
+   "characters": [
+    "Constantin Valdor",
+    "The Emperor",
+    "Ushotan",
+    "Uwoma Kandawire"
+   ],
+   "setting": "M30",
+   "sort": 30000,
+   "planets": [
+    "terra"
+   ]
   },
   "luther_first_fallen": {
    "title": "Luther: First of the Fallen",
    "author": "Gav Thorpe",
    "series": "The Horus Heresy: Characters",
-   "year": 2021
+   "year": 2020,
+   "format": "Novel",
+   "synopsis": "Luther, the knight who found and raised Lion El'Jonson, tells his own story of Caliban, from his years beside the Lion to the slow-burning resentment of being left behind. As rebellion and dark influences grow on the Dark Angels' homeworld, Luther makes the choices that will shatter both the Legion and Caliban.",
+   "legions": [
+    "Dark Angels"
+   ],
+   "characters": [
+    "Luther",
+    "Lion El'Jonson",
+    "Zahariel",
+    "Merir Astelan"
+   ],
+   "planets": [
+    "caliban"
+   ]
+  },
+  "legion": {
+   "title": "Legion",
+   "author": "Dan Abnett",
+   "series": "The Horus Heresy",
+   "number": 7,
+   "year": 2008,
+   "format": "Novel",
+   "synopsis": "The Imperial Army's Geno Five-Two Chiliad struggles to pacify the world of Nurth when the secretive Alpha Legion arrives to assist. As officers investigate the Legion's motives and an ancient sorcerous cult, the twin primarchs make a fateful choice about which side to take in the coming war.",
+   "legions": [
+    "Alpha Legion",
+    "Imperial Army"
+   ],
+   "characters": [
+    "Alpharius",
+    "Omegon",
+    "Peto Soneka",
+    "John Grammaticus",
+    "Hurtado Bronzi",
+    "Namid Shere"
+   ],
+   "planets": [
+    "nurth"
+   ]
+  },
+  "tales_of_heresy": {
+   "title": "Tales of Heresy",
+   "author": "Various",
+   "series": "The Horus Heresy",
+   "number": 10,
+   "year": 2009,
+   "format": "Anthology",
+   "synopsis": "A collection of short stories that widens the scope of the Great Crusade and the early Heresy, from the Legio Custodes and the Sisters of Silence on Terra to Angron's World Eaters, the Space Wolves, the Dark Angels and the Emperor's Children. Several tales explore the Imperial Truth, the last remnants of faith and the Emperor himself.",
+   "legions": [
+    "Legio Custodes",
+    "Sisters of Silence",
+    "World Eaters",
+    "Space Wolves",
+    "Dark Angels",
+    "Emperor's Children"
+   ],
+   "characters": [
+    "Amon Tauromachian",
+    "The Emperor",
+    "Angron",
+    "Leman Russ",
+    "Uriah Olathaire"
+   ],
+   "planets": [
+    "terra"
+   ]
+  },
+  "nemesis": {
+   "title": "Nemesis",
+   "author": "James Swallow",
+   "series": "The Horus Heresy",
+   "number": 13,
+   "year": 2010,
+   "format": "Novel",
+   "synopsis": "The Officio Assassinorum assembles an Execution Force of operatives from its rival clades and sends them to the world of Dagonet to kill the Warmaster. Meanwhile, the Word Bearers set a murderous agent of their own in motion, and Imperial investigators on Terra pursue a trail of impossible killings.",
+   "legions": [
+    "Officio Assassinorum",
+    "Sons of Horus",
+    "Word Bearers"
+   ],
+   "characters": [
+    "Eristede Kell",
+    "Jenniker Soalm",
+    "Iota",
+    "Fon Tariel",
+    "Garantine",
+    "Erebus",
+    "Horus"
+   ],
+   "planets": [
+    "dagonet",
+    "terra"
+   ]
+  },
+  "age_of_darkness": {
+   "title": "Age of Darkness",
+   "author": "Various",
+   "series": "The Horus Heresy",
+   "number": 16,
+   "year": 2011,
+   "format": "Anthology",
+   "synopsis": "Short stories set in the shadowed years after Isstvan, when the war spread into countless hidden conflicts. Tales cover the Ultramarines before Calth, the scattered survivors of Isstvan V, the Raven Guard and Alpha Legion, Remembrancers on Terra, the shattered Thousand Sons and the Iron Warriors.",
+   "legions": [
+    "Ultramarines",
+    "Raven Guard",
+    "Alpha Legion",
+    "Thousand Sons",
+    "Iron Warriors",
+    "Iron Hands",
+    "Salamanders",
+    "Sons of Horus"
+   ],
+   "characters": [
+    "Roboute Guilliman",
+    "Corvus Corax",
+    "Horus Aximand",
+    "Ahzek Ahriman",
+    "Malcador"
+   ],
+   "planets": [
+    "terra",
+    "prospero"
+   ]
+  },
+  "the_primarchs": {
+   "title": "The Primarchs",
+   "author": "Various",
+   "series": "The Horus Heresy",
+   "number": 20,
+   "year": 2012,
+   "format": "Anthology",
+   "synopsis": "Four novellas centred on the primarchs themselves: Fulgrim faces the consequences of his choices, Lion El'Jonson's Dark Angels fight the Heresy in secret, the Alpha Legion's twin primarchs pursue their hidden designs, and Ferrus Manus leads his Iron Hands in a war against a defiant world before the Heresy breaks.",
+   "legions": [
+    "Emperor's Children",
+    "Dark Angels",
+    "Alpha Legion",
+    "Iron Hands"
+   ],
+   "characters": [
+    "Fulgrim",
+    "Lion El'Jonson",
+    "Alpharius",
+    "Omegon",
+    "Ferrus Manus",
+    "Corswain"
+   ],
+   "planets": []
+  },
+  "damnation_of_pythos": {
+   "title": "The Damnation of Pythos",
+   "author": "David Annandale",
+   "series": "The Horus Heresy",
+   "number": 30,
+   "year": 2014,
+   "format": "Novel",
+   "synopsis": "A band of Iron Hands, Raven Guard and Salamanders who survived Isstvan V takes refuge on Pythos, a death world swarming with predators. There they try to strike back at the Traitors. A warp anomaly at the planet's heart draws a growing horror, and the Shattered Legions face a foe that cannot be beaten with bolter and blade.",
+   "legions": [
+    "Iron Hands",
+    "Raven Guard",
+    "Salamanders",
+    "Imperial Army"
+   ],
+   "characters": [
+    "Atticus",
+    "Galba",
+    "Madail"
+   ],
+   "planets": [
+    "pythos"
+   ]
+  },
+  "legacies_of_betrayal": {
+   "title": "Legacies of Betrayal",
+   "author": "Various",
+   "series": "The Horus Heresy",
+   "number": 31,
+   "year": 2015,
+   "format": "Anthology",
+   "synopsis": "This anthology collects many shorter tales from across the galaxy-spanning civil war. Their viewpoints range from Primarchs to line legionaries. They include the White Scars' brotherhood, Angron and Lorgar on the eve of open war, Horus in his role as Warmaster, and the first steps of Lucius towards becoming the Eternal Blade.",
+   "legions": [
+    "White Scars",
+    "World Eaters",
+    "Word Bearers",
+    "Sons of Horus",
+    "Emperor's Children",
+    "Iron Hands",
+    "Space Wolves"
+   ],
+   "characters": [
+    "Jaghatai Khan",
+    "Angron",
+    "Lorgar",
+    "Horus",
+    "Lucius",
+    "Sharrowkyn"
+   ],
+   "planets": []
+  },
+  "war_without_end": {
+   "title": "War Without End",
+   "author": "Various",
+   "series": "The Horus Heresy",
+   "number": 33,
+   "year": 2016,
+   "format": "Anthology",
+   "synopsis": "This anthology gathers short stories from the Great Crusade and the Heresy, many first released as limited editions or event exclusives. They range from Angron's bloody past and Fulgrim's descent to the Lion's campaigns and the Iron Warriors' escape from the Eye of Terror.",
+   "legions": [
+    "World Eaters",
+    "Emperor's Children",
+    "Dark Angels",
+    "Iron Warriors",
+    "Space Wolves",
+    "Legio Custodes"
+   ],
+   "characters": [
+    "Angron",
+    "Fulgrim",
+    "Lion El'Jonson",
+    "Perturabo"
+   ],
+   "planets": []
+  },
+  "eye_of_terra": {
+   "title": "Eye of Terra",
+   "author": "Various",
+   "series": "The Horus Heresy",
+   "number": 35,
+   "year": 2016,
+   "format": "Anthology",
+   "synopsis": "This collection of short stories covers the era of the Great Crusade and the Heresy. Its centrepiece is the novella Aurelian, in which Lorgar journeys through the Eye of Terror. Other tales range from Horus and the Emperor fighting side by side against the Orks to scattered battles across the galaxy.",
+   "legions": [
+    "Word Bearers",
+    "Luna Wolves",
+    "Space Wolves",
+    "Dark Angels",
+    "Iron Hands",
+    "Blood Angels"
+   ],
+   "characters": [
+    "Lorgar",
+    "Horus",
+    "The Emperor"
+   ],
+   "planets": []
+  },
+  "path_of_heaven": {
+   "title": "The Path of Heaven",
+   "author": "Chris Wraight",
+   "series": "The Horus Heresy",
+   "number": 36,
+   "year": 2016,
+   "format": "Novel",
+   "synopsis": "Years after declaring for the Emperor, the White Scars are hemmed in by Warp storms and Traitor Legions as they wage a hit-and-run war far from Terra. Jaghatai Khan searches for a route home to the Throneworld. Meanwhile the Death Guard and Emperor's Children close in, and old divisions within the Legion flare up again.",
+   "legions": [
+    "White Scars",
+    "Death Guard",
+    "Emperor's Children",
+    "Alpha Legion"
+   ],
+   "characters": [
+    "Jaghatai Khan",
+    "Shiban",
+    "Targutai Yesugei",
+    "Ilya Ravallion",
+    "Mortarion"
+   ],
+   "planets": [
+    "prospero",
+    "terra"
+   ]
+  },
+  "silent_war": {
+   "title": "The Silent War",
+   "author": "Various",
+   "series": "The Horus Heresy",
+   "number": 37,
+   "year": 2016,
+   "format": "Anthology",
+   "synopsis": "This anthology focuses on Malcador the Sigillite and the hidden agents he sends out as the Heresy spreads. Many of the stories follow his Knights Errant, renegade legionaries recruited for covert missions, along with the Sisters of Silence and others fighting a secret war in the shadows.",
+   "legions": [
+    "Knights Errant",
+    "Sisters of Silence",
+    "Legio Custodes",
+    "Imperial Fists"
+   ],
+   "characters": [
+    "Malcador the Sigillite",
+    "Nathaniel Garro"
+   ],
+   "planets": [
+    "terra",
+    "luna"
+   ]
+  },
+  "shattered_legions": {
+   "title": "Shattered Legions",
+   "author": "Various",
+   "series": "The Horus Heresy",
+   "number": 43,
+   "year": 2017,
+   "format": "Anthology",
+   "synopsis": "A collection of stories, edited by Laurie Goulding, following the survivors of the Isstvan V massacre. Iron Hands, Salamanders and Raven Guard bands, bound together under Shadrak Meduson, fight a guerrilla war of vengeance against the traitor Legions while struggling with their own grief and growing ruthlessness. The volume is anchored by Graham McNeill's novella The Seventh Serpent.",
+   "legions": [
+    "Iron Hands",
+    "Salamanders",
+    "Raven Guard"
+   ],
+   "characters": [
+    "Shadrak Meduson",
+    "Nykona Sharrowkyn"
+   ],
+   "planets": []
+  },
+  "burden_of_loyalty": {
+   "title": "The Burden of Loyalty",
+   "author": "Various",
+   "series": "The Horus Heresy",
+   "number": 48,
+   "year": 2018,
+   "format": "Anthology",
+   "synopsis": "An anthology, edited by Laurie Goulding, of loyalist stories set across the later Heresy. Its centrepieces are Chris Wraight's novella The Wolf King, about the Space Wolves, and Rob Sanders' Cybernetica, about the Legio Cybernetica, alongside shorter tales by Dan Abnett, Aaron Dembski-Bowden, John French, David Annandale and Gav Thorpe.",
+   "legions": [
+    "Space Wolves",
+    "Mechanicum",
+    "Imperial Fists",
+    "Ultramarines"
+   ],
+   "planets": []
+  },
+  "born_of_flame": {
+   "title": "Born of Flame",
+   "author": "Nick Kyme",
+   "series": "The Horus Heresy",
+   "number": 50,
+   "year": 2018,
+   "format": "Anthology",
+   "synopsis": "A collection of Nick Kyme's shorter Salamanders fiction from the Great Crusade and the Heresy, including the novellas Promethean Sun and Scorched Earth and the short novel Sons of the Forge. It follows Vulkan and his sons from a doomed crusade campaign through the aftermath of the Isstvan V massacre, showing the Legion's humanity and its burden of loss.",
+   "legions": [
+    "Salamanders",
+    "Iron Hands"
+   ],
+   "characters": [
+    "Vulkan",
+    "Artellus Numeon"
+   ],
+   "planets": [
+    "isstvan5"
+   ]
+  },
+  "heralds_of_the_siege": {
+   "title": "Heralds of the Siege",
+   "author": "Various",
+   "series": "The Horus Heresy",
+   "number": 52,
+   "year": 2018,
+   "format": "Anthology",
+   "synopsis": "A collection of stories, edited by Nick Kyme and Laurie Goulding, set in the final months before the Siege of Terra. Loyalist and traitor forces make their last moves across the galaxy and inside the Sol System, preparing for the conflict to come. Contributors include John French, Chris Wraight, Gav Thorpe, Guy Haley, Nick Kyme, James Swallow, Rob Sanders and Anthony Reynolds.",
+   "legions": [
+    "Imperial Fists",
+    "Sons of Horus",
+    "Thousand Sons",
+    "Raven Guard",
+    "Alpha Legion"
+   ],
+   "characters": [
+    "Rogal Dorn",
+    "Malcador the Sigillite"
+   ],
+   "planets": [
+    "terra"
+   ]
+  },
+  "end_and_death_volume_i": {
+   "title": "The End and the Death: Volume I",
+   "author": "Dan Abnett",
+   "series": "The Siege of Terra",
+   "number": 8,
+   "year": 2023,
+   "format": "Novel",
+   "synopsis": "As the Palace verges on collapse and time itself begins to unravel on Terra, Horus makes a final gamble. When the Warmaster lowers the Vengeful Spirit's shields, the Emperor must decide whether to answer the challenge. The first volume of the finale gathers the surviving characters of the saga toward their last stand.",
+   "legions": [
+    "Sons of Horus",
+    "Imperial Fists",
+    "Blood Angels",
+    "Legio Custodes",
+    "Daemons"
+   ],
+   "characters": [
+    "The Emperor",
+    "Horus Lupercal",
+    "Rogal Dorn",
+    "Malcador the Sigillite",
+    "John Grammaticus",
+    "Oll Persson",
+    "Garviel Loken"
+   ],
+   "setting": "014.M31",
+   "sort": 31014,
+   "planets": [
+    "terra"
+   ]
+  },
+  "end_and_death_volume_ii": {
+   "title": "The End and the Death: Volume II",
+   "author": "Dan Abnett",
+   "series": "The Siege of Terra",
+   "number": 9,
+   "year": 2023,
+   "format": "Novel",
+   "synopsis": "The Emperor and His companions fight their way across the nightmare realm that the Vengeful Spirit has become. On Terra the defenders hold on without their master, while aboard the flagship two angelic brothers come face to face. The middle volume moves the Heresy toward its fatal reckoning.",
+   "legions": [
+    "Sons of Horus",
+    "Blood Angels",
+    "Legio Custodes",
+    "Daemons"
+   ],
+   "characters": [
+    "The Emperor",
+    "Horus Lupercal",
+    "Sanguinius",
+    "Garviel Loken",
+    "Oll Persson"
+   ],
+   "setting": "014.M31",
+   "sort": 31014,
+   "planets": [
+    "terra"
+   ]
+  },
+  "end_and_death_volume_iii": {
+   "title": "The End and the Death: Volume III",
+   "author": "Dan Abnett",
+   "series": "The Siege of Terra",
+   "number": 10,
+   "year": 2024,
+   "format": "Novel",
+   "synopsis": "The Emperor and Horus meet for the last time, in a duel fought across reality as much as on the deck of the Vengeful Spirit. On Terra, Malcador sits on the Golden Throne to buy his master time. The concluding volume brings the Horus Heresy to its end and sets the Imperium on the path to the grim forty-first millennium.",
+   "legions": [
+    "Sons of Horus",
+    "Legio Custodes",
+    "Imperial Fists",
+    "Daemons"
+   ],
+   "characters": [
+    "The Emperor",
+    "Horus Lupercal",
+    "Malcador the Sigillite",
+    "Garviel Loken",
+    "Rogal Dorn"
+   ],
+   "setting": "014.M31",
+   "sort": 31014,
+   "planets": [
+    "terra"
+   ]
+  },
+  "fury_of_magnus": {
+   "title": "Fury of Magnus",
+   "author": "Graham McNeill",
+   "series": "The Siege of Terra",
+   "year": 2020,
+   "format": "Novella",
+   "synopsis": "Magnus the Red brings his Thousand Sons to the Siege of Terra in the hope of finally carrying out his long-laid plans. From beyond the walls to the heart of the Palace and the realms beyond, Ahriman, Amon and Menkaura are caught up in the culmination of their primarch's designs. Salamanders and Space Wolves stand against them.",
+   "legions": [
+    "Thousand Sons",
+    "Salamanders",
+    "Space Wolves"
+   ],
+   "characters": [
+    "Magnus the Red",
+    "Ahzek Ahriman",
+    "Amon",
+    "Menkaura"
+   ],
+   "setting": "014.M31",
+   "sort": 31014,
+   "planets": [
+    "terra"
+   ]
+  },
+  "garro_knight_of_grey": {
+   "title": "Garro: Knight of Grey",
+   "author": "James Swallow",
+   "series": "The Siege of Terra",
+   "year": 2023,
+   "format": "Novella",
+   "synopsis": "Within the ruined Imperial Palace, the Knight-Errant Nathaniel Garro fights on as the plagues of the Death Guard spread through the defences. His war becomes a personal confrontation with his gene-father Mortarion, now a Daemon Primarch. It closes Garro's long arc through the Heresy.",
+   "legions": [
+    "Knights Errant",
+    "Death Guard"
+   ],
+   "characters": [
+    "Nathaniel Garro",
+    "Mortarion"
+   ],
+   "setting": "014.M31",
+   "sort": 31014,
+   "planets": [
+    "terra"
+   ]
+  },
+  "era_of_ruin": {
+   "title": "Era of Ruin",
+   "author": "Various",
+   "series": "The Siege of Terra",
+   "year": 2025,
+   "format": "Anthology",
+   "synopsis": "An epilogue anthology of eight stories by the Siege of Terra authors, set in the immediate aftermath of the Siege. Survivors on both sides count the cost of the war as the Imperium begins to take its new, grim shape. Contributors include Dan Abnett, John French, Aaron Dembski-Bowden, Chris Wraight, Gav Thorpe, Guy Haley and Nick Kyme.",
+   "legions": [
+    "Imperial Fists",
+    "Blood Angels",
+    "White Scars",
+    "Legio Custodes"
+   ],
+   "setting": "014.M31",
+   "sort": 31014,
+   "planets": [
+    "terra"
+   ]
+  },
+  "alpharius_head_of_the_hydra": {
+   "title": "Alpharius: Head of the Hydra",
+   "author": "Mike Brooks",
+   "series": "The Horus Heresy: Primarchs",
+   "number": 14,
+   "year": 2021,
+   "format": "Novella",
+   "synopsis": "Alpharius himself narrates the story of his origins and of how the Alpha Legion came to be, after being reunited with his twin Omegon. The tale is interrupted by an assault from the xenos Slaugth, and the reader can never be sure how much of the primarch's account is truth and how much is misdirection.",
+   "legions": [
+    "Alpha Legion"
+   ],
+   "characters": [
+    "Alpharius",
+    "Omegon",
+    "Horus"
+   ],
+   "planets": []
+  },
+  "rogal_dorn_the_emperors_crusader": {
+   "title": "Rogal Dorn: The Emperor's Crusader",
+   "author": "Gav Thorpe",
+   "series": "The Horus Heresy: Primarchs",
+   "number": 16,
+   "year": 2022,
+   "format": "Novella",
+   "synopsis": "Six decades into the Great Crusade, four primarchs are sent beyond the Northern Major Warp Storm to conquer the shrouded region known as the Occluda Noctis. Rogal Dorn leads the Imperial Fists into this Night Crusade, clashing with Lion El'Jonson over how to fulfil the Emperor's orders while an unknown foe waits in the dark.",
+   "legions": [
+    "Imperial Fists",
+    "Dark Angels"
+   ],
+   "characters": [
+    "Rogal Dorn",
+    "Lion El'Jonson",
+    "Fafnir Rann"
+   ],
+   "planets": []
+  },
+  "sanguinius_the_great_angel": {
+   "title": "Sanguinius: The Great Angel",
+   "author": "Chris Wraight",
+   "series": "The Horus Heresy: Primarchs",
+   "number": 17,
+   "year": 2022,
+   "format": "Novella",
+   "synopsis": "A disgraced remembrancer is assigned to the Blood Angels to chronicle their primarch. Told through the chronicler's interviews and observations, the book explores the gap between Sanguinius the man and the angelic myth that surrounds him, and what the legend means to those who serve him.",
+   "legions": [
+    "Blood Angels"
+   ],
+   "characters": [
+    "Sanguinius"
+   ],
+   "planets": []
+  },
+  "sons_of_the_emperor": {
+   "title": "Sons of the Emperor",
+   "author": "Various",
+   "series": "The Horus Heresy: Primarchs",
+   "year": 2018,
+   "format": "Anthology",
+   "synopsis": "Eight short stories by different Black Library authors, each spotlighting one or more primarchs at defining moments of the Great Crusade and Heresy. Among them is a tale of the Emperor coming to Nocturne to reveal Vulkan's destiny.",
+   "legions": [],
+   "characters": [
+    "Vulkan",
+    "The Emperor"
+   ],
+   "planets": []
+  },
+  "scions_of_the_emperor": {
+   "title": "Scions of the Emperor",
+   "author": "Various",
+   "series": "The Horus Heresy: Primarchs",
+   "year": 2019,
+   "format": "Anthology",
+   "synopsis": "A second collection of eight primarch-focused short stories. Highlights include a young Guilliman learning hard lessons in statecraft, an even younger Ferrus Manus fighting to survive alone on Medusa, and the Lion conversing with an Alpha Legionnaire during the Rangdan Xenocides.",
+   "legions": [
+    "Ultramarines",
+    "Iron Hands",
+    "Dark Angels",
+    "Alpha Legion"
+   ],
+   "characters": [
+    "Roboute Guilliman",
+    "Ferrus Manus",
+    "Lion El'Jonson"
+   ],
+   "planets": [
+    "medusa"
+   ]
+  },
+  "blood_of_the_emperor": {
+   "title": "Blood of the Emperor",
+   "author": "Various",
+   "series": "The Horus Heresy: Primarchs",
+   "year": 2021,
+   "format": "Anthology",
+   "synopsis": "Six short stories, each offering a fresh look at one of the primarchs, by Graham McNeill, Nick Kyme, David Guymer, Andy Clark, Mike Brooks and Chris Wraight.",
+   "legions": [],
+   "characters": [],
+   "planets": []
+  },
+  "sigismund_the_eternal_crusader": {
+   "title": "Sigismund: The Eternal Crusader",
+   "author": "John French",
+   "series": "The Horus Heresy: Characters",
+   "year": 2022,
+   "format": "Novel",
+   "synopsis": "Near the end of the Great Crusade, the remembrancer Solomon Voss sets out to understand why Sigismund believes the war will never end. His search uncovers Sigismund's life before he became a Space Marine, his first battles and oaths, and the duels that made him the Imperial Fists' greatest champion.",
+   "legions": [
+    "Imperial Fists"
+   ],
+   "characters": [
+    "Sigismund",
+    "Solomon Voss",
+    "Rogal Dorn"
+   ],
+   "planets": [
+    "terra"
+   ]
+  },
+  "eidolon_the_auric_hammer": {
+   "title": "Eidolon: The Auric Hammer",
+   "author": "Marc Collins",
+   "series": "The Horus Heresy: Characters",
+   "year": 2024,
+   "format": "Novel",
+   "synopsis": "Lord Commander Primus Eidolon of the Emperor's Children has fallen far and faces a reckoning for his misdeeds during the Heresy. As the traitor host closes on Terra, he must claw back his power and decide how much of his soul he will trade for glory, amid ever more dangerous dealings with daemons.",
+   "legions": [
+    "Emperor's Children"
+   ],
+   "characters": [
+    "Eidolon",
+    "Fulgrim"
+   ],
+   "planets": []
+  },
+  "zardu_layak_the_crimson_apostle": {
+   "title": "Zardu Layak: The Crimson Apostle",
+   "author": "Rich McCormick",
+   "series": "The Horus Heresy: Characters",
+   "year": 2026,
+   "format": "Novel",
+   "synopsis": "The Word Bearers zealot Zardu Layak believes the gods have chosen him, guided by visions of Lorgar. To claim the strength his destiny requires, he journeys to the haunted, desolate world of Helwain in search of the daemon-bound Anakatis Blades, where the ghosts of his own past weakness wait for him.",
+   "legions": [
+    "Word Bearers"
+   ],
+   "characters": [
+    "Zardu Layak",
+    "Lorgar",
+    "Anakatis Blade-Slaves"
+   ],
+   "planets": [
+    "helwain"
+   ]
+  },
+  "raldoron_revenant": {
+   "title": "Raldoron: Revenant",
+   "author": "Guy Haley",
+   "series": "The Horus Heresy: Characters",
+   "year": 2026,
+   "format": "Novel",
+   "synopsis": "Sanguinius leads the Imperial Reprisal Fleet into the Garmon Cluster to slow Horus' advance on Terra. First Captain Raldoron is forced to fill his ranks with hastily raised inductii whose unchecked savagery threatens to revive the Blood Angels' darker heritage as the Revenant Legion.",
+   "legions": [
+    "Blood Angels"
+   ],
+   "characters": [
+    "Raldoron",
+    "Sanguinius"
+   ],
+   "planets": [
+    "beta_garmon2"
+   ]
+  },
+  "promethean_sun": {
+   "title": "Promethean Sun",
+   "author": "Nick Kyme",
+   "series": "The Horus Heresy",
+   "year": 2011,
+   "format": "Novella",
+   "synopsis": "During the Great Crusade, the Iron Hands, Death Guard and Salamanders invade a feral world held by the eldar. While their brothers fight in the open, the Salamanders push into deep jungles full of monstrous beasts and witchery, and Vulkan himself must foil the xenos' plan, at a cost he will long regret.",
+   "legions": [
+    "Salamanders",
+    "Iron Hands",
+    "Death Guard"
+   ],
+   "characters": [
+    "Vulkan",
+    "Ferrus Manus",
+    "Mortarion",
+    "Artellus Numeon"
+   ],
+   "planets": [
+    "one_five_four_four"
+   ]
+  },
+  "aurelian": {
+   "title": "Aurelian",
+   "author": "Aaron Dembski-Bowden",
+   "series": "The Horus Heresy",
+   "year": 2011,
+   "format": "Novella",
+   "synopsis": "After the Emperor's rebuke at Monarchia, Lorgar searches the stars for truth until he stares into the Eye of Terror. Guided by the daemon Ingethel, he travels into the realm of Chaos and witnesses visions of the pivotal moments that will decide humanity's fate, then sets his course towards damnation.",
+   "legions": [
+    "Word Bearers"
+   ],
+   "characters": [
+    "Lorgar",
+    "Ingethel",
+    "Argel Tal"
+   ],
+   "planets": []
+  },
+  "brotherhood_of_the_storm": {
+   "title": "Brotherhood of the Storm",
+   "author": "Chris Wraight",
+   "series": "The Horus Heresy",
+   "year": 2012,
+   "format": "Novella",
+   "synopsis": "While news of Horus' treachery spreads, the White Scars remain silent, locked in a long war against the orks of Chondax. Shiban Khan and his jetbike brotherhood fight on the frontier as both loyalists and traitors try to reach the V Legion, and the Khan must finally choose where to turn.",
+   "legions": [
+    "White Scars"
+   ],
+   "characters": [
+    "Shiban Khan",
+    "Torghun Khan",
+    "Targutai Yesugei",
+    "Jaghatai Khan",
+    "Ilya Ravallion"
+   ],
+   "setting": "001–007.M31",
+   "sort": 31001,
+   "planets": [
+    "chondax"
+   ]
+  },
+  "corax_soulforge": {
+   "title": "Corax: Soulforge",
+   "author": "Gav Thorpe",
+   "series": "The Horus Heresy",
+   "year": 2013,
+   "format": "Novella",
+   "synopsis": "Still rebuilding after Isstvan V, the Raven Guard discover that the forge world Constanix II has allied with the Word Bearers. Corax leads an infiltration into the heart of its Dark Mechanicum priesthood to stop the new war machines being built there, and confronts questions about his own origins.",
+   "legions": [
+    "Raven Guard",
+    "Word Bearers",
+    "Dark Mechanicum"
+   ],
+   "characters": [
+    "Corvus Corax",
+    "Agapito Nev",
+    "Branne Nev",
+    "Magos Delvere"
+   ],
+   "planets": [
+    "constanix_ii"
+   ]
+  },
+  "scorched_earth": {
+   "title": "Scorched Earth",
+   "author": "Nick Kyme",
+   "series": "The Horus Heresy",
+   "year": 2013,
+   "format": "Novella",
+   "synopsis": "In the aftermath of the Drop Site Massacre, Salamanders Ra'stan and Usabius leave the other survivors and venture into the Urgall Depression on Isstvan V. Their mission is to discover what, if anything, remains of their vanished primarch Vulkan.",
+   "legions": [
+    "Salamanders",
+    "Iron Hands",
+    "Raven Guard",
+    "Emperor's Children"
+   ],
+   "characters": [
+    "Ra'stan",
+    "Usabius",
+    "Erasmus Ruuman",
+    "Ishmal Sulnar",
+    "Morvax Haukspeer"
+   ],
+   "setting": "006.M31",
+   "sort": 31006,
+   "planets": [
+    "isstvan5"
+   ]
+  },
+  "tallarn_executioner": {
+   "title": "Tallarn: Executioner",
+   "author": "John French",
+   "series": "The Horus Heresy",
+   "year": 2013,
+   "format": "Novella",
+   "synopsis": "The Iron Warriors virus-bomb the garrison world of Tallarn, turning it into a toxic wasteland. When the survivors of an armoured regiment emerge from their shelters, the opening moves of the greatest tank battle in history begin, while hidden powers manipulate both sides.",
+   "legions": [
+    "Iron Warriors",
+    "Imperial Army"
+   ],
+   "characters": [
+    "Tahirah"
+   ],
+   "setting": "010–012.M31",
+   "sort": 31010,
+   "planets": [
+    "tallarn"
+   ]
+  },
+  "ravenlord": {
+   "title": "Ravenlord",
+   "author": "Gav Thorpe",
+   "series": "The Horus Heresy",
+   "year": 2014,
+   "format": "Novella",
+   "synopsis": "Corax and his surviving Raven Guard wage a guerrilla war, liberating worlds held by the traitors. A reunion with another Isstvan V survivor leads them to the prison colony of Carandiru, and to the ghosts of their own past on Deliverance.",
+   "legions": [
+    "Raven Guard"
+   ],
+   "characters": [
+    "Corvus Corax",
+    "Agapito Nev",
+    "Branne Nev"
+   ],
+   "planets": [
+    "carandiru",
+    "deliverance"
+   ]
+  },
+  "purge": {
+   "title": "The Purge",
+   "author": "Anthony Reynolds",
+   "series": "The Horus Heresy",
+   "year": 2014,
+   "format": "Novella",
+   "synopsis": "As the Shadow Crusade spreads across Ultramar, the Word Bearers' 34th Company descends on the isolated world of Percepton Primus. Commander Sor Talgron, once welcome in the halls of the Imperial Palace, begins to doubt the glory of this campaign of extermination, a dangerous thought in Lorgar's Legion.",
+   "legions": [
+    "Word Bearers",
+    "Ultramarines"
+   ],
+   "characters": [
+    "Sor Talgron"
+   ],
+   "setting": "007–008.M31",
+   "sort": 31007,
+   "planets": [
+    "percepton_primus"
+   ]
+  },
+  "seventh_serpent": {
+   "title": "The Seventh Serpent",
+   "author": "Graham McNeill",
+   "series": "The Horus Heresy",
+   "year": 2014,
+   "format": "Novella",
+   "synopsis": "The crew of the Sisypheum, a band of Iron Hands, Raven Guard and Salamanders survivors, joins Shadrak Meduson in a raid on a hidden Alpha Legion outpost. Nothing involving the XX Legion is what it seems, and the true architect of the battle reveals himself.",
+   "legions": [
+    "Iron Hands",
+    "Raven Guard",
+    "Salamanders",
+    "Alpha Legion"
+   ],
+   "characters": [
+    "Shadrak Meduson",
+    "Cadmus Tyro",
+    "Nykona Sharrowkyn",
+    "Frater Thamatica",
+    "Alpharius"
+   ],
+   "planets": []
+  },
+  "tallarn_ironclad": {
+   "title": "Tallarn: Ironclad",
+   "author": "John French",
+   "series": "The Horus Heresy",
+   "year": 2015,
+   "format": "Novella",
+   "synopsis": "The Battle of Tallarn rages across the poisoned planet as tanks, Dreadnoughts and Titans clash. Colonel Silas Kord and his crews fight to survive while agents of several traitor factions try to uncover the secret that really drew the Iron Warriors to Tallarn.",
+   "legions": [
+    "Iron Warriors",
+    "Imperial Army",
+    "Sons of Horus",
+    "Alpha Legion",
+    "Iron Hands"
+   ],
+   "characters": [
+    "Silas Kord",
+    "Argonis",
+    "Jalen",
+    "Hrend",
+    "Menoetius"
+   ],
+   "setting": "010–012.M31",
+   "sort": 31010,
+   "planets": [
+    "tallarn"
+   ]
+  },
+  "cybernetica": {
+   "title": "Cybernetica",
+   "author": "Rob Sanders",
+   "series": "The Horus Heresy",
+   "year": 2015,
+   "format": "Novella",
+   "synopsis": "With Mars lost to Horus' Dark Mechanicum and blockaded by Rogal Dorn, the corruption runs too deep to ignore. Malcador and Dorn turn to those who witnessed the fall to plan a terrible final solution: wiping out all life on the Red Planet using loyal machine cohorts.",
+   "legions": [
+    "Imperial Fists",
+    "Mechanicum",
+    "Legio Cybernetica"
+   ],
+   "characters": [
+    "Rogal Dorn",
+    "Malcador",
+    "Zagreus Kane",
+    "Gnaus Archelon",
+    "Octal Bool"
+   ],
+   "planets": [
+    "mars"
+   ]
+  },
+  "wolf_king": {
+   "title": "Wolf King",
+   "author": "Chris Wraight",
+   "series": "The Horus Heresy",
+   "year": 2015,
+   "format": "Novella",
+   "synopsis": "Still reeling from Prospero, the Space Wolves are ambushed by the Alpha Legion and driven to the edge of the Alaxxes Nebula. Leman Russ calls for help from his brothers, but none comes, so the trapped Rout prepares to make its stand in the rust-red clouds.",
+   "legions": [
+    "Space Wolves",
+    "Alpha Legion",
+    "Dark Angels"
+   ],
+   "characters": [
+    "Leman Russ",
+    "Bjorn",
+    "Gunnar Gunnhilt",
+    "Althalos",
+    "Alpharius"
+   ],
+   "setting": "007.M31",
+   "sort": 31007,
+   "planets": []
+  },
+  "honoured": {
+   "title": "The Honoured",
+   "author": "Rob Sanders",
+   "series": "The Horus Heresy",
+   "year": 2015,
+   "format": "Novella",
+   "synopsis": "After the Word Bearers' betrayal at Calth, the poisoned Veridian star drives survivors into the planet's subterranean arcologies. Captain Steloc Aethon of the Ultramarines' 19th Company leads the underground war against the traitors, if he can master his own thirst for revenge.",
+   "legions": [
+    "Ultramarines",
+    "Word Bearers"
+   ],
+   "characters": [
+    "Steloc Aethon"
+   ],
+   "setting": "007.M31",
+   "sort": 31007,
+   "planets": [
+    "calth"
+   ]
+  },
+  "unburdened": {
+   "title": "The Unburdened",
+   "author": "David Annandale",
+   "series": "The Horus Heresy",
+   "year": 2015,
+   "format": "Novella",
+   "synopsis": "A companion to The Honoured, told from the traitors' side. Chaplain Kurtha Sedd of the Word Bearers is troubled by the attack on Calth, yet he and his devout brethren carry the war into the haunted tunnels beneath the planet, whatever it costs them.",
+   "legions": [
+    "Word Bearers",
+    "Ultramarines"
+   ],
+   "characters": [
+    "Kurtha Sedd"
+   ],
+   "setting": "007.M31",
+   "sort": 31007,
+   "planets": [
+    "calth"
+   ]
+  },
+  "garro_vow_of_faith": {
+   "title": "Garro: Vow of Faith",
+   "author": "James Swallow",
+   "series": "The Horus Heresy",
+   "year": 2015,
+   "format": "Novella",
+   "synopsis": "Nathaniel Garro, now Agentia Primus of Malcador's Knights Errant, grows restless as the Sigillite's plans for the future become clear. As the traitors draw closer to the Throneworld, he sets out into the wastes of Terra in search of the living saint Euphrati Keeler.",
+   "legions": [
+    "Knights Errant",
+    "Death Guard"
+   ],
+   "characters": [
+    "Nathaniel Garro",
+    "Malcador",
+    "Euphrati Keeler"
+   ],
+   "planets": [
+    "terra"
+   ]
+  },
+  "sons_of_the_forge": {
+   "title": "Sons of the Forge",
+   "author": "Nick Kyme",
+   "series": "The Horus Heresy",
+   "year": 2016,
+   "format": "Novella",
+   "synopsis": "Charged by Vulkan himself, Forgefather T'kell and a band of Firedrakes escort seven of the primarch's greatest artefacts to a secret vault called the Wrought. But Sons of Horus and the Dark Mechanicum are already trying to break into it.",
+   "legions": [
+    "Salamanders",
+    "Sons of Horus",
+    "Dark Mechanicum"
+   ],
+   "characters": [
+    "T'kell",
+    "Vulkan"
+   ],
+   "planets": []
+  },
+  "weregeld": {
+   "title": "Weregeld",
+   "author": "Gav Thorpe",
+   "series": "The Horus Heresy",
+   "year": 2016,
+   "format": "Novel",
+   "synopsis": "The Raven Guard continue to rebuild after Isstvan V while Alpha Legion infiltrators work to undo them from within. Corax's war of vengeance against the XX Legion comes to a head in a final reckoning that decides whether the Legion has any future at all.",
+   "legions": [
+    "Raven Guard",
+    "Alpha Legion"
+   ],
+   "characters": [
+    "Corvus Corax",
+    "Omegon"
+   ],
+   "planets": []
+  },
+  "dreadwing": {
+   "title": "Dreadwing",
+   "author": "David Guymer",
+   "series": "The Horus Heresy",
+   "year": 2018,
+   "format": "Novella",
+   "synopsis": "With the Ruinstorm broken and Guilliman and Sanguinius racing to Terra, the Dark Angels wage a campaign of annihilation against the worlds of the traitor Legions. As the Legion fragments, the Wing lieutenants begin to ask whether the Lion is still fighting a war he means to win.",
+   "legions": [
+    "Dark Angels"
+   ],
+   "characters": [
+    "Lion El'Jonson",
+    "Farith Redloss",
+    "Calloson"
+   ],
+   "planets": []
+  },
+  "spear_of_ultramar": {
+   "title": "Spear of Ultramar",
+   "author": "David Annandale",
+   "series": "The Horus Heresy",
+   "year": 2018,
+   "format": "Novella",
+   "synopsis": "As Guilliman's fleet races through the Ruinstorm towards Terra, Horus sends Warsmith Khrossus and a single company of Iron Warriors to delay it in the Charchera System. Guilliman sees the ambush coming but has no choice except to plunge into it, knowing every second lost could doom the Throneworld.",
+   "legions": [
+    "Ultramarines",
+    "Iron Warriors"
+   ],
+   "characters": [
+    "Roboute Guilliman",
+    "Khrossus"
+   ],
+   "planets": []
   }
  }
 };

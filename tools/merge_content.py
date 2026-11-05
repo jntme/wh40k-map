@@ -68,7 +68,10 @@ def main():
                 old = D["books"][bid]
                 if str(old.get("year")) != str(b.get("year")) or old.get("author") != b.get("author"):
                     report.append(f"[{src}] Book {bid}: old {old.get('author')}/{old.get('year')} new {b.get('author')}/{b.get('year')} -> new applied")
-                    D["books"][bid] = {**old, **b}
+                planets = union(old.get("planets"), b.get("planets"))
+                D["books"][bid] = {**old, **b}
+                if planets:
+                    D["books"][bid]["planets"] = planets
                 continue
             dup = [k for k, v in D["books"].items() if norm(v["title"]) == norm(b["title"])]
             if dup:
@@ -89,8 +92,15 @@ def main():
             dup = [k for k, v in D["planets"].items() if norm(v["name"]) == norm(p["name"])]
             if dup:
                 report.append(f"[{src}] Planet {pid} duplicates {dup[0]} (same name)")
+            target = p.pop("add_to_system", None)
+            p.pop("position_estimated", None)
             p.setdefault("books", [])
             D["planets"][pid] = p
+            if target:
+                if target in systems:
+                    systems[target]["planets"] = union(systems[target]["planets"], [pid])
+                else:
+                    report.append(f"[{src}] Planet {pid}: system {target} unknown")
 
         for s in N.get("systems", []):
             if s["id"] in systems:
@@ -109,6 +119,8 @@ def main():
                 systems[dup[0]]["planets"] = union(systems[dup[0]]["planets"], s.get("planets"))
                 continue
             entry = {k: s[k] for k in ("id", "name", "segmentum", "x", "y", "planets") if k in s}
+            if s.get("position_estimated"):
+                report.append(f"[{src}] System {s['id']}: position estimated")
             if s.get("major"):
                 entry["major"] = True
             systems[s["id"]] = entry
@@ -162,6 +174,10 @@ def main():
         for b in e["books"]:
             if b not in D["books"]:
                 report.append(f"Event {e['id']}: book {b} missing")
+    for bid, b in D["books"].items():
+        for p in b.get("planets", []):
+            if p not in D["planets"]:
+                report.append(f"Book {bid}: planet {p} missing")
     for pid, p in D["planets"].items():
         if pid not in owner:
             report.append(f"Planet {pid} has no system")

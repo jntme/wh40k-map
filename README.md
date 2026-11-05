@@ -2,6 +2,8 @@
 
 Interactive fan map of the Warhammer 40,000 galaxy: explore systems and planets, zoom in, and see the storylines and matching books for each world. The toggle at the top switches between **30K** (the Great Crusade and the Horus Heresy) and **40K** (M41 to the Dark Imperium).
 
+In 30K, the **Horus Heresy Library** lists every novel, novella and anthology of The Horus Heresy, The Siege of Terra, Primarchs and Characters series. Filter by series, Legion or character, and sort by reading order or in-universe date: the worlds of all listed books are highlighted on the map, hovering a book previews its worlds, and clicking it opens its details.
+
 Live: https://jntme.github.io/wh40k-map/
 
 ## View locally
@@ -22,7 +24,7 @@ Open `index.html` in a browser. No build step or server needed.
 
 Everything lives in `data.js` (JSON format):
 
-1. **Book**: add it under `books` with an ID.
+1. **Book**: add it under `books` with an ID. Besides `title`, `author`, `series` and `year`, a book can carry `number` (position in its series), `format` (Novel, Novella, Anthology), `synopsis`, `legions`, `characters`, `setting` (in-universe date, e.g. `005.M31`), `sort` (same key as for events) and `planets` (IDs of the worlds where it is set).
 2. **Planet**: add it under `planets` and list its ID in the matching system under `systems[].planets`. For a new system, set `x`/`y`: centre (0,0), radius approx. 1050, x grows east, y grows south.
 3. **Event**: link it under `events` to `planets` and `books`. `sort` is millennium × 1000 + year, so 999.M41 becomes `41999`. Events with `sort` below 32000 appear in 30K, all others in 40K.
 4. **Era texts** for a planet: `era30k` and `era40k`, each with its own `type` and `desc` (e.g. Prospero as an intact Legion homeworld in 30K).

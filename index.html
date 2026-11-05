@@ -12,6 +12,32 @@
 </head>
 <body>
   <div id="app">
+    <aside id="library" aria-label="Horus Heresy library" hidden>
+      <div class="lib-head">
+        <div>
+          <h2>Horus Heresy Library</h2>
+          <div class="lib-count" id="lib-count"></div>
+        </div>
+        <button type="button" class="lib-close" id="lib-close" aria-label="Close library" title="Close library">×</button>
+      </div>
+      <div class="lib-filters">
+        <input id="lib-filter" type="search" placeholder="Filter by title, author, Legion, character" autocomplete="off" aria-label="Filter books">
+        <div class="lib-row">
+          <select id="lib-series" aria-label="Series">
+            <option value="">All series</option>
+          </select>
+          <select id="lib-legion" aria-label="Legion or faction">
+            <option value="">All Legions &amp; factions</option>
+          </select>
+        </div>
+        <div class="lib-sort" role="group" aria-label="Sort order">
+          <button type="button" data-sort="series" aria-pressed="true">Reading order</button>
+          <button type="button" data-sort="chrono" aria-pressed="false">In-universe</button>
+        </div>
+      </div>
+      <div class="lib-list" id="lib-list"></div>
+    </aside>
+
     <main id="map-wrap">
       <svg id="map" aria-label="Galaxy map"></svg>
 
@@ -21,6 +47,7 @@
           <button type="button" data-era="30k" aria-pressed="false"><b>30K</b><span> · Horus Heresy</span></button>
           <button type="button" data-era="40k" aria-pressed="true"><b>40K</b><span> · Dark Imperium</span></button>
         </div>
+        <button type="button" class="lib-toggle" id="lib-toggle" aria-controls="library" aria-expanded="false">📚 <span>Library</span></button>
         <div class="search">
           <input id="search" type="search" placeholder="Search planets, events or books" autocomplete="off" aria-label="Search">
           <ul id="search-results" role="listbox" hidden></ul>
@@ -37,6 +64,7 @@
         <span><i class="dot dot-sys"></i>System</span>
         <span><i class="dot dot-major"></i>Major system</span>
         <span><i class="dot dot-warp"></i>Warp anomaly</span>
+        <span class="legend-lib"><i class="dot dot-lib"></i>World in selected books</span>
       </div>
     </main>
 

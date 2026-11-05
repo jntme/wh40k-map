@@ -39,6 +39,11 @@
     e.planets.forEach(p => (eventsByPlanet[p] = eventsByPlanet[p] || []).push(e));
     e.books.forEach(b => (eventsByBook[b] = eventsByBook[b] || []).push(e));
   });
+  // Books may list their own locations; mirror them onto the planets
+  Object.entries(D.books).forEach(([bid, b]) => (b.planets || []).forEach(p => {
+    const pl = D.planets[p];
+    if (pl && !(pl.books || []).includes(bid)) (pl.books = pl.books || []).push(bid);
+  }));
   const planetsByBook = {};
   Object.entries(D.planets).forEach(([pid, p]) =>
     (p.books || []).forEach(b => (planetsByBook[b] = planetsByBook[b] || []).push(pid)));
@@ -332,6 +337,7 @@
     document.body.classList.toggle('era-40k', era === '40k');
     eraButtons.forEach(b => b.setAttribute('aria-pressed', b.dataset.era === era));
     document.getElementById('brand-era').textContent = ERAS[era].short;
+    libEraChanged();
     riftGroup.style.display = inEra(D.rift) ? '' : 'none';
     D.systems.forEach(s => {
       const g = systemEls[s.id];
@@ -529,11 +535,12 @@
   document.getElementById('zoom-out').addEventListener('click', () => zoomCenter(1 / 1.8));
   document.getElementById('zoom-reset').addEventListener('click', () => navigate(`#/${era}/`));
 
-  window.addEventListener('resize', () => {
+  function onResize() {
     const c = center();
     measure();
     setView(c.x, c.y, clamp(view.k, kMin(), K_MAX));
-  });
+  }
+  window.addEventListener('resize', onResize);
 
   // Mobile: expand/collapse panel
   document.getElementById('panel-handle').addEventListener('click', () => {
@@ -621,6 +628,7 @@
       if (fly) flyTo(0, 0, kFit);
     }
     panelBody.scrollTop = 0;
+    libSync(kind === 'book' ? id : null);
   }
 
   function bookPlanets(bid) {
@@ -760,11 +768,19 @@
     const b = D.books[bid];
     setCrumbs([[link('book', bid), b.title]]);
     const evs = eraEvents(eventsByBook[bid]);
+    const seriesLine = [b.number ? `${esc(b.series)} #${b.number}` : esc(b.series), esc(b.format), esc(b.year)].filter(Boolean).join(' · ');
+    const lex = `https://wh40k.lexicanum.com/wiki/Special:Search?search=${encodeURIComponent(b.title)}`;
     panelBody.innerHTML = `<h2>${esc(b.title)}</h2>
-      <div class="subtitle">${esc(b.author)} · ${esc(b.series)} · ${esc(b.year)}</div>
+      <div class="subtitle">${esc(b.author)}<br>${seriesLine}</div>
+      ${b.setting ? `<div class="era-box"><span class="era-tag">Set</span> ${esc(b.setting)}</div>` : ''}
+      ${b.synopsis ? `<p>${esc(b.synopsis)}</p>` : ''}
+      ${(b.legions || []).length ? `<h3>Legions &amp; factions</h3><div class="chips">${b.legions.map(l =>
+        `<button type="button" class="chip" data-legion="${esc(l)}" title="Show all books with ${esc(l)}">${esc(l)}</button>`).join('')}</div>` : ''}
+      ${(b.characters || []).length ? `<h3>Characters</h3><p class="characters">${b.characters.map(esc).join(' · ')}</p>` : ''}
       <h3>Storylines</h3>
       ${evs.length ? evs.map(e => eventCard(e, false)).join('') : '<div class="empty">Not linked to any event.</div>'}
-      <h3>Locations</h3>${planetChips(bookPlanets(bid))}`;
+      <h3>Locations</h3>${planetChips(bookPlanets(bid))}
+      <p style="margin-top:18px"><a href="${lex}" target="_blank" rel="noopener">Find on Lexicanum ↗</a></p>`;
   }
 
   function renderFeature(id) {
@@ -831,6 +847,149 @@
   });
   searchInput.addEventListener('blur', () => setTimeout(() => { resultsEl.hidden = true; }, 100));
   searchInput.addEventListener('focus', renderResults);
+
+  // ---------- Horus Heresy library (30K) ----------
+  const LIB_SERIES = [
+    ['The Horus Heresy', 'Main series'],
+    ['The Siege of Terra', 'The Siege of Terra'],
+    ['The Horus Heresy: Primarchs', 'Primarchs'],
+    ['The Horus Heresy: Characters', 'Characters']
+  ];
+  const libSeriesOf = b => (b.series || '').replace(/\s*\((Novella|Novelle)\)$/i, '');
+  const libRank = Object.fromEntries(LIB_SERIES.map(([s], i) => [s, i]));
+  const libBooks = Object.keys(D.books).filter(bid => libSeriesOf(D.books[bid]) in libRank);
+  const libEl = document.getElementById('library');
+  const libList = document.getElementById('lib-list');
+  const libToggle = document.getElementById('lib-toggle');
+  const libFilter = document.getElementById('lib-filter');
+  const libSeriesSel = document.getElementById('lib-series');
+  const libLegionSel = document.getElementById('lib-legion');
+  const libSortBtns = [...libEl.querySelectorAll('[data-sort]')];
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* ignore */ } }
+  };
+  let libOpen = store.get('lib-open') !== '0' && !isMobile();
+  let libSort = 'series';
+  let libActive = null;
+
+  LIB_SERIES.forEach(([s, label]) => {
+    if (libBooks.some(bid => libSeriesOf(D.books[bid]) === s))
+      libSeriesSel.insertAdjacentHTML('beforeend', `<option value="${esc(s)}">${esc(label)}</option>`);
+  });
+  const legionCount = {};
+  libBooks.forEach(bid => (D.books[bid].legions || []).forEach(l => { legionCount[l] = (legionCount[l] || 0) + 1; }));
+  Object.keys(legionCount).sort((a, b) => a.localeCompare(b)).forEach(l =>
+    libLegionSel.insertAdjacentHTML('beforeend', `<option value="${esc(l)}">${esc(l)} (${legionCount[l]})</option>`));
+
+  function libFiltered() {
+    const q = norm(libFilter.value.trim());
+    const ser = libSeriesSel.value, leg = libLegionSel.value;
+    return libBooks.filter(bid => {
+      const b = D.books[bid];
+      if (ser && libSeriesOf(b) !== ser) return false;
+      if (leg && !(b.legions || []).includes(leg)) return false;
+      if (!q) return true;
+      return norm([b.title, b.author, ...(b.legions || []), ...(b.characters || [])].join(' ')).includes(q);
+    });
+  }
+
+  function libSorted(ids) {
+    const bySeries = (a, b) => {
+      const A = D.books[a], B = D.books[b];
+      return (libRank[libSeriesOf(A)] - libRank[libSeriesOf(B)]) ||
+        ((A.number || 999) - (B.number || 999)) || ((A.year || 0) - (B.year || 0)) || A.title.localeCompare(B.title);
+    };
+    if (libSort === 'series') return ids.sort(bySeries);
+    return ids.sort((a, b) => ((D.books[a].sort || 99999) - (D.books[b].sort || 99999)) || bySeries(a, b));
+  }
+
+  function libRender() {
+    const ids = libSorted(libFiltered());
+    const worlds = new Set();
+    ids.forEach(bid => bookPlanets(bid).forEach(p => worlds.add(p)));
+    document.getElementById('lib-count').textContent =
+      `${ids.length} of ${libBooks.length} books · ${worlds.size} ${worlds.size === 1 ? 'world' : 'worlds'} highlighted`;
+    let html = '', group = null;
+    ids.forEach(bid => {
+      const b = D.books[bid];
+      const g = libSort === 'series' ? (LIB_SERIES[libRank[libSeriesOf(b)]] || [])[1] : null;
+      if (g && g !== group) { group = g; html += `<div class="lib-group">${esc(g)}</div>`; }
+      const n = bookPlanets(bid).length;
+      const lead = libSort === 'series' ? (b.number ? b.number : '·') : esc(b.setting || '?');
+      const meta = [b.author, b.year, b.format && b.format !== 'Novel' ? b.format : ''].filter(Boolean).map(esc).join(' · ');
+      html += `<a class="lib-book${bid === libActive ? ' active' : ''}" href="${link('book', bid, '30k')}" data-bid="${esc(bid)}">
+        <span class="lib-num${libSort === 'series' ? '' : ' wide'}">${lead}</span>
+        <span class="lib-main"><span class="lib-title">${esc(b.title)}</span><span class="lib-meta">${meta}</span></span>
+        <span class="lib-worlds" title="${n} ${n === 1 ? 'world' : 'worlds'} on the map">${n || ''}</span></a>`;
+    });
+    if (!ids.length) html = '<div class="empty" style="padding:12px 16px">No books match the filter.</div>';
+    libList.innerHTML = html;
+    libMark(worlds);
+  }
+
+  // Worlds of all listed books get a soft highlight
+  function libMark(worlds) {
+    svg.querySelectorAll('.lib').forEach(n => n.classList.remove('lib'));
+    document.body.classList.toggle('lib-on', libVisible());
+    if (!libVisible()) return;
+    mark([...(worlds || [])], 'lib');
+  }
+
+  function libVisible() { return libOpen && era === '30k'; }
+
+  function libSetOpen(open, persist = true) {
+    libOpen = open;
+    if (persist && !isMobile()) store.set('lib-open', open ? '1' : '0');
+    libApply();
+  }
+
+  function libApply() {
+    const vis = libVisible();
+    libEl.hidden = !vis;
+    libToggle.hidden = era !== '30k';
+    libToggle.setAttribute('aria-expanded', vis);
+    libToggle.classList.toggle('on', vis);
+    if (vis) libRender(); else libMark(null);
+    onResize();
+  }
+
+  function libEraChanged() { libApply(); }
+
+  function libSync(activeBid) {
+    libActive = activeBid;
+    libList.querySelectorAll('.lib-book').forEach(a => a.classList.toggle('active', a.dataset.bid === activeBid));
+  }
+
+  libToggle.addEventListener('click', () => libSetOpen(!libOpen));
+  document.getElementById('lib-close').addEventListener('click', () => libSetOpen(false));
+  libFilter.addEventListener('input', libRender);
+  libSeriesSel.addEventListener('change', libRender);
+  libLegionSel.addEventListener('change', libRender);
+  libSortBtns.forEach(btn => btn.addEventListener('click', () => {
+    libSort = btn.dataset.sort;
+    libSortBtns.forEach(b => b.setAttribute('aria-pressed', b === btn));
+    libRender();
+  }));
+  // Hover preview: show a book's worlds without selecting it
+  libList.addEventListener('mouseover', e => {
+    const a = e.target.closest('.lib-book');
+    svg.querySelectorAll('.preview').forEach(n => n.classList.remove('preview'));
+    if (a) mark(bookPlanets(a.dataset.bid), 'preview');
+  });
+  libList.addEventListener('mouseleave', () => svg.querySelectorAll('.preview').forEach(n => n.classList.remove('preview')));
+  libList.addEventListener('click', e => {
+    if (e.target.closest('.lib-book') && isMobile()) libSetOpen(false, false);
+  });
+  // Legion chips in the book panel filter the library
+  panelBody.addEventListener('click', e => {
+    const chip = e.target.closest('[data-legion]');
+    if (!chip) return;
+    libLegionSel.value = chip.dataset.legion;
+    libFilter.value = '';
+    libSeriesSel.value = '';
+    if (!libOpen) libSetOpen(true); else libRender();
+  });
 
   // ---------- Data validation ----------
   function validateData() {
