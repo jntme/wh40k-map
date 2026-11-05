@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Galaxiekarte 40K</title>
+  <meta name="description" content="Interaktive Fan-Karte der Warhammer-40,000-Galaxie mit Planeten, Ereignissen und Büchern.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <main id="map-wrap">
+      <svg id="map" aria-label="Galaxiekarte"></svg>
+
+      <header class="topbar">
+        <h1 class="brand">Galaxiekarte <span>40K</span></h1>
+        <div class="search">
+          <input id="search" type="search" placeholder="Planet, Ereignis oder Buch suchen" autocomplete="off" aria-label="Suche">
+          <ul id="search-results" role="listbox" hidden></ul>
+        </div>
+      </header>
+
+      <div class="zoom-controls" role="group" aria-label="Zoom">
+        <button id="zoom-in" title="Hineinzoomen" aria-label="Hineinzoomen">+</button>
+        <button id="zoom-out" title="Herauszoomen" aria-label="Herauszoomen">−</button>
+        <button id="zoom-reset" title="Ganze Galaxie" aria-label="Ganze Galaxie">⌂</button>
+      </div>
+
+      <div class="legend">
+        <span><i class="dot dot-sys"></i>System</span>
+        <span><i class="dot dot-major"></i>Bedeutendes System</span>
+        <span><i class="dot dot-warp"></i>Warp-Anomalie</span>
+      </div>
+    </main>
+
+    <aside id="panel" aria-live="polite">
+      <div class="panel-handle" id="panel-handle" aria-hidden="true"></div>
+      <nav class="crumbs" id="crumbs"></nav>
+      <div id="panel-body"></div>
+      <footer class="disclaimer">
+        Inoffizielles Fanprojekt, nicht mit Games Workshop verbunden. Warhammer 40,000 ist eine Marke von Games Workshop Ltd. Positionen sind schematisch.
+      </footer>
+    </aside>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
